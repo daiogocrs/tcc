@@ -1,0 +1,13 @@
+CREATE DATABASE meubanco;
+
+use meubanco;
+
+CREATE TABLE usuarios(
+	id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR (100) NOT NULL,
+    email VARCHAR (100) NOT NULL,
+    cidade VARCHAR (100) NOT NULL,
+    bairro VARCHAR (100) NOT NULL,
+    rua VARCHAR (100) NOT NULL,
+    senha VARCHAR (100) NOT NULL
+);
