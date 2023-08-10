@@ -21,7 +21,7 @@
         {
             $_SESSION['email'] = $email;
             $_SESSION['senha'] = $senha;
-            header('Location: sistema.php');
+            header('Location: home.php');
         }
     }
     else
