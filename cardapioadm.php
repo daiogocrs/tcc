@@ -26,9 +26,14 @@
 
 <body>
 
-  <header>
-		  <a href="home.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
-	</header>
+<header>
+		<a href="home.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
+    <nav>
+			    <ul>
+				    <li><a href="home.php" class="voltarbotao">Voltar</a></li>
+			    <ul>
+		    </nav>
+</header>
 
   <script type="text/javascript" src="js/cardapio.js"></script>
   <section class="bg-cardapio bg-section" id="cardapio">
@@ -39,7 +44,7 @@
                 <!-- Nav pills -->
                 <ul class="nav nav-pills" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="pill" href="#salgados">Salgados</a>
+                        <a class="nav-link active" data-toggle="pill" href="#salgados">Salgados  </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="pill" href="#doces">Doces</a>

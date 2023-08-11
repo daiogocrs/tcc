@@ -1,3 +1,20 @@
+<?php
+
+    if(isset($_POST['submit']))
+    {
+        include_once('config.php');
+
+        $nome = $_POST['nome'];
+        $categoria = $_POST['preco'];
+        $preco = $_POST['categoria'];
+
+        $result = mysqli_query($conexao, "INSERT INTO produtos(nome,preco,categoria) 
+        VALUES ('$nome','$preco','$categoria')");
+
+        header('Location: login.php');
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -17,29 +34,33 @@
 
 <body>
 
-	<header>
+<header>
 		<a href="home.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
 		<nav>
 			<ul>
-				<li><a href="home.php" class="voltarbotao">Voltar</a></li>
+				<li><a href="home.php">Voltar</a></li>
 			<ul>
 		</nav>
 	</header>
 
 	<div class="form-wrap">
 		<div class="tabs">
-			<h3 class="signup-tab"><a>Logar</a></h3>
+			<h3 class="signup-tab"><a>Cadastre-se</a></h3>
 		</div>
 		<div class="tabs-content">
 			<div id="signup-tab-content" class="active">
-				<form class="form_cadastro" action="testLogin.php" method="POST">
+				<form class="form_cadastro" action="cadastro.php" method="POST">
+					<input type="text" class="input" id="user_nome" autocomplete="off" placeholder="Nome" name="nome" required>
 					<input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email" name="email" required>
+					<input type="text" class="input" id="user_cidade" autocomplete="off" placeholder="Cidade" name="cidade" required>
+					<input type="text" class="input" id="user_bairro" autocomplete="off" placeholder="Bairro" name="bairro" required>
+					<input type="text" class="input" id="user_rua" autocomplete="off" placeholder="Rua" name="rua" required>
 					<input type="password" class="input" id="user_senha" autocomplete="off" placeholder="Senha" name="senha" required>
-					<input type="submit" class="button" name="submit" value="Entrar">
+					<input type="submit" class="button" name="submit" id="submit" value="Cadastrar">
 				</form>
 				<div class="help-text">
-					<p>Não possui uma conta ainda?</p>
-					<p><a href="cadastro.php">Cadastrar</a></p>
+					<p>Já possui uma conta?</p>
+					<p><a href="login.php">Entre aqui</a></p>
 				</div>
 			</div>
 		</div>

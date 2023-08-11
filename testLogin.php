@@ -1,4 +1,5 @@
 <?php
+
     session_start();
     if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']))
     {
@@ -21,7 +22,7 @@
         {
             $_SESSION['email'] = $email;
             $_SESSION['senha'] = $senha;
-            header('Location: home.php');
+            header('Location: homelogado.php');
         }
     }
     else

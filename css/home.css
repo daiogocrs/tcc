@@ -50,7 +50,7 @@ header {
     visibility: visible;
   }
   
-  nav ul {
+  header nav ul {
     list-style-type: none;
     margin: 0 2% auto 0;
     padding-left: 0;
@@ -58,20 +58,20 @@ header {
     max-width: 100%;
   }
   
-  nav ul li {
+  header nav ul li {
     display: inline-block;
     line-height: 60px;
     margin-left: 10px;
   }
   
-  nav ul li a {
+  header nav ul li a {
     font-size: large;
     text-decoration: none;
     color: #ffffff;
     font: 500 17px 'Work Sans', Helvetica, sans-serif;
   }
 
-  nav ul li a.entrarbotão{
+  header nav ul li a.entrarbotão{
     background-color: rgba(255, 255, 255, 0.35);
     display: inline-block;
     padding: 8px 13px;
@@ -84,7 +84,7 @@ header {
     margin-left: 10px;
   }
   
-  nav ul li a.entrarbotão:hover{
+  header nav ul li a.entrarbotão:hover{
     background-color: rgba(255, 255, 255, 0.50);
     }
 

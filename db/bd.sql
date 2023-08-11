@@ -11,3 +11,16 @@ CREATE TABLE usuarios(
     rua VARCHAR (100) NOT NULL,
     senha VARCHAR (100) NOT NULL
 );
+
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    produtonome VARCHAR(255) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    categoria VARCHAR(50)
+);
+
+INSERT INTO produtos (nome, preco, categoria)
+VALUES ('asd', 1, 'asd');
+
+INSERT INTO usuarios (nome, email, cidade, bairro, rua, senha)
+VALUES ('asd', 'asd@gmail.com', 'asd', 'asd', 'asd', '123');

@@ -24,12 +24,13 @@
     <nav>
       <div class="site-title">Cantina Federal</div>
         <ul>
-            <li><a href="cadastro.php">criar conta</a> <a href="login.php" class="entrarbotão">Entrar</a></li>
+            <li><a href="sair.php" class="entrarbotão">Sair</a></li>
         <ul>
     </nav>
   </header>
 
   <!-- MENU PRINCIPAL -->
+  <script type="text/javascript" src="../public/js/homepage.js"></script>
   </div>
   <aside class="banner primeiro">
     <div class="container-envelope">
@@ -48,7 +49,7 @@
       <img src="." class="bannerimg" />
       <div class="col-xs-12">
         <p>Cardápio</p>
-        <a href="cardapio.php" class="acessar">Acessar</a>
+        <a href="cardapioadm.php" class="acessar">Acessar</a>
       </div>
     </div>
   </aside>
