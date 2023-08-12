@@ -2,6 +2,12 @@ CREATE DATABASE meubanco;
 
 use meubanco;
 
+CREATE TABLE adm (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE usuarios(
 	id INTEGER PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR (100) NOT NULL,
@@ -9,7 +15,8 @@ CREATE TABLE usuarios(
     cidade VARCHAR (100) NOT NULL,
     bairro VARCHAR (100) NOT NULL,
     rua VARCHAR (100) NOT NULL,
-    senha VARCHAR (100) NOT NULL
+    senha VARCHAR (100) NOT NULL,
+    nivel_acesso ENUM('adm', 'usuario') NOT NULL
 );
 
 CREATE TABLE produtos (
@@ -19,8 +26,5 @@ CREATE TABLE produtos (
     categoria VARCHAR(100)
 );
 
-INSERT INTO produtos (nome, preco, categoria)
-VALUES ('asd', 1, 'asd');
-
-INSERT INTO usuarios (nome, email, cidade, bairro, rua, senha)
-VALUES ('asd', 'asd@gmail.com', 'asd', 'asd', 'asd', '123');
+INSERT INTO usuarios (email, senha, nivel_acesso)
+VALUES ('admin@gmail.com', '123123', 'adm');

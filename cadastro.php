@@ -10,9 +10,10 @@
         $cidade = $_POST['cidade'];
         $bairro = $_POST['bairro'];
         $rua = $_POST['rua'];
+		$nivel_acesso = $_POST['rua'];
 
-        $result = mysqli_query($conexao, "INSERT INTO usuarios(nome,senha,email,cidade,bairro,rua) 
-        VALUES ('$nome','$senha','$email','$cidade','$bairro','$rua')");
+        $result = mysqli_query($conexao, "INSERT INTO usuarios(nome,senha,email,cidade,bairro,rua,nivel_acesso) 
+        VALUES ('$nome','$senha','$email','$cidade','$bairro','$rua','$nivel_acesso')");
 
         header('Location: login.php');
     }
@@ -59,6 +60,7 @@
 					<input type="text" class="input" id="user_bairro" autocomplete="off" placeholder="Bairro" name="bairro" required>
 					<input type="text" class="input" id="user_rua" autocomplete="off" placeholder="Rua" name="rua" required>
 					<input type="password" class="input" id="user_senha" autocomplete="off" placeholder="Senha" name="senha" required>
+					<input type="hidden" class="input" id="user_nivel_acesso" autocomplete="on" name="nivel_acesso" value="usuario" required>
 					<input type="submit" class="button" name="submit" id="submit" value="Cadastrar">
 				</form>
 				<div class="help-text">
