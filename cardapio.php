@@ -1,3 +1,27 @@
+<?php
+session_start();
+include_once('config.php');
+if (!empty($_GET['search'])) {
+    $data = $_GET['search'];
+    $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id DESC";
+} else {
+    $sql = "SELECT * FROM produtos ORDER BY id DESC";
+}
+
+function getProdutosByCategoria($conexao, $categoria)
+{
+    $sql = "SELECT * FROM produtos WHERE categoria = '$categoria' ORDER BY id DESC";
+    $result = $conexao->query($sql);
+    return $result;
+}
+
+$categorias = array('salgados', 'doces', 'bebidas', 'sorvetes');
+
+
+$result = $conexao->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -24,7 +48,6 @@
 </head>
 
 <body>
-
     <header>
         <a href="home.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
     </header>
@@ -35,103 +58,46 @@
             <h1 class="container-h1">Cardápio</h1>
             <div class="row">
                 <ul class="nav nav-pills" role="tablist">
+                    <?php foreach ($categorias as $categoria) { ?>
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="pill" href="#salgados">Salgados</a>
+                        <a class="nav-link" data-toggle="pill"
+                            href="#<?= $categoria ?>"><?php echo ucfirst($categoria); ?></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#doces">Doces</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#bebidas">Bebidas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#sorvetes">Picolé e sorvetes</a>
-                    </li>
+                    <?php } ?>
                 </ul>
                 <div class="tab-content slideanim">
-                    <div id="salgados" class="tab-pane fade show active">
+                    <?php foreach ($categorias as $categoria) { ?>
+                    <div id="<?= $categoria ?>" class="tab-pane fade">
                         <div class="row">
-                            <div class="col-sm-7">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <?php
-                                        while ($user_data = mysqli_fetch_assoc($result)) {
-                                            echo '<h4 class="list-group-item-heading">' . $user_data['nome'];
-                                            echo '<span class="badge pull-right">' . $user_data['preco'] . '</span>';
-                                            echo '</h4>';
-                                        }
-                                        ?>
-                                    </li>
-                                </ul>
-                            </div>
+                            <?php
+                                $categoria_result = getProdutosByCategoria($conexao, $categoria);
+                                echo '<div class="col-sm-7">';
+                                echo '<ul class="list-group">';
+                                while ($user_data = mysqli_fetch_assoc($categoria_result)) {
+                                    echo '<li class="list-group-item">';
+                                    echo '<h4 class="list-group-item-heading">' . $user_data['nome'];
+                                    echo '<span class="badge pull-right">' . $user_data['preco'] . '</span>';
+                                    echo '</h4>';
+                                    echo '</li>';
+                                }
+                                echo '</ul>';
+                                echo '</div>';
+                                ?>
                             <div class="col-sm-5">
                                 <div class="right-cover">
-                                    <h3>Salgados</h3>
-                                    <img src="fotos/salgados.jpg" class="cardapio-img img-fluid"
-                                        alt="Imagem de salgados">
+                                    <h3><?php echo ucfirst($categoria); ?></h3>
+                                    <img src="fotos/<?= $categoria ?>.jpg" class="cardapio-img img-fluid"
+                                        alt="Imagem de <?= $categoria ?>">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="doces" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-sm-7">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Churros<span class="badge pull-right">R$0,80
-                                                pila</span></h4>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="right-cover">
-                                    <h3>Doces</h3>
-                                    <img src="fotos/doces.jpg" class="cardapio-img img-fluid" alt="Imagem de doces">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="bebidas" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-sm-7">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Café<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="right-cover">
-                                    <h3>Bebidas</h3>
-                                    <img src="fotos/bebidas.jpg" class="cardapio-img img-fluid" alt="Imagem de bebidas">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="sorvetes" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-sm-7">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Sorvete X<span
-                                                class="badge pull-right">R$5,00</span></h4>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="right-cover">
-                                    <h3>Picolé e sorvetes</h3>
-                                    <img src="fotos/sorvetes.jpg" class="cardapio-img img-fluid"
-                                        alt="Imagem de sorvetes">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
     </section>
 </body>
+
 
 </html>

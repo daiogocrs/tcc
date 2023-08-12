@@ -1,3 +1,27 @@
+<?php
+session_start();
+include_once('config.php');
+if (!empty($_GET['search'])) {
+    $data = $_GET['search'];
+    $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id DESC";
+} else {
+    $sql = "SELECT * FROM produtos ORDER BY id DESC";
+}
+
+function getProdutosByCategoria($conexao, $categoria)
+{
+    $sql = "SELECT * FROM produtos WHERE categoria = '$categoria' ORDER BY id DESC";
+    $result = $conexao->query($sql);
+    return $result;
+}
+
+$categorias = array('salgados', 'doces', 'bebidas', 'sorvetes');
+
+
+$result = $conexao->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -21,7 +45,6 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Tela de Cardápio</title>
-
 </head>
 
 <body>
@@ -35,8 +58,6 @@
         <div class="container-fluid">
             <h1 class="container-h1">Cardápio</h1>
             <div class="row">
-
-                <!-- Nav pills -->
                 <ul class="nav nav-pills" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="pill" href="#salgados">Salgados</a>
@@ -54,62 +75,19 @@
                 <div class="tab-content slideanim">
                     <div id="salgados" class="tab-pane fade show active">
                         <div class="row">
-                            <div class="col-sm-7">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Pastel de carne<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Pastel de frango<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Risoles de presunto e queijo<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Risoles de frango<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Assado de carne<span
-                                                class="badge pull-right">R$4,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Assado de frango<span
-                                                class="badge pull-right">R$4,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Pão de queijo<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Rosca de polvilho<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Salsichão<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Pizza<span
-                                                class="badge pull-right">R$5,00</span></h4>
-                                        <p class="list-group-item-text">calabresa, cheedar e cream cheese</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Sanduiche<span
-                                                class="badge pull-right">R$5,00</span></h4>
-                                        <p class="list-group-item-text">presunto, queijo, alface e tomate</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Hamburguer<span
-                                                class="badge pull-right">R$5,00</span></h4>
-                                        <p class="list-group-item-text">hamburguer, presunto, queijo, alface e tomate
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
+                            <?php
+                            echo '<div class="col-sm-7">';
+                            echo '<ul class="list-group">';
+                            while ($user_data = mysqli_fetch_assoc($result)) {
+                                echo '<li class="list-group-item">';
+                                echo '<h4 class="list-group-item-heading">' . $user_data['nome'];
+                                echo '<span class="badge pull-right">' . $user_data['preco'] . '</span>';
+                                echo '</h4>';
+                                echo '</li>';
+                            }
+                            echo '</ul>';
+                            echo '</div>';
+                            ?>
                             <div class="col-sm-5">
                                 <div class="right-cover">
                                     <h3>Salgados</h3>
@@ -124,16 +102,12 @@
                             <div class="col-sm-7">
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Churros<span
-                                                class="badge pull-right">R$0,80</span></h4>
+                                        <h4 class="list-group-item-heading">Churros<span class="badge pull-right">R$0,80
+                                                pila</span></h4>
                                     </li>
                                     <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Cavaquinho/Cueca virada<span
-                                                class="badge pull-right">R$2,00</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Croissant de chocolate<span
-                                                class="badge pull-right">R$5,00</span></h4>
+                                        <h4 class="list-group-item-heading">Churros<span class="badge pull-right">R$0,80
+                                                pila</span></h4>
                                     </li>
                                 </ul>
                             </div>
@@ -153,25 +127,6 @@
                                         <h4 class="list-group-item-heading">Café<span
                                                 class="badge pull-right">R$3,50</span></h4>
                                     </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Achocolatado<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Suco<span
-                                                class="badge pull-right">R$3,50</span></h4>
-                                        <p class="list-group-item-text">laranja</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Regrigerante 2L<span
-                                                class="badge pull-right">R$12,00</span></h4>
-                                        <p class="list-group-item-text">pepsi, coca-cola, guarána e sprite</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Refrigerante 600mL<span
-                                                class="badge pull-right">R$6,00</span></h4>
-                                        <p class="list-group-item-text">pepsi, coca-cola, guarána e sprite</p>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="col-sm-5">
@@ -190,18 +145,6 @@
                                         <h4 class="list-group-item-heading">Sorvete X<span
                                                 class="badge pull-right">R$5,00</span></h4>
                                     </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Sorvete Y<span
-                                                class="badge pull-right">R$6,00</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Picolé X<span
-                                                class="badge pull-right">R$7,00</span></h4>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">Picolé Y<span
-                                                class="badge pull-right">R$8,00</span></h4>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="col-sm-5">
@@ -217,7 +160,6 @@
             </div>
         </div>
     </section>
-
 </body>
 
 </html>
