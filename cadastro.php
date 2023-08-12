@@ -37,7 +37,7 @@
 
 <body>
 
-<header>
+	<header>
 		<a href="home.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
 		<nav>
 			<ul>
