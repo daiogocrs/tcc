@@ -7,8 +7,8 @@
         $preco = $_POST['preco'];
         $categoria = $_POST['categoria'];
         
-        $sqlInsert = "UPDATE usuarios 
-        SET nome='$nome',categoria='$categoria',preco='$preco''
+        $sqlInsert = "UPDATE produtos
+        SET nome='$nome',preco='$preco',categoria='$categoria'
         WHERE id=$id";
         $result = $conexao->query($sqlInsert);
         print_r($result);

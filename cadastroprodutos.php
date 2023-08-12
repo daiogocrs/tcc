@@ -38,7 +38,7 @@
 		<a href="homeadm.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
 		<nav>
 			<ul>
-				<li><a href="home.php">Voltar</a></li>
+				<li><a href="produtos.php">Voltar</a></li>
 			<ul>
 		</nav>
 	</header>

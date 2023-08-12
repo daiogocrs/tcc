@@ -4,7 +4,7 @@
     if(!empty($_GET['id']))
     {
         $id = $_GET['id'];
-        $sqlSelect = "SELECT * FROM usuarios WHERE id=$id";
+        $sqlSelect = "SELECT * FROM produtos WHERE id=$id";
         $result = $conexao->query($sqlSelect);
         if($result->num_rows > 0)
         {
@@ -42,7 +42,7 @@
                 <br>
                 <div class="inputBox">
                     <input type="text" name="nome" id="nome" class="inputUser" value=<?php echo $nome;?> required>
-                    <label for="nome" class="labelInput">Nome completo</label>
+                    <label for="nome" class="labelInput">Nome</label>
                 </div>
                 <br><br>
                 <div class="inputBox">
@@ -51,7 +51,7 @@
                 </div>
                 <br><br>
                 <div class="inputBox">
-                    <input type="text" name="text" id="categoria" class="inputUser" value=<?php echo $categoria;?> required>
+                    <input type="text" name="categoria" id="categoria" class="inputUser" value=<?php echo $categoria;?> required>
                     <label for="categoria" class="labelInput">Categoria</label>
                 </div>
                 <br><br>
