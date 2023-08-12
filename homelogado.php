@@ -49,7 +49,7 @@
       <img src="." class="bannerimg" />
       <div class="col-xs-12">
         <p>Cardápio</p>
-        <a href="cardapioadm.php" class="acessar">Acessar</a>
+        <a href="cardapio.php" class="acessar">Acessar</a>
       </div>
     </div>
   </aside>
