@@ -9,7 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-  <title>Cantina Federal</title>
+  <title>Tela Inicial</title>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
     <nav>
       <div class="site-title">Cantina Federal</div>
         <ul>
-            <li><a href="cadastro.php">criar conta</a> <a href="login.php" class="entrarbotão">Entrar</a></li>
+            <li><a href="homeadm.php" class="entrarbotão">Voltar</a></li>
         <ul>
     </nav>
   </header>
@@ -47,8 +47,8 @@
       </svg>
       <img src="." class="bannerimg" />
       <div class="col-xs-12">
-        <p>Cardápio</p>
-        <a href="cardapio.php" class="acessar">Acessar</a>
+        <p>Cadastrar</p>
+        <a href="cadastroprodutos.php" class="acessar">Acessar</a>
       </div>
     </div>
   </aside>
@@ -68,29 +68,8 @@
       </svg>
       <img src="." class="bannerimg" />
       <div class="col-xs-12">
-        <p>Marmitas</p>
-        <a href="#" class="acessar">Acessar</a>
-      </div>
-    </div>
-  </aside>
-  <aside class="banner terceiro">
-    <div class="container-envelope">
-      <svg class="cirle-a" height="160" width="160">
-        <circle cx="80" cy="80" r="80" />
-      </svg>
-      <svg class="cirle-b" height="60" width="60">
-        <circle cx="30" cy="30" r="30" />
-      </svg>
-      <svg class="cirle-c" height="600" width="600">
-        <circle cx="300" cy="300" r="300" />
-      </svg>
-      <svg class="cirle-d" height="60" width="60">
-        <circle cx="30" cy="30" r="30" />
-      </svg>
-      <img src="" class="bannerimg" />
-      <div class="col-xs-12">
-        <p>Promoções e Novidades</p>
-        <a href="#" class="acessar">Acessar</a>
+        <p>Editar</p>
+        <a href="editprodutos.php" class="acessar">Acessar</a>
       </div>
     </div>
   </aside>

@@ -9,7 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-  <title>Tela Inicial</title>
+  <title>Cantina Federal ADM</title>
 </head>
 
 <body>
@@ -24,13 +24,12 @@
     <nav>
       <div class="site-title">Cantina Federal</div>
         <ul>
-            <li><a href="sair.php" class="entrarbotão">Sair</a></li>
+            <li><a href="produtos.php" class="entrarbotão">Produtos</a><a href="sistema.php" class="entrarbotão">Clientes</a><a href="sair.php" class="entrarbotão">Sair</a></li>
         <ul>
     </nav>
   </header>
 
   <!-- MENU PRINCIPAL -->
-  <script type="text/javascript" src="../public/js/homepage.js"></script>
   </div>
   <aside class="banner primeiro">
     <div class="container-envelope">
@@ -98,7 +97,10 @@
   <!-- MENU PRINCIPAL -->
 
   <footer>
-    <p>© 2023-2023</p>
+    <p>Localização: Rua X, 123 | Bairro X | Sombrio/SC - CEP: 12345-678 | Telefone: (XX) XXXX-XXXX</p>
+    <p>Horário de Funcionamento: | Segunda a Sexta: XX - XX | Sábado: XX - XX | Domingo: XX - XX</p>
+    <p>Siga-nos: <a href="https://www.instagram.com/cantina_federal/" target="_blank" style="color: white;">Instagram</a></p>
+    <p>© 2023 Cantina Federal. Todos os direitos reservados.</p>
   </footer>
 </body>
 

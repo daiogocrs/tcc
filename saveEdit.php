@@ -7,11 +7,11 @@
         $email = $_POST['email'];
         $senha = $_POST['senha'];
         $cidade = $_POST['cidade'];
-        $estado = $_POST['bairro'];
-        $endereco = $_POST['rua'];
+        $bairro = $_POST['bairro'];
+        $rua = $_POST['rua'];
         
         $sqlInsert = "UPDATE usuarios 
-        SET nome='$nome',senha='$senha',email='$email',cidade='$cidade',estado='$estado',endereco='$endereco'
+        SET nome='$nome',senha='$senha',email='$email',cidade='$cidade',bairro='$bairro',rua='$rua'
         WHERE id=$id";
         $result = $conexao->query($sqlInsert);
         print_r($result);

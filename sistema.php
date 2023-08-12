@@ -48,13 +48,13 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Editar Perfil</a>
+            <a class="navbar-brand">Editar Cadastro</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
         <div class="d-flex">
-            <a href="sair.php" class="btn btn-danger me-5">Sair</a>
+            <a href="homeadm.php" class="btn btn-danger me-5">Voltar</a>
         </div>
     </nav>
     <br>
@@ -76,11 +76,11 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Senha</th>
                     <th scope="col">Email</th>
                     <th scope="col">Cidade</th>
                     <th scope="col">Bairro</th>
                     <th scope="col">Rua</th>
+                    <th scope="col">Senha</th>
                     <th scope="col">...</th>
                 </tr>
             </thead>
@@ -90,11 +90,11 @@
                         echo "<tr>";
                         echo "<td>".$user_data['id']."</td>";
                         echo "<td>".$user_data['nome']."</td>";
-                        echo "<td>".$user_data['senha']."</td>";
+                        echo "<td>".$user_data['email']."</td>";
                         echo "<td>".$user_data['cidade']."</td>";
                         echo "<td>".$user_data['bairro']."</td>";
-                        echo "<td>".$user_data['email']."</td>";
                         echo "<td>".$user_data['rua']."</td>";
+                        echo "<td>".$user_data['senha']."</td>";
                         echo "<td>
                         <a class='btn btn-sm btn-primary' href='edit.php?id=$user_data[id]' title='Editar'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>

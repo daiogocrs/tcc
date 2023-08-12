@@ -22,7 +22,7 @@
         {
             $_SESSION['email'] = $email;
             $_SESSION['senha'] = $senha;
-            header('Location: homelogado.php');
+            header('Location: homeadm.php');
         }
     }
     else

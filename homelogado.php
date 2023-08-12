@@ -9,7 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-  <title>Tela Inicial</title>
+  <title>Cantina Federal</title>
 </head>
 
 <body>
@@ -98,7 +98,10 @@
   <!-- MENU PRINCIPAL -->
 
   <footer>
-    <p>© 2023-2023</p>
+    <p>Localização: Rua X, 123 | Bairro X | Sombrio/SC - CEP: 12345-678 | Telefone: (XX) XXXX-XXXX</p>
+    <p>Horário de Funcionamento: | Segunda a Sexta: XX - XX | Sábado: XX - XX | Domingo: XX - XX</p>
+    <p>Siga-nos: <a href="https://www.instagram.com/cantina_federal/" target="_blank" style="color: white;">Instagram</a></p>
+    <p>© 2023 Cantina Federal. Todos os direitos reservados.</p>
   </footer>
 </body>
 
