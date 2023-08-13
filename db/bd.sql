@@ -17,7 +17,16 @@ CREATE TABLE produtos (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     preco VARCHAR(100) NOT NULL,
-    categoria VARCHAR(100)
+    categoria VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE pedidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tamanho VARCHAR(255) NOT NULL,
+    carne VARCHAR(255) NOT NULL,
+    comidas TEXT,
+    saladas TEXT,
+    outros TEXT
 );
 
 INSERT INTO usuarios (email, senha, nivel_acesso)

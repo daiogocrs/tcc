@@ -1,11 +1,10 @@
-$(function ($) {
-    tab = $('.tabs h3 a');
-    tab.on('click', function (event) {
-        event.preventDefault();
-        tab.removeClass('active');
-        $(this).addClass('active');
-        tab_content = $(this).attr('href');
-        $('div[id$="tab-content"]').removeClass('active');
-        $(tab_content).addClass('active');
+const senhaInput = document.getElementById('user_senha');
+    const showPasswordButton = document.getElementById('show_password_button');
+
+    showPasswordButton.addEventListener('click', function () {
+        if (senhaInput.type === 'password') {
+            senhaInput.type = 'text';
+        } else {
+            senhaInput.type = 'password';
+        }
     });
-});

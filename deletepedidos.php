@@ -6,14 +6,16 @@
 
         $id = $_GET['id'];
 
-        $sqlSelect = "SELECT *  FROM usuarios WHERE id=$id";
+        $sqlSelect = "SELECT *  FROM pedidos WHERE id=$id";
 
         $result = $conexao->query($sqlSelect);
 
         if($result->num_rows > 0)
         {
-            $sqlDelete = "DELETE FROM usuarios WHERE id=$id";
+            $sqlDelete = "DELETE FROM pedidos WHERE id=$id";
             $resultDelete = $conexao->query($sqlDelete);
         }
     }
-    header('Location: sistema.php');
+    header('Location: marmitasadm.php');
+   
+?>

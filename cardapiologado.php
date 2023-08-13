@@ -29,6 +29,7 @@ $result = $conexao->query($sql);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
     <link rel="stylesheet" type="text/css" href="css/cardapio.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
@@ -59,18 +60,16 @@ $result = $conexao->query($sql);
             <div class="row">
                 <ul class="nav nav-pills" role="tablist">
                     <?php foreach ($categorias as $categoria) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if ($categoria === 'salgados') echo 'active'; ?>" data-toggle="pill"
-                            href="#<?= $categoria ?>"><?php echo ucfirst($categoria); ?></a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if ($categoria === 'salgados') echo 'active'; ?>" data-toggle="pill" href="#<?= $categoria ?>"><?php echo ucfirst($categoria); ?></a>
+                        </li>
                     <?php } ?>
                 </ul>
                 <div class="tab-content slideanim">
                     <?php foreach ($categorias as $categoria) { ?>
-                    <div id="<?= $categoria ?>"
-                        class="tab-pane fade <?php if ($categoria === 'salgados') echo 'show active'; ?>">
-                        <div class="row">
-                            <?php
+                        <div id="<?= $categoria ?>" class="tab-pane fade <?php if ($categoria === 'salgados') echo 'show active'; ?>">
+                            <div class="row">
+                                <?php
                                 $categoria_result = getProdutosByCategoria($conexao, $categoria);
                                 echo '<div class="col-sm-7">';
                                 echo '<ul class="list-group">';
@@ -84,15 +83,14 @@ $result = $conexao->query($sql);
                                 echo '</ul>';
                                 echo '</div>';
                                 ?>
-                            <div class="col-sm-5">
-                                <div class="right-cover">
-                                    <h3><?php echo ucfirst($categoria); ?></h3>
-                                    <img src="fotos/<?= $categoria ?>.jpg?v=<?= time() ?>"
-                                        class="cardapio-img img-fluid" alt="Imagem de <?= $categoria ?>">
+                                <div class="col-sm-5">
+                                    <div class="right-cover">
+                                        <h3><?php echo ucfirst($categoria); ?></h3>
+                                        <img src="fotos/<?= $categoria ?>.jpg?v=<?= time() ?>" class="cardapio-img img-fluid" alt="Imagem de <?= $categoria ?>">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <?php } ?>
                 </div>
             </div>

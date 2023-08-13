@@ -27,12 +27,15 @@
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
     <title>Editar Cadastro de Produto</title>
 </head>
+
 <body>
     <a href="sistemaprodutos.php">Voltar</a>
     <div class="box">
@@ -51,14 +54,16 @@
                 </div>
                 <br><br>
                 <div class="inputBox">
-                    <input type="text" name="categoria" id="categoria" class="inputUser" value=<?php echo $categoria;?> required>
+                    <input type="text" name="categoria" id="categoria" class="inputUser" value=<?php echo $categoria;?>
+                        required>
                     <label for="categoria" class="labelInput">Categoria</label>
                 </div>
                 <br><br>
-				<input type="hidden" name="id" value=<?php echo $id;?>>
+                <input type="hidden" name="id" value=<?php echo $id;?>>
                 <input type="submit" name="update" id="submit">
             </fieldset>
         </form>
     </div>
 </body>
+
 </html>

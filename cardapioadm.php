@@ -50,7 +50,7 @@ $result = $conexao->query($sql);
 
 <body>
     <header>
-        <a href="home.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
+        <a href="homeadm.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
     </header>
 
     <script type="text/javascript" src="js/cardapio.js"></script>
