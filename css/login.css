@@ -79,6 +79,20 @@ header img {
   width: 100%;
 }
 
+.form-wrap form .error-message {
+  -moz-box-sizing: border-box;
+  border: 1px solid #CFCFCF;
+  box-sizing: border-box;
+  color: inherit;
+  display: inline-block;
+  font-family: inherit;
+  margin: 0 0 .8em 0;
+  outline: 0;
+  padding-right: 2em;
+  padding: .8em 0 10px .8em;
+  width: 100%;
+}
+
 .form-wrap form .button {
   background-color: #801300;
   border: none;

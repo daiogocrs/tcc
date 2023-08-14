@@ -16,13 +16,19 @@ if (isset($_POST['submit'])) {
     $preco = limparDados($conexao, $_POST['preco']);
     $categoria = limparDados($conexao, $_POST['categoria']);
 
-    $result = mysqli_query($conexao, "INSERT INTO produtos(nome, preco, categoria) 
-        VALUES ('$nome', '$preco', '$categoria')");
-
-    if ($result) {
-        $mensagemCadastro = 'Produto cadastrado!';
+    $verificarExistencia = mysqli_query($conexao, "SELECT * FROM produtos WHERE nome = '$nome'");
+    if (mysqli_num_rows($verificarExistencia) > 0) {
+        $mensagemCadastro = 'Produto já cadastrado.';
     } else {
-        $mensagemCadastro = 'Erro ao cadastrar o produto.';
+
+        $result = mysqli_query($conexao, "INSERT INTO produtos(nome, preco, categoria) 
+            VALUES ('$nome', '$preco', '$categoria')");
+
+        if ($result) {
+            $mensagemCadastro = 'Produto cadastrado!';
+        } else {
+            $mensagemCadastro = 'Erro ao cadastrar o produto.';
+        }
     }
 
     mysqli_close($conexao);
@@ -61,8 +67,11 @@ if (isset($_POST['submit'])) {
             <div id="signup-tab-content" class="active">
                 <?php
                 if ($mensagemCadastro) {
-                    echo '<p style="color: green; text-align: center; font-size: 20px; padding-bottom: 15px;">' . $mensagemCadastro . '</p>';
-                    if ($mensagemCadastro === 'Produto cadastrado!') {
+                    if ($mensagemCadastro === 'Produto já cadastrado.') {
+                        echo '<p style="color: red; text-align: center; font-size: 20px; padding-bottom: 15px;">' . $mensagemCadastro . '</p>';
+                        echo '<form action="cadastroprodutos.php" method="GET"><input type="submit" class="button" value="Cadastrar Novo Produto"></form>';
+                    } else {
+                        echo '<p style="color: lightgreen; text-align: center; font-size: 20px; padding-bottom: 15px;">' . $mensagemCadastro . '</p>';
                         echo '<form action="cadastroprodutos.php" method="GET"><input type="submit" class="button" value="Cadastrar Novo Produto"></form>';
                     }
                 } else {
@@ -79,9 +88,7 @@ if (isset($_POST['submit'])) {
                         </select>
                         <input type="submit" class="button" name="submit" id="submit" value="Cadastrar">
                     </form>
-                <?php
-                }
-                ?>
+                <?php } ?>
             </div>
         </div>
     </div>
