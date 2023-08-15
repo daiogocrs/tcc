@@ -103,7 +103,10 @@ if (isset($_POST['submit'])) {
                             <option value="media">Média</option>
                             <option value="grande">Grande</option>
                         </select>
-                        <input type="submit" class="button" name="submit" id="submit" value="Enviar Pedido">
+                        <div class="help-text">
+                            <p style="color: red; font-size: 17px;">Faça login para fazer o pedido.</p>
+                            <p><a href="login.php">Entre aqui</a></p>
+                        </div>
                     </form>
                 <?php
                 }
