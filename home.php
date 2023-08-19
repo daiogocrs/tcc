@@ -69,7 +69,7 @@
             </svg>
             <img src="." class="bannerimg" />
             <div class="col-xs-12">
-                <p>Marmitas</p>
+                <p>Delivery</p>
                 <a href="marmitas.php" class="acessar">Acessar</a>
             </div>
         </div>

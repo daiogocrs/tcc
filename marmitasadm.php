@@ -29,31 +29,14 @@
     <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/sistema.css">
     <title>Pedidos de Marmitas</title>
-    <style>
-    body {
-        background: linear-gradient(to right, #801300, #801350);
-        color: white;
-        text-align: center;
-    }
-
-    .table-bg {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 15px 15px 0 0;
-    }
-
-    .box-search {
-        display: flex;
-        justify-content: center;
-        gap: .1%;
-    }
-    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-bg">
         <div class="container-fluid">
-            <a class="navbar-brand">Editar Produtos</a>
+            <a class="navbar-brand">Marmitas</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -63,11 +46,6 @@
             <a href="homeadm.php" class="btn btn-danger me-5">Voltar</a>
         </div>
     </nav>
-    <br>
-    <?php
-        echo "<h1>Bem vindo <u>$logado</u></h1>";
-    ?>
-    <br>
     <div class="box-search">
         <input type="search" class="form-control w-25" placeholder="Pesquisar" id="pesquisar">
         <button onclick="searchData()" class="btn btn-primary">
@@ -96,6 +74,7 @@
                     while($user_data = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
                         echo "<td>".$user_data['id']."</td>";
+                        echo "<td>".$user_data['tamanho']."</td>";
                         echo "<td>".$user_data['carne']."</td>";
                         echo "<td>".$user_data['comidas']."</td>";
                         echo "<td>".$user_data['saladas']."</td>";
