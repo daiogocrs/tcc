@@ -3,22 +3,18 @@ body {
     color: white;
     text-align: center;
 }
-
 .table-bg {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 15px 15px 0 0;
 }
-
 .box-search {
     display: flex;
     justify-content: center;
     gap: .1%;
 }
-
 .navbar-bg {
     background-color: #6e1100;
 }
-
 .navbar-brand {
-color: white;
+    color: white;
 }
