@@ -9,8 +9,8 @@ body {
 }
 .box-search {
     display: flex;
-    justify-content: center;
     gap: .1%;
+    justify-content: center;
 }
 .navbar-bg {
     background-color: #6e1100;

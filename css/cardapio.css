@@ -157,23 +157,23 @@ section {
 }
 /* Estilos personalizados para os botões de categoria */
 .category-buttons {
+	-webkit-overflow-scrolling: touch;
 	display: inline-flex;
 	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
 }
 .category-buttons .nav-link {
-	margin: 1px;
-	padding: 10px;
 	background-color: #182c39;
-	color: #fff;
 	border: none;
-	text-decoration: none;
-	text-align: center;
-	white-space: nowrap;
+	color: #fff;
+	margin: 1px;
 	min-width: 100px;
 	overflow: hidden;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
 	text-overflow: ellipsis;
 	transition: background-color 0.3s, color 0.3s;
+	white-space: nowrap;
 }
 .category-buttons .nav-link.active {
 	background-color: #944743;
@@ -193,22 +193,22 @@ section {
 }
 .swiper-slide {
 	flex-shrink: 0;
-	width: 105px;
 	transition: transform 0.3s ease-in-out;
+	width: 105px;
 }
 .swiper-pagination {
-	position: absolute;
 	bottom: 10px;
 	left: 50%;
+	position: absolute;
 	transform: translateX(-50%);
 }
 .swiper-pagination-bullet {
 	background-color: #fff;
-	opacity: 0.5;
-	width: 10px;
+	border-radius: 50%;
 	height: 10px;
 	margin: 0 5px;
-	border-radius: 50%;
+	opacity: 0.5;
+	width: 10px;
 }
 .jumbotron {
 	background-image: url('https://res.cloudinary.com/dbte0ueti/image/upload/v1536951689/new/jumbotron.jpg');
