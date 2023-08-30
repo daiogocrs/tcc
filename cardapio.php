@@ -45,7 +45,7 @@ $result = $conexao->query($sql);
 
 <body>
     <header>
-        <a href="home.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
+        <a href="home.php"><img src="fotos/cantinalogo.png" alt="logo cantina Federal"></a>
     </header>
     <section class="bg-cardapio bg-section" id="cardapio">
         <div class="container-fluid">

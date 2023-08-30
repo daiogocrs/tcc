@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
 </head>
 <body>
     <header>
-        <a href="home.php"><img src="fotos/cantinalogo2.png" alt="logo cantina Federal"></a>
+        <a href="home.php"><img src="fotos/cantinalogo.png" alt="logo cantina Federal"></a>
         <nav>
             <ul>
                 <li><a href="home.php">Voltar</a></li>
