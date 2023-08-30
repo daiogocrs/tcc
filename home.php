@@ -28,7 +28,7 @@
             <div class="site-title">Cantina Federal</div>
             <ul>
                 <li><a href="cadastro.php">criar conta</a> <a href="login.php" class="entrarbotão">Entrar</a></li>
-                <ul>
+            <ul>
         </nav>
     </header>
 

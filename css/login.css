@@ -3,18 +3,35 @@
      margin: 0;
      padding: 0;
 }
- a {
-     color: #666;
-     text-decoration: none;
+  nav ul {
+    font: 500 15px 'Work Sans', Helvetica, sans-serif;
+    list-style-type: none;
+    margin: 0 2% auto 0;
+    max-width: 100%;
+    padding-left: 0;
+    text-align: right;
+    text-transform: uppercase;
 }
- a:hover {
+ nav ul li {
+    display: inline-block;
+    line-height: 60px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+ nav ul li a {
+    color: black;
+    font-size: large;
+    text-decoration: none;
+}
+ 
+  a:hover {
      color: #4FDA8C;
 }
  input {
      font: 16px/26px "Raleway", sans-serif;
 }
  body {
-     background-color: #f1f2f2;
+     background-color: white;
      color: #666;
      font: 16px/26px "Raleway", sans-serif;
 }
@@ -22,7 +39,7 @@
      margin-left: 20px;
      margin-top: 20px;
      position: absolute;
-     width: 200px;
+     width: 100px;
 }
  .form-wrap {
      -moz-box-shadow: 0px 1px 8px #BEBEBE;
@@ -141,21 +158,5 @@
      font-size: 14px;
      text-align: center;
 }
- nav ul {
-     list-style-type: none;
-     margin: 0 2% auto 0;
-     max-width: 100%;
-     padding-left: 0;
-     text-align: right;
-}
- nav ul li {
-     display: inline-block;
-     line-height: 60px;
-     margin-left: 10px;
-}
- nav ul li a {
-     color: black;
-     font-size: large;
-     text-decoration: none;
-}
+ 
  

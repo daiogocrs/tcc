@@ -5,20 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="bibliotecas.html">
     <title>Cantina Federal</title>
     <style>
-    
-
-/* Please ❤ this if you like it! */
-
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext');
 
-/* #Primary
-================================================== */
-
-body{
+header{
     font-family: 'Poppins', sans-serif;
 	font-size: 16px;
 	line-height: 24px;
@@ -40,10 +38,6 @@ body{
 	color: #fff;
 	background-color: #8167a9;
 }
-
-
-/* #Navigation
-================================================== */
 
 .start-header {
 	opacity: 1;
@@ -164,9 +158,6 @@ body{
     transition: all 200ms linear;
 }
 
-/* #Primary style
-================================================== */
-
 .bg-light {
 	background-color: #fff !important;
     transition: all 200ms linear;
@@ -207,7 +198,7 @@ p{
     transition: all 300ms linear;
     transition-delay: 1700ms;
 }
-body.hero-anime p{
+header.hero-anime p{
 	opacity: 0;
 	transform: translateY(40px);
     transition-delay: 1700ms;
@@ -218,43 +209,43 @@ h1 span{
 	opacity: 1;
 	transform: translate(0);
 }
-body.hero-anime h1 span:nth-child(1){
+header.hero-anime h1 span:nth-child(1){
 	opacity: 0;
 	transform: translateY(-20px);
 }
-body.hero-anime h1 span:nth-child(2){
+header.hero-anime h1 span:nth-child(2){
 	opacity: 0;
 	transform: translateY(-30px);
 }
-body.hero-anime h1 span:nth-child(3){
+header.hero-anime h1 span:nth-child(3){
 	opacity: 0;
 	transform: translateY(-50px);
 }
-body.hero-anime h1 span:nth-child(4){
+header.hero-anime h1 span:nth-child(4){
 	opacity: 0;
 	transform: translateY(-10px);
 }
-body.hero-anime h1 span:nth-child(5){
+header.hero-anime h1 span:nth-child(5){
 	opacity: 0;
 	transform: translateY(-50px);
 }
-body.hero-anime h1 span:nth-child(6){
+header.hero-anime h1 span:nth-child(6){
 	opacity: 0;
 	transform: translateY(-20px);
 }
-body.hero-anime h1 span:nth-child(7){
+header.hero-anime h1 span:nth-child(7){
 	opacity: 0;
 	transform: translateY(-40px);
 }
-body.hero-anime h1 span:nth-child(8){
+header.hero-anime h1 span:nth-child(8){
 	opacity: 0;
 	transform: translateY(-10px);
 }
-body.hero-anime h1 span:nth-child(9){
+header.hero-anime h1 span:nth-child(9){
 	opacity: 0;
 	transform: translateY(-30px);
 }
-body.hero-anime h1 span:nth-child(10){
+header.hero-anime h1 span:nth-child(10){
 	opacity: 0;
 	transform: translateY(-20px);
 }
@@ -288,23 +279,23 @@ h1 span:nth-child(9){
 h1 span:nth-child(10){
     transition-delay: 700ms;
 }
-body.hero-anime h1 span:nth-child(11){
+header.hero-anime h1 span:nth-child(11){
 	opacity: 0;
 	transform: translateY(30px);
 }
-body.hero-anime h1 span:nth-child(12){
+header.hero-anime h1 span:nth-child(12){
 	opacity: 0;
 	transform: translateY(50px);
 }
-body.hero-anime h1 span:nth-child(13){
+header.hero-anime h1 span:nth-child(13){
 	opacity: 0;
 	transform: translateY(20px);
 }
-body.hero-anime h1 span:nth-child(14){
+header.hero-anime h1 span:nth-child(14){
 	opacity: 0;
 	transform: translateY(30px);
 }
-body.hero-anime h1 span:nth-child(15){
+header.hero-anime h1 span:nth-child(15){
 	opacity: 0;
 	transform: translateY(50px);
 }
@@ -344,7 +335,7 @@ h1 span:nth-child(15){
     transition: all 300ms linear;
     transition-delay: 1900ms;
 }
-body.hero-anime #switch{
+header.hero-anime #switch{
 	opacity: 0;
 	transform: translateY(40px);
     transition-delay: 1900ms;
@@ -411,59 +402,6 @@ body.hero-anime #switch{
 	background-color: rgba(129,103,169,.6);
 }
 
-body.dark{
-	color: #fff;
-	background-color: #1f2029;
-}
-body.dark .navbar-brand img{
-  filter: brightness(100%);
-}
-body.dark h1{
-	color: #fff;
-}
-body.dark h1 span{
-    transition-delay: 0ms !important;
-}
-body.dark p{
-	color: #fff;
-    transition-delay: 0ms !important;
-}
-body.dark .bg-light {
-	background-color: #14151a !important;
-}
-body.dark .start-header {
-	box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
-}
-body.dark .start-header.scroll-on {
-	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
-}
-body.dark .nav-link{
-	color: #fff !important;
-}
-body.dark .nav-item.active .nav-link{
-	color: #999 !important;
-}
-body.dark .dropdown-menu {
-	color: #fff;
-	background-color: #1f2029;
-	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
-}
-body.dark .dropdown-item {
-	color: #fff;
-}
-body.dark .navbar-light .navbar-toggler-icon {
-	border-bottom: 1px solid #fff;
-}
-body.dark .navbar-light .navbar-toggler-icon:after, 
-body.dark .navbar-light .navbar-toggler-icon:before{
-	background-color: #fff;
-}
-body.dark .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-	border-color: transparent;
-}
-
-
-
 /* #Media
 ================================================== */
 
@@ -513,43 +451,10 @@ body.dark .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 		margin-top: 10px !important;
 		margin-bottom: 20px !important;
 	}
-	body.dark .nav-item::before {
-		background-color: #fff;
-	}
-	body.dark .dropdown-toggle::after {
-		background-color: #fff;
-	}
-	body.dark .dropdown-menu {
-		background-color: transparent;
-		box-shadow: none;
-	}
-}
-
-/* #Link to page
-================================================== */
-
-.logo {
-	position: absolute;
-	bottom: 30px;
-	right: 30px;
-	display: block;
-	z-index: 100;
-	transition: all 250ms linear;
-}
-.logo img {
-	height: 26px;
-	width: auto;
-	display: block;
-  filter: brightness(10%);
-	transition: all 250ms linear;
-}
-body.dark .logo img {
-  filter: brightness(100%);
-}
-    </style>
+}  </style>
 </head>
-<body class="hero-anime">	
-
+<body>	
+<header class="hero-anime">
 	<div class="navigation-wrap bg-light start-header start-style">
 		<div class="container">
 			<div class="row">
@@ -602,39 +507,7 @@ body.dark .logo img {
 			</div>
 		</div>
 	</div>
-	<div class="section full-height">
-		<div class="absolute-center">
-			<div class="section">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-				<h1><span>B</span><span>o</span><span>o</span><span>t</span><span>s</span><span>t</span><span>r</span><span>a</span><span>p</span> <span>4</span><br>
-				<span>m</span><span>e</span><span>n</span><span>u</span></h1>
-				<p>scroll for nav animation</p>	
-						</div>	
-					</div>		
-				</div>		
-			</div>
-			<div class="section mt-5">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-							<div id="switch">
-								<div id="circle"></div>
-							</div>
-						</div>	
-					</div>		
-				</div>			
-			</div>
-		</div>
-	</div>
-	<div class="my-5 py-5">
-	</div>
-
-	<a href="https://front.codes/" class="logo" target="_blank">
-		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">
-	</a>
-
+</header>
     <script type="text/javascript" src="js/bibliotecas.js"></script>
     <script>
       (function($) { "use strict";
@@ -655,12 +528,12 @@ body.dark .logo img {
 	//Animation
 	
 	$(document).ready(function() {
-		$('body.hero-anime').removeClass('hero-anime');
+		$('header.hero-anime').removeClass('hero-anime');
 	});
 
 	//Menu On Hover
 		
-	$('body').on('mouseenter mouseleave','.nav-item',function(e){
+	$('header').on('mouseenter mouseleave','.nav-item',function(e){
 			if ($(window).width() > 750) {
 				var _d=$(e.target).closest('.nav-item');_d.addClass('show');
 				setTimeout(function(){
@@ -668,19 +541,6 @@ body.dark .logo img {
 				},1);
 			}
 	});	
-	
-	//Switch light/dark
-	
-	$("#switch").on('click', function () {
-		if ($("body").hasClass("dark")) {
-			$("body").removeClass("dark");
-			$("#switch").removeClass("switched");
-		}
-		else {
-			$("body").addClass("dark");
-			$("#switch").addClass("switched");
-		}
-	});  
 	
   })(jQuery);   
     </script>
