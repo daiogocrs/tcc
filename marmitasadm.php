@@ -92,6 +92,9 @@
             </tbody>
         </table>
     </div>
+
+    <script type="text/javascript" src="js/bibliotecas.js"></script>
+    
 </body>
 
 </html>

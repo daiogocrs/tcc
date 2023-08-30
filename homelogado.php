@@ -7,15 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
     <link rel="stylesheet" type="text/css" href="css/home.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <title>Cantina Federal</title>
 </head>
 
 <body>
-
-    <script type="text/javascript" src="js/home.js"></script>
 
     <header>
         <div class="header-banner">
@@ -30,7 +25,6 @@
         </nav>
     </header>
 
-    <!-- MENU PRINCIPAL -->
     <script type="text/javascript" src="../public/js/homepage.js"></script>
     </div>
     <aside class="banner primeiro">
@@ -96,7 +90,6 @@
             </div>
         </div>
     </aside>
-    <!-- MENU PRINCIPAL -->
 
     <footer>
         <p>Localização: Rua X, 123 | Bairro X | Sombrio/SC - CEP: 12345-678 | Telefone: (XX) XXXX-XXXX</p>
@@ -104,6 +97,10 @@
         <p>Siga-nos: <a href="https://www.instagram.com/cantina_federal/" target="_blank" style="color: white;">Instagram</a></p>
         <p>© 2023 Cantina Federal. Todos os direitos reservados.</p>
     </footer>
+
+    <script type="text/javascript" src="js/bibliotecas.js"></script>
+    <script type="text/javascript" src="js/home.js"></script>
+    
 </body>
 
 </html>

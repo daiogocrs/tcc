@@ -100,6 +100,8 @@
         </table>
     </div>
 </body>
+
+<script type="text/javascript" src="js/bibliotecas.js"></script>
 <script>
 var search = document.getElementById('pesquisar');
 

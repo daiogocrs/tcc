@@ -1,10 +1,11 @@
-const senhaInput = document.getElementById('user_senha');
-    const showPasswordButton = document.getElementById('show_password_button');
-
-    showPasswordButton.addEventListener('click', function () {
-        if (senhaInput.type === 'password') {
-            senhaInput.type = 'text';
-        } else {
-            senhaInput.type = 'password';
-        }
-    });
+function togglePasswordVisibility() {
+    const senhaInput = document.getElementById('user_senha');
+    const passwordToggle = document.getElementById('password_toggle');
+    if (senhaInput.type === 'password') {
+        senhaInput.type = 'text';
+        passwordToggle.textContent = '👁';
+    } else {
+        senhaInput.type = 'password';
+        passwordToggle.textContent = '👁';
+    }
+}
