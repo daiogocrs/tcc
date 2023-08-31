@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
     <link rel="stylesheet" type="text/css" href="css/home.css">
+    <script type="text/javascript" src="js/bibliotecas.js"></script>
     <title>Tela Inicial</title>
 </head>
 
@@ -21,7 +22,7 @@
             <div class="site-title">Cantina Federal</div>
             <ul>
                 <li><a href="homeadm.php" class="entrarbotão">Voltar</a></li>
-                <ul>
+            <ul>
         </nav>
     </header>
 
@@ -76,10 +77,7 @@
                 style="color: white;">Instagram</a></p>
         <p>© 2023 Cantina Federal. Todos os direitos reservados.</p>
     </footer>
-
-    <script type="text/javascript" src="js/bibliotecas.js"></script>
     <script type="text/javascript" src="js/home.js"></script>
-    
 </body>
 
 </html>

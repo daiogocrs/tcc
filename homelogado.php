@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/home.css">
+    <script type="text/javascript" src="js/bibliotecas.js"></script>
     <title>Cantina Federal</title>
 </head>
 
@@ -103,10 +104,7 @@
         <p>Siga-nos: <a href="https://www.instagram.com/cantina_federal/" target="_blank" style="color: white;">Instagram</a></p>
         <p>© 2023 Cantina Federal. Todos os direitos reservados.</p>
     </footer>
-
-    <script type="text/javascript" src="js/bibliotecas.js"></script>
     <script type="text/javascript" src="js/home.js"></script>
-    
 </body>
 
 </html>
