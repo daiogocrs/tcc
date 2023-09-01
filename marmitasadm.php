@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="homeamd.php">Home</a>
+                                        <a class="nav-link" href="homeadm.php">Home</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link" href="cardapioadm.php">Cardápio</a>
@@ -75,8 +75,17 @@ if (isset($_POST['submit'])) {
                                         <a class="nav-link" href="marmitasadm.php">Delivery</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="sair.php">Sair</a>
+                                        <a class="nav-link" href="sistema.php">Clientes</a>
                                     </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="produtos.php">Produtos</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conta</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="editarperfil.php">Editar Perfil</a>
+										<a class="dropdown-item" href="sair.php">Sair</a>
+									</div>
                                 </ul>
                             </div>
                                 

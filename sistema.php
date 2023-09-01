@@ -66,7 +66,6 @@
                     <th scope="col">Cidade</th>
                     <th scope="col">Bairro</th>
                     <th scope="col">Rua</th>
-                    <th scope="col">Senha</th>
                     <th scope="col">...</th>
                 </tr>
             </thead>
@@ -80,7 +79,6 @@
                         echo "<td>".$user_data['cidade']."</td>";
                         echo "<td>".$user_data['bairro']."</td>";
                         echo "<td>".$user_data['rua']."</td>";
-                        echo "<td>".$user_data['senha']."</td>";
                         echo "<td>
                         <a class='btn btn-sm btn-primary' href='edit.php?id=$user_data[id]' title='Editar'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
