@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,11 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="bibliotecas.html">
     <link rel="stylesheet" type="text/css" href="css/home copy.css">
-    <script type="text/javascript" src="js/bibliotecas.js"></script>
     <title>Cantina Federal</title>
 </head>
-
 <body>	
     <header class="header-animation">
         <div class="navigation-wrap bg start-header start-style">
@@ -34,34 +32,19 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                        </div>
+                                        <a class="nav-link" href="home.php">Home</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="#">Portfolio</a>
+                                        <a class="nav-link" href="cardapio.php">Cardápio</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="#">Agency</a>
+                                        <a class="nav-link" href="marmitas.php">Delivery</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                        </div>
+                                        <a class="nav-link" href="#">Contato</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="#">Journal</a>
-                                    </li>
-                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="#">Contact</a>
+                                        <a class="nav-link" href="login.php">Entrar</a>
                                     </li>
                                 </ul>
                             </div>
@@ -72,9 +55,41 @@
             </div>
         </div>
     </header>
+    <script type="text/javascript" src="js/bibliotecas.js"></script>
+    <script>
+      (function($) { "use strict";
 
+$(function() {
+    var header = $(".start-style");
+    $(window).scroll(function() {    
+        var scroll = $(window).scrollTop();
     
-    <script type="text/javascript" src="js/home copy.js"></script>
-</body>
+        if (scroll >= 10) {
+            header.removeClass('start-style').addClass("scroll-on");
+        } else {
+            header.removeClass("scroll-on").addClass('start-style');
+        }
+    });
+});		
+    
+//Animation
 
+$(document).ready(function() {
+    $('body.header-animation').removeClass('header-animation');
+});
+
+//Menu On Hover
+    
+$('body').on('mouseenter mouseleave','.nav-item',function(e){
+        if ($(window).width() > 750) {
+            var _d=$(e.target).closest('.nav-item');_d.addClass('show');
+            setTimeout(function(){
+            _d[_d.is(':hover')?'addClass':'removeClass']('show');
+            },1);
+        }
+});	
+
+})(jQuery);   
+    </script>
+</body>
 </html>

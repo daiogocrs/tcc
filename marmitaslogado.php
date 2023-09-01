@@ -50,13 +50,44 @@ if (isset($_POST['submit'])) {
     <title>Tela de Pedido de Marmitas</title>
 </head>
 <body>
-    <header>
-        <a href="homelogado.php"><img src="fotos/cantinalogo.png" alt="logo cantina Federal"></a>
-        <nav>
-            <ul>
-                <li><a href="homelogado.php">Voltar</a></li>
-            </ul>
-        </nav>
+    <header class="header-animation">
+        <div class="navigation-wrap bg start-header start-style">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-md navbar-light">
+                            
+                            <a class="navbar-brand" href="homelogado.php"><img src="fotos/cantinalogo2.png" alt=""></a>	
+                                
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                                
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ml-auto py-4 py-md-0">
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="homelogado.php">Home</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="cardapiologado.php">Cardápio</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+                                        <a class="nav-link" href="marmitaslogado.php">Delivery</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="#">Contato</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="sair.php">Sair</a>
+                                    </li>
+                                </ul>
+                            </div>
+                                
+                        </nav>		
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
     <div class="form-wrap">
         <div class="tabs">
@@ -105,7 +136,10 @@ if (isset($_POST['submit'])) {
                             <option value="media">Média</option>
                             <option value="grande">Grande</option>
                         </select>
-                        <input type="submit" class="button" name="submit" id="submit" value="Enviar Pedido">
+                        <div class="help-text">
+                            <p style="color: red; font-size: 17px;">Faça login para fazer o pedido.</p>
+                            <p><a href="login.php">Entre aqui</a></p>
+                        </div>
                     </form>
                 <?php
                 }
@@ -113,6 +147,7 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="js/header.js"></script>
 </body>
 </html>
 
