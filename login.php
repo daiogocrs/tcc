@@ -26,7 +26,7 @@
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
                         
-                            <a class="navbar-brand" href="home.php"><img src="fotos/cantinalogo2.png" alt=""></a>		
+                            <a class="navbar-brand" href="index.php"><img src="fotos/cantinalogo2.png" alt=""></a>		
                             
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="home.php">Home</a>
+                                        <a class="nav-link" href="index.php">Home</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link" href="cardapio.php">Cardápio</a>
@@ -63,8 +63,10 @@
             <div id="signup-tab-content" class="active">
                 <form class="form_cadastro" action="testLogin.php" method="POST">
                     <input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email" name="email" required>
-                    <input type="password" class="input" id="user_senha" autocomplete="off" placeholder="Senha" name="senha" required>
-                    <span class="password-toggle" id="password_toggle" onclick="togglePasswordVisibility()" style="position: absolute; margin-top: -50px; margin-left: 240px; cursor: pointer; user-select: none;">👁</span>
+                    <div class="password-container">
+                        <input type="password" class="input" id="user_senha" autocomplete="off" placeholder="Senha" name="senha" required>
+                        <span class="password-toggle" id="password_toggle" onclick="togglePasswordVisibility()">👁</span>
+                    </div>
                     <input type="submit" class="button" name="submit" value="Entrar">
                 </form>
                 <div class="help-text">

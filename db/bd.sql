@@ -29,5 +29,5 @@ CREATE TABLE pedidos (
     outros TEXT
 );
 
-INSERT INTO usuarios (email, senha, nivel_acesso)
-VALUES ('admin@gmail.com', '123123', 'adm');
+INSERT INTO usuarios (nome, email, cidade, bairro, rua, senha, nivel_acesso)
+VALUES ('cantina', 'admin@gmail.com', 'sombrio', 'x', 'x', '123123', 'adm');

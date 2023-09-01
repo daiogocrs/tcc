@@ -420,6 +420,17 @@ div .form-wrap {
 .form-wrap .tabs-content .active {
 	display: block !important;
 }
+.password-container {
+    position: relative;
+}
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 25px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
 .form-wrap form .input {
 	-moz-box-sizing: border-box;
 	border: 1px solid #CFCFCF;
