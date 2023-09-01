@@ -43,9 +43,6 @@
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link" href="marmitas.php">Delivery</a>
                                     </li>
-                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="#">Contato</a>
-                                    </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
                                         <a class="nav-link" href="login.php">Entrar</a>
                                     </li>

@@ -48,7 +48,7 @@ $result = $conexao->query($sql);
 </head>
 
 <body>
-<header class="header-animation">
+    <header class="header-animation">
         <div class="navigation-wrap bg start-header start-style">
             <div class="container">
                 <div class="row">
@@ -71,9 +71,6 @@ $result = $conexao->query($sql);
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link" href="marmitaslogado.php">Delivery</a>
-                                    </li>
-                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="#">Contato</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link" href="sair.php">Sair</a>

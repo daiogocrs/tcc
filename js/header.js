@@ -12,14 +12,11 @@ $(function() {
         }
     });
 });		
-    
-//Animation
 
 $(document).ready(function() {
     $('body.header-animation').removeClass('header-animation');
 });
 
-//Menu On Hover
     
 $('body').on('mouseenter mouseleave','.nav-item',function(e){
         if ($(window).width() > 750) {
