@@ -86,6 +86,7 @@ if (!empty($_GET['id'])) {
                 </div>
                 <br><br>
                 <input type="hidden" name="id" value=<?php echo $id; ?>>
+                <input type="hidden" name="nivel_acesso" id="user_nivel_acesso" value=<?php echo $nivel_acesso; ?>>
                 <input type="submit" name="update" id="submit">
             </fieldset>
         </form>

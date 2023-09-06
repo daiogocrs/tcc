@@ -106,8 +106,12 @@ if (isset($_POST['submit'])) {
                         name="bairro" required>
                     <input type="text" class="input" id="user_rua" autocomplete="off" placeholder="Rua" name="rua"
                         required>
-                    <input type="password" class="input" id="user_senha" autocomplete="off" placeholder="Senha"
-                        name="senha" required>
+                    <div class="password-container">
+                        <input type="password" class="input" id="user_senha" autocomplete="off" placeholder="Senha"
+                            name="senha" required>
+                        <span class="password-toggle" id="password_toggle"
+                            onclick="togglePasswordVisibility()">👁</span>
+                    </div>
                     <input type="hidden" class="input" id="user_nivel_acesso" autocomplete="on" name="nivel_acesso"
                         value="usuario" required>
                     <input type="submit" class="button" name="submit" id="submit" value="Cadastrar">
@@ -119,6 +123,7 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript" src="../js/header.js"></script>
 </body>
 
