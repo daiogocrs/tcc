@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
-    include_once('config.php');
+    include('config.php');
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
@@ -21,7 +21,9 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']
             $_SESSION['senha'] = $senha;
             header('Location: homeadm/homeadm.php');
         } else {
-            header('Location: homeusuario/homelogado.php');
+            $_SESSION['email'] = $email;
+            $_SESSION['senha'] = $senha;
+            header('Location: homeusuario/homeusuario.php');
         }
     }
 } else {

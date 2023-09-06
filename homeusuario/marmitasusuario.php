@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
 
-                            <a class="navbar-brand" href="homelogado.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
+                            <a class="navbar-brand" href="homeusuario.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -71,13 +71,13 @@ if (isset($_POST['submit'])) {
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="homelogado.php">Home</a>
+                                        <a class="nav-link" href="homeusuario.php">Home</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="cardapiologado.php">Cardápio</a>
+                                        <a class="nav-link" href="cardapiousuario.php">Cardápio</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                                        <a class="nav-link" href="marmitaslogado.php">Delivery</a>
+                                        <a class="nav-link" href="marmitasusuario.php">Delivery</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
@@ -105,11 +105,11 @@ if (isset($_POST['submit'])) {
                 if ($mensagemPedido) {
                     echo '<p style="color: green; text-align: center; font-size: 20px; padding-bottom: 15px;">' . $mensagemPedido . '</p>';
                     if ($mensagemPedido === 'Seu pedido foi feito!') {
-                        echo '<form action="marmitaslogado.php" method="GET"><input type="submit" class="button" value="Fazer Novo Pedido"></form>';
+                        echo '<form action="marmitasusuario.php" method="GET"><input type="submit" class="button" value="Fazer Novo Pedido"></form>';
                     }
                 } else {
                     ?>
-                    <form class="form_cadastro" action="marmitaslogado.php" method="POST">
+                    <form class="form_cadastro" action="marmitasusuario.php" method="POST">
                         <label>Faça seu prato:</label><br>
                         <input type="checkbox" class="input" name="comida[]" value="arroz"> Arroz <br>
                         <input type="checkbox" class="input" name="comida[]" value="arroz temperado"> Arroz Temperado <br>

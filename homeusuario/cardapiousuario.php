@@ -56,7 +56,7 @@ $result = $conexao->query($sql);
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
 
-                            <a class="navbar-brand" href="homelogado.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
+                            <a class="navbar-brand" href="homeusuario.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -67,13 +67,13 @@ $result = $conexao->query($sql);
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="homelogado.php">Home</a>
+                                        <a class="nav-link" href="homeusuario.php">Home</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                                        <a class="nav-link" href="cardapiologado.php">Cardápio</a>
+                                        <a class="nav-link" href="cardapiousuario.php">Cardápio</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="marmitaslogado.php">Delivery</a>
+                                        <a class="nav-link" href="marmitasusuario.php">Delivery</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
