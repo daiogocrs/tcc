@@ -1,6 +1,15 @@
 <?php
 session_start();
+
 include('../config.php');
+
+if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true) and (!isset($_SESSION['nivel_acesso']) == 'adm'))
+{
+    unset($_SESSION['email']);
+    unset($_SESSION['senha']);
+    header('Location: ../home/login.php');
+}
+
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
     $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id DESC";

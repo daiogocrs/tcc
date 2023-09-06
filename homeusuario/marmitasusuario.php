@@ -1,8 +1,17 @@
 <?php
+session_start();
+
+include('../config.php');
+
+if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
+    unset($_SESSION['email']);
+    unset($_SESSION['senha']);
+    header('Location: ../home/login.php');
+}
+
 $mensagemPedido = '';
 
 if (isset($_POST['submit'])) {
-    include('../config.php');
     
     function limparDados($conexao, $dados) {
         $dados = trim($dados);

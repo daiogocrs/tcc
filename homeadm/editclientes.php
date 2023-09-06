@@ -1,5 +1,14 @@
 <?php
+session_start();
+
 include('../config.php');
+
+if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true) and (!isset($_SESSION['nivel_acesso']) == 'adm'))
+{
+    unset($_SESSION['email']);
+    unset($_SESSION['senha']);
+    header('Location: ../home/login.php');
+}
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
@@ -40,7 +49,7 @@ if (!empty($_GET['id'])) {
 </head>
 
 <body>
-    <a href="sistema.php">Voltar</a>
+    <a href="sistemaclientes.php">Voltar</a>
     <div class="box">
         <form action="saveEditclientes.php" method="POST">
             <fieldset>

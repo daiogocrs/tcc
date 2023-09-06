@@ -1,5 +1,13 @@
 <?php
+session_start();
+
 include('../config.php');
+
+if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true) and (!isset($_SESSION['nivel_acesso']) == 'adm')) {
+    unset($_SESSION['email']);
+    unset($_SESSION['senha']);
+    header('Location: ../home/login.php');
+}
 
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
@@ -18,6 +26,7 @@ if (!empty($_GET['id'])) {
     header('Location: sistemaprodutos.php');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -55,11 +64,11 @@ if (!empty($_GET['id'])) {
                 <br><br>
                 <div class="inputBox">
                     <select id="user_categoria" class="input" name="categoria" required>
-                            <option value="" disabled selected>Selecione a categoria</option>
-                            <option value="salgados">Salgados</option>
-                            <option value="doces">Doces</option>
-                            <option value="bebidas">Bebidas</option>
-                            <option value="sorvetes">Sorvetes</option>
+                        <option value="" disabled selected>Selecione a categoria</option>
+                        <option value="salgados">Salgados</option>
+                        <option value="doces">Doces</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="sorvetes">Sorvetes</option>
                     </select>
                 </div>
                 <br><br>

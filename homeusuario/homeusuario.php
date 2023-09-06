@@ -1,32 +1,30 @@
 <?php
-    session_start();
-    include('../config.php');
-    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
-    {
-        unset($_SESSION['email']);
-        unset($_SESSION['senha']);
-        header('Location: ../home/login.php');
-    }
+session_start();
 
-    $email = $_SESSION['email'];
-    $sql = "SELECT nome FROM usuarios WHERE email = '$email'";
-    $result = $conexao->query($sql);
+include('../config.php');
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $logado = $row['nome'];
-    }
+if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
+    unset($_SESSION['email']);
+    unset($_SESSION['senha']);
+    header('Location: ../home/login.php');
+}
 
-    if(!empty($_GET['search']))
-    {
-        $data = $_GET['search'];
-        $sql = "SELECT * FROM usuarios WHERE id LIKE '%$data%' or nome LIKE '%$data%' or email LIKE '%$data%' ORDER BY id DESC";
-    }
-    else
-    {
-        $sql = "SELECT * FROM usuarios ORDER BY id DESC";
-    }
-    $result = $conexao->query($sql);
+$email = $_SESSION['email'];
+$sql = "SELECT nome FROM usuarios WHERE email = '$email'";
+$result = $conexao->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $logado = $row['nome'];
+}
+
+if (!empty($_GET['search'])) {
+    $data = $_GET['search'];
+    $sql = "SELECT * FROM usuarios WHERE id LIKE '%$data%' or nome LIKE '%$data%' or email LIKE '%$data%' ORDER BY id DESC";
+} else {
+    $sql = "SELECT * FROM usuarios ORDER BY id DESC";
+}
+$result = $conexao->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +59,8 @@
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
 
-                            <a class="navbar-brand" href="homeusuario.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
+                            <a class="navbar-brand" href="homeusuario.php"><img src="../fotos/cantinalogo2.png"
+                                    alt=""></a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -100,7 +99,9 @@
     <div class="jumbotron">
         <div class="container-fluid">
             <div class="header-content-inner">
-                <h1>Bem-vindo, <?php echo $logado; ?>!</h1>
+                <h1>Bem-vindo,
+                    <?php echo $logado; ?>!
+                </h1>
                 <h3>Aqui, cada visita é um momento para desfrutar de sabores genuínos em um ambiente que abraça a todos.
                 </h3>
             </div>
