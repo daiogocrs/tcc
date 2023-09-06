@@ -2,7 +2,7 @@
 $mensagemPedido = '';
 
 if (isset($_POST['submit'])) {
-    include_once('../config.php');
+    include('../config.php');
 
     function limparDados($conexao, $dados)
     {
@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
+    <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -98,14 +98,6 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="tabs-content">
             <div id="signup-tab-content" class="active">
-                <?php
-                if ($mensagemPedido) {
-                    echo '<p style="color: green; text-align: center; font-size: 20px; padding-bottom: 15px;">' . $mensagemPedido . '</p>';
-                    if ($mensagemPedido === 'Seu pedido foi feito!') {
-                        echo '<form action="marmitas.php" method="GET"><input type="submit" class="button" value="Fazer Novo Pedido"></form>';
-                    }
-                } else {
-                    ?>
                     <form class="form_cadastro" action="marmitas.php" method="POST">
                         <label>Faça seu prato:</label><br>
                         <input type="checkbox" class="input" name="comida[]" value="arroz"> Arroz <br>
@@ -144,9 +136,6 @@ if (isset($_POST['submit'])) {
                             <p><a href="login.php">Entre aqui</a></p>
                         </div>
                     </form>
-                    <?php
-                }
-                ?>
             </div>
         </div>
     </div>

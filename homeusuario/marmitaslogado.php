@@ -2,32 +2,31 @@
 $mensagemPedido = '';
 
 if (isset($_POST['submit'])) {
-    include('config.php');
-
-    function limparDados($conexao, $dados)
-    {
+    include('../config.php');
+    
+    function limparDados($conexao, $dados) {
         $dados = trim($dados);
         $dados = mysqli_real_escape_string($conexao, $dados);
         return $dados;
     }
-
+    
     $tamanho = limparDados($conexao, $_POST['tamanho']);
     $comidas = isset($_POST['comida']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['comida'])) : '';
     $saladas = isset($_POST['salada']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['salada'])) : '';
     $outros = isset($_POST['outros']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['outros'])) : '';
     $carne = limparDados($conexao, $_POST['carne']);
-
+    
     $query = "INSERT INTO pedidos (tamanho, carne, comidas, saladas, outros) VALUES (?, ?, ?, ?, ?)";
-
+    
     $stmt = mysqli_prepare($conexao, $query);
     mysqli_stmt_bind_param($stmt, "sssss", $tamanho, $carne, $comidas, $saladas, $outros);
-
+    
     if (mysqli_stmt_execute($stmt)) {
         $mensagemPedido = 'Seu pedido foi feito!';
     } else {
         $mensagemPedido = 'Erro ao inserir pedido: ' . mysqli_error($conexao);
     }
-
+    
     mysqli_stmt_close($stmt);
     mysqli_close($conexao);
 }
@@ -40,7 +39,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
+    <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -48,8 +47,8 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/marmitas.css">
-    <script type="text/javascript" src="js/bibliotecas.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/marmitas.css">
+    <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Tela de Pedido de Marmitas</title>
 </head>
 
@@ -61,7 +60,7 @@ if (isset($_POST['submit'])) {
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
 
-                            <a class="navbar-brand" href="homelogado.php"><img src="fotos/cantinalogo2.png" alt=""></a>
+                            <a class="navbar-brand" href="homelogado.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -85,7 +84,7 @@ if (isset($_POST['submit'])) {
                                             aria-haspopup="true" aria-expanded="false">Conta</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="editarperfil.php">Editar Perfil</a>
-                                            <a class="dropdown-item" href="sair.php">Sair</a>
+                                            <a class="dropdown-item" href="../sair.php">Sair</a>
                                         </div>
                                 </ul>
                             </div>
@@ -106,11 +105,11 @@ if (isset($_POST['submit'])) {
                 if ($mensagemPedido) {
                     echo '<p style="color: green; text-align: center; font-size: 20px; padding-bottom: 15px;">' . $mensagemPedido . '</p>';
                     if ($mensagemPedido === 'Seu pedido foi feito!') {
-                        echo '<form action="marmitas.php" method="GET"><input type="submit" class="button" value="Fazer Novo Pedido"></form>';
+                        echo '<form action="marmitaslogado.php" method="GET"><input type="submit" class="button" value="Fazer Novo Pedido"></form>';
                     }
                 } else {
                     ?>
-                    <form class="form_cadastro" action="marmitas.php" method="POST">
+                    <form class="form_cadastro" action="marmitaslogado.php" method="POST">
                         <label>Faça seu prato:</label><br>
                         <input type="checkbox" class="input" name="comida[]" value="arroz"> Arroz <br>
                         <input type="checkbox" class="input" name="comida[]" value="arroz temperado"> Arroz Temperado <br>
@@ -143,18 +142,14 @@ if (isset($_POST['submit'])) {
                             <option value="media">Média</option>
                             <option value="grande">Grande</option>
                         </select>
-                        <div class="help-text">
-                            <p style="color: red; font-size: 17px;">Faça login para fazer o pedido.</p>
-                            <p><a href="login.php">Entre aqui</a></p>
-                        </div>
+                        <input type="submit" class="button" name="submit" id="submit" value="Enviar Pedido">
                     </form>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
 </body>
-
 </html>

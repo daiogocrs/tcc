@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('../config.php');
+include('../config.php');
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
     $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id DESC";

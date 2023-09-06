@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('config.php');
+include('../config.php');
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
     $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id DESC";
@@ -29,7 +29,7 @@ $result = $conexao->query($sql);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
+    <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -43,8 +43,8 @@ $result = $conexao->query($sql);
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/cardapio.css">
-    <script type="text/javascript" src="js/bibliotecas.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/cardapio.css">
+    <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Tela de Cardápio</title>
 </head>
 
@@ -56,7 +56,7 @@ $result = $conexao->query($sql);
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
 
-                            <a class="navbar-brand" href="homelogado.php"><img src="fotos/cantinalogo2.png" alt=""></a>
+                            <a class="navbar-brand" href="homelogado.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -80,7 +80,7 @@ $result = $conexao->query($sql);
                                             aria-haspopup="true" aria-expanded="false">Conta</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="editarperfil.php">Editar Perfil</a>
-                                            <a class="dropdown-item" href="sair.php">Sair</a>
+                                            <a class="dropdown-item" href="../sair.php">Sair</a>
                                         </div>
                                 </ul>
                             </div>
@@ -140,7 +140,7 @@ $result = $conexao->query($sql);
                                     <h3>
                                         <?php echo ucfirst($categoria); ?>
                                     </h3>
-                                    <img src="fotos/<?= $categoria ?>.jpg?v=<?= time() ?>" class="cardapio-img img-fluid"
+                                    <img src="../fotos/<?= $categoria ?>.jpg?v=<?= time() ?>" class="cardapio-img img-fluid"
                                         alt="Imagem de <?= $categoria ?>">
                                 </div>
                             </div>
@@ -150,8 +150,8 @@ $result = $conexao->query($sql);
             </div>
         </div>
     </section>
-    <script type="text/javascript" src="js/cardapio.js"></script>
-    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="../js/cardapio.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
 </body>
 
 
