@@ -90,7 +90,7 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="tabs-content">
             <div id="signup-tab-content" class="active">
-                <form class="form_cadastro" action="cadastro.php" method="POST">
+                <form class="form_cadastro" action="cadastroclientes.php" method="POST">
                     <?php if (!empty($error_message)): ?>
                         <p style="color: red;">
                             <?php echo $error_message; ?>

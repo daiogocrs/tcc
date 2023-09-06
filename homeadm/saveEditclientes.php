@@ -16,6 +16,6 @@
         $result = $conexao->query($sqlInsert);
         print_r($result);
     }
-    header('Location: sistema.php');
+    header('Location: sistemaclientes.php');
 
 ?>

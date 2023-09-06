@@ -77,7 +77,7 @@
                 </form>
                 <div class="help-text">
                     <p>Não possui uma conta ainda?</p>
-                    <p><a href="cadastro.php">Cadastrar</a></p>
+                    <p><a href="cadastroclientes.php">Cadastrar</a></p>
                 </div>
             </div>
         </div>

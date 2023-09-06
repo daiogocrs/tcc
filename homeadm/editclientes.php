@@ -15,10 +15,10 @@ if (!empty($_GET['id'])) {
             $rua = $user_data['rua'];
         }
     } else {
-        header('Location: sistema.php');
+        header('Location: sistemaclientes.php');
     }
 } else {
-    header('Location: sistema.php');
+    header('Location: sistemaclientes.php');
 }
 ?>
 <!DOCTYPE html>
@@ -42,7 +42,7 @@ if (!empty($_GET['id'])) {
 <body>
     <a href="sistema.php">Voltar</a>
     <div class="box">
-        <form action="saveEdit.php" method="POST">
+        <form action="saveEditclientes.php" method="POST">
             <fieldset>
                 <legend><b>Editar Cliente</b></legend>
                 <br>
