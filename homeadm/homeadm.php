@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="Website Icon" type="png" href="fotos/cantinalogo.png">
+    <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script type="text/javascript" src="js/bibliotecas.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <script type="text/javascript" src="../js/bibliotecas.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
     <title>Cantina Federal</title>
 </head>
 
@@ -30,7 +30,7 @@
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
 
-                            <a class="navbar-brand" href="homeadm.php"><img src="fotos/cantinalogo2.png" alt=""></a>
+                            <a class="navbar-brand" href="homeadm.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -59,8 +59,8 @@
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                             aria-haspopup="true" aria-expanded="false">Conta</a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="editarperfil.php">Editar Perfil</a>
-                                            <a class="dropdown-item" href="sair.php">Sair</a>
+                                            <a class="dropdown-item" href="editarperfiladm.php">Editar Perfil</a>
+                                            <a class="dropdown-item" href="../sair.php">Sair</a>
                                         </div>
                                 </ul>
                             </div>
@@ -87,7 +87,7 @@
                 <div class="col-sm-5">
 
                     <div class="hov-img">
-                        <img src="fotos/cantina1.png" alt="Mesas" class="hov-img-bottom img-fluid">
+                        <img src="../fotos/cantina1.png" alt="Mesas" class="hov-img-bottom img-fluid">
                         <div class="hov-img-top hov-img-slideup">
                             <div class="hov-img-text">
                                 <h5>Mesas</h5>
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="hov-img">
-                        <img src="fotos/cantina2.png" alt="Mesas confortáveis" class="hov-img-bottom img-fluid">
+                        <img src="../fotos/cantina2.png" alt="Mesas confortáveis" class="hov-img-bottom img-fluid">
                         <div class="hov-img-top hov-img-slideup">
                             <div class="hov-img-text">
                                 <h5>Mesas confortáveis</h5>
@@ -168,7 +168,7 @@
                                 <i class="fa fa-instagram fa-3x"></i>
                             </div>
                         </div>
-                        <img src="fotos/cantina3.png" class="img-fluid
+                        <img src="../fotos/cantina3.png" class="img-fluid
                         " alt="">
                     </a>
                 </div>
@@ -179,7 +179,7 @@
                                 <i class="fa fa-instagram fa-3x"></i>
                             </div>
                         </div>
-                        <img src="fotos/cantina4.png" class="img-fluid" alt="">
+                        <img src="../fotos/cantina4.png" class="img-fluid" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -189,7 +189,7 @@
                                 <i class="fa fa-instagram fa-3x"></i>
                             </div>
                         </div>
-                        <img src="fotos/cantina5.png" class="img-fluid" alt="">
+                        <img src="../fotos/cantina5.png" class="img-fluid" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -199,7 +199,7 @@
                                 <i class="fa fa-instagram fa-3x"></i>
                             </div>
                         </div>
-                        <img src="fotos/cantina6.png" class="img-fluid" alt="">
+                        <img src="../fotos/cantina6.png" class="img-fluid" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -209,7 +209,7 @@
                                 <i class="fa fa-instagram fa-3x"></i>
                             </div>
                         </div>
-                        <img src="fotos/cantina7.png" class="img-fluid" alt="">
+                        <img src="../fotos/cantina7.png" class="img-fluid" alt="">
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -219,7 +219,7 @@
                                 <i class="fa fa-instagram fa-3x"></i>
                             </div>
                         </div>
-                        <img src="fotos/cantina8.png" class="img-fluid" alt="">
+                        <img src="../fotos/cantina8.png" class="img-fluid" alt="">
                     </a>
                 </div>
             </div>

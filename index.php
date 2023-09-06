@@ -41,16 +41,16 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                                        <a class="nav-link" href="home.php">Home</a>
+                                        <a class="nav-link" href="index.php">Home</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="cardapio.php">Cardápio</a>
+                                        <a class="nav-link" href="home/cardapio.php">Cardápio</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="marmitas.php">Delivery</a>
+                                        <a class="nav-link" href="home/marmitas.php">Delivery</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="login.php">Entrar</a>
+                                        <a class="nav-link" href="home/login.php">Entrar</a>
                                     </li>
                                 </ul>
                             </div>

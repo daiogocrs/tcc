@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('config.php');
+include_once('../config.php');
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
     $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id DESC";
@@ -43,8 +43,8 @@ $result = $conexao->query($sql);
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/cardapio.css">
-    <script type="text/javascript" src="js/bibliotecas.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/cardapio.css">
+    <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Tela de Cardápio</title>
 </head>
 
@@ -56,7 +56,7 @@ $result = $conexao->query($sql);
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
 
-                            <a class="navbar-brand" href="index.php"><img src="fotos/cantinalogo2.png" alt=""></a>
+                            <a class="navbar-brand" href="../index.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -67,7 +67,7 @@ $result = $conexao->query($sql);
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="index.php">Home</a>
+                                        <a class="nav-link" href="../index.php">Home</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
                                         <a class="nav-link" href="cardapio.php">Cardápio</a>
@@ -136,7 +136,7 @@ $result = $conexao->query($sql);
                                     <h3>
                                         <?php echo ucfirst($categoria); ?>
                                     </h3>
-                                    <img src="fotos/<?= $categoria ?>.jpg?v=<?= time() ?>" class="cardapio-img img-fluid"
+                                    <img src="../fotos/<?= $categoria ?>.jpg?v=<?= time() ?>" class="cardapio-img img-fluid"
                                         alt="Imagem de <?= $categoria ?>">
                                 </div>
                             </div>
@@ -146,8 +146,8 @@ $result = $conexao->query($sql);
             </div>
         </div>
     </section>
-    <script type="text/javascript" src="js/cardapio.js"></script>
-    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="../js/cardapio.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
 </body>
 
 

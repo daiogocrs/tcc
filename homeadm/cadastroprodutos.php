@@ -4,7 +4,7 @@ session_start();
 $mensagemCadastro = '';
 
 if (isset($_POST['submit'])) {
-    include_once('config.php');
+    include_once('../config.php');
 
     function limparDados($conexao, $dados)
     {
@@ -51,8 +51,8 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
-    <script type="text/javascript" src="js/bibliotecas.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Tela de Cadastro de Produtos</title>
 </head>
 
@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
 
-                            <a class="navbar-brand" href="homeadm.php"><img src="fotos/cantinalogo2.png" alt=""></a>
+                            <a class="navbar-brand" href="homeadm.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -93,8 +93,8 @@ if (isset($_POST['submit'])) {
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                             aria-haspopup="true" aria-expanded="false">Conta</a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="editarperfil.php">Editar Perfil</a>
-                                            <a class="dropdown-item" href="sair.php">Sair</a>
+                                            <a class="dropdown-item" href="editarperfiladm.php">Editar Perfil</a>
+                                            <a class="dropdown-item" href="../sair.php">Sair</a>
                                         </div>
                                 </ul>
                             </div>
@@ -140,7 +140,7 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
 </body>
 
 </html>
