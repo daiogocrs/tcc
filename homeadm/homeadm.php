@@ -372,8 +372,8 @@
             <i class="fa fa-chevron-up"></i>
         </a>
     </footer>
-    <script type="text/javascript" src="js/home.js"></script>
-    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="../js/home.js"></script>
+    <script type="text/javascript" src="../js/header.js"></script>
 </body>
 
 </html>
