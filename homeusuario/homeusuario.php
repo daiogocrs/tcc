@@ -364,7 +364,7 @@ $result = $conexao->query($sql);
         <div class="container-fluid">
             <div class="row footer-align">
                 <div class="col-md-6 col-sm-6">
-                    <h5>Our contact</h5>
+                    <h5>Nosso Contato</h5>
                     <hr class="hr-foot">
                     <div class="footer-items">
                         <address>
