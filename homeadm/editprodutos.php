@@ -25,7 +25,7 @@ if (!empty($_GET['id'])) {
 } else {
     header('Location: sistemaprodutos.php');
 }
-
+    
 ?>
 
 <!DOCTYPE html>

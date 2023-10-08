@@ -18,12 +18,6 @@ if ($result->num_rows > 0) {
     $logado = $row['nome'];
 }
 
-if (!empty($_GET['search'])) {
-    $data = $_GET['search'];
-    $sql = "SELECT * FROM usuarios WHERE id LIKE '%$data%' or nome LIKE '%$data%' or email LIKE '%$data%' ORDER BY id DESC";
-} else {
-    $sql = "SELECT * FROM usuarios ORDER BY id DESC";
-}
 $result = $conexao->query($sql);
 ?>
 
