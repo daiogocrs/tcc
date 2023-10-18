@@ -1,3 +1,5 @@
+DROP DATABASE meubanco;
+
 CREATE DATABASE meubanco;
 
 USE meubanco;

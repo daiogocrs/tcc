@@ -1,41 +1,35 @@
 <?php
 session_start();
-
 include('../config.php');
-
-if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
-    unset($_SESSION['email']);
-    unset($_SESSION['senha']);
-    header('Location: ../home/login.php');
-}
 
 $mensagemPedido = '';
 
 if (isset($_POST['submit'])) {
-    
     function limparDados($conexao, $dados) {
         $dados = trim($dados);
         $dados = mysqli_real_escape_string($conexao, $dados);
         return $dados;
     }
-    
+
     $tamanho = limparDados($conexao, $_POST['tamanho']);
     $comidas = isset($_POST['comida']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['comida'])) : '';
     $saladas = isset($_POST['salada']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['salada'])) : '';
     $outros = isset($_POST['outros']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['outros'])) : '';
     $carne = limparDados($conexao, $_POST['carne']);
-    
-    $query = "INSERT INTO pedidos (tamanho, carne, comidas, saladas, outros) VALUES (?, ?, ?, ?, ?)";
-    
+    $latitude = isset($_POST['latitude']) ? $_POST['latitude'] : '';
+    $longitude = isset($_POST['longitude']) ? $_POST['longitude'] : '';
+
+    $query = "INSERT INTO pedidos (tamanho, carne, comidas, saladas, outros, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
     $stmt = mysqli_prepare($conexao, $query);
-    mysqli_stmt_bind_param($stmt, "sssss", $tamanho, $carne, $comidas, $saladas, $outros);
-    
+    mysqli_stmt_bind_param($stmt, "sssssss", $tamanho, $carne, $comidas, $saladas, $outros, $latitude, $longitude);
+
     if (mysqli_stmt_execute($stmt)) {
         $mensagemPedido = 'Seu pedido foi feito!';
     } else {
         $mensagemPedido = 'Erro ao inserir pedido: ' . mysqli_error($conexao);
     }
-    
+
     mysqli_stmt_close($stmt);
     mysqli_close($conexao);
 }
@@ -151,6 +145,13 @@ if (isset($_POST['submit'])) {
                             <option value="media">Média</option>
                             <option value="grande">Grande</option>
                         </select>
+
+                        <input type="hidden" name="latitude" id="latitude">
+                        <input type="hidden" name="longitude" id="longitude">
+                        <label>Localização:</label>
+                        <span id="localizacaoSpan"></span>
+                        <input type="button" onclick="obterLocalizacao()" class="button" value="Obter Localização">
+
                         <input type="submit" class="button" name="submit" id="submit" value="Enviar Pedido">
                     </form>
                 <?php
@@ -160,5 +161,26 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
     <script type="text/javascript" src="../js/header.js"></script>
+    <script> 
+    function obterLocalizacao() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            document.getElementById('latitude').value = position.coords.latitude;
+            document.getElementById('longitude').value = position.coords.longitude;
+
+            // Exibe as informações no console do navegador
+            console.log('Latitude:', position.coords.latitude);
+            console.log('Longitude:', position.coords.longitude);
+
+            alert('Localização obtida com sucesso!');
+        }, function(error) {
+            console.error('Erro ao obter localização: ', error);
+            alert('Erro ao obter localização. Verifique as configurações do navegador.');
+        });
+    } else {
+        alert("Geolocalização não é suportada pelo seu navegador.");
+    }
+}
+    </script>
 </body>
 </html>

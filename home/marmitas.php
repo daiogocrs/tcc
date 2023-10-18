@@ -131,10 +131,14 @@ if (isset($_POST['submit'])) {
                             <option value="media">Média</option>
                             <option value="grande">Grande</option>
                         </select>
-                        <div class="help-text">
-                            <p style="color: red; font-size: 17px;">Faça login para fazer o pedido.</p>
-                            <p><a href="login.php">Entre aqui</a></p>
-                        </div>
+
+                        <input type="hidden" name="latitude" id="latitude">
+                        <input type="hidden" name="longitude" id="longitude">
+                        <label>Localização:</label>
+                        <span id="localizacaoSpan"></span>
+                        <input type="button" onclick="obterLocalizacao()" class="button" value="Obter Localização">
+
+                        <input type="submit" class="button" name="submit" id="submit" value="Enviar Pedido">
                     </form>
             </div>
         </div>
