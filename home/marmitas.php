@@ -13,14 +13,11 @@ if (isset($_POST['submit'])) {
 
     $tamanho = limparDados($conexao, $_POST['tamanho']);
     $comidas = isset($_POST['comida']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['comida'])) : '';
-    $saladas = isset($_POST['salada']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['salada'])) : '';
-    $outros = isset($_POST['outros']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['outros'])) : '';
-    $carne = limparDados($conexao, $_POST['carne']);
 
-    $query = "INSERT INTO pedidos (tamanho, carne, comidas, saladas, outros) VALUES (?, ?, ?, ?, ?)";
+    $query = "INSERT INTO pedidos (tamanho, comidas) VALUES (?, ?)";
 
     $stmt = mysqli_prepare($conexao, $query);
-    mysqli_stmt_bind_param($stmt, "sssss", $tamanho, $carne, $comidas, $saladas, $outros);
+    mysqli_stmt_bind_param($stmt, "ss", $tamanho, $comidas);
 
     if (mysqli_stmt_execute($stmt)) {
         $mensagemPedido = 'Seu pedido foi feito!';
@@ -103,19 +100,13 @@ if (isset($_POST['submit'])) {
                         <input type="checkbox" class="input" name="comida[]" value="arroz"> Arroz <br>
                         <input type="checkbox" class="input" name="comida[]" value="arroz temperado"> Arroz Temperado <br>
                         <input type="checkbox" class="input" name="comida[]" value="macarrao"> Macarrão <br>
-
-                        <label>Salada:</label><br>
-                        <input type="checkbox" class="input" name="salada[]" value="tomate"> Tomate <br>
-                        <input type="checkbox" class="input" name="salada[]" value="alface"> Alface <br>
-                        <input type="checkbox" class="input" name="salada[]" value="pepino"> Pepino <br>
-
-                        <label>Outros:</label><br>
-                        <input type="checkbox" class="input" name="outros[]" value="batata frita"> Batata Frita <br>
-                        <input type="checkbox" class="input" name="outros[]" value="maionese"> Maionese <br>
-                        <input type="checkbox" class="input" name="outros[]" value="batata palha"> Batata Palha <br>
-                        <input type="checkbox" class="input" name="outros[]" value="farofa"> Farofa <br>
-
-                        <label>Carne:</label><br>
+                        <input type="checkbox" class="input" name="comida[]" value="tomate"> Tomate <br>
+                        <input type="checkbox" class="input" name="comida[]" value="alface"> Alface <br>
+                        <input type="checkbox" class="input" name="comida[]" value="pepino"> Pepino <br>
+                        <input type="checkbox" class="input" name="comida[]" value="batata frita"> Batata Frita <br>
+                        <input type="checkbox" class="input" name="comida[]" value="maionese"> Maionese <br>
+                        <input type="checkbox" class="input" name="comida[]" value="batata palha"> Batata Palha <br>
+                        <input type="checkbox" class="input" name="comida[]" value="farofa"> Farofa <br>
                         <select class="input" id="user_tamanho" autocomplete="off" name="carne" required>
                             <option value="" disabled selected>Selecione a Carne</option>
                             <option value="nenhuma">Nenhuma</option>
