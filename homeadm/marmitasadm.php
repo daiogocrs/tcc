@@ -31,9 +31,30 @@ $result = $conexao->query($sql);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/sistema.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Pedidos de Marmitas</title>
+    <style>
+        body {
+            background-color: #801300;
+            color: white;
+            text-align: center;
+        }
+        .table-bg {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px 15px 0 0;
+        }
+        .box-search {
+            display: flex;
+            gap: .1%;
+            justify-content: center;
+        }
+        .navbar-bg {
+            background-color: #6e1100;
+        }
+        .navbar-brand {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
