@@ -6,26 +6,27 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    $sql = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";
+    $stmt = $conexao->prepare("SELECT * FROM usuarios WHERE email = ? AND senha = ?");
+    $stmt->bind_param("ss", $email, $senha);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    $result = $conexao->query($sql);
-
-    if (mysqli_num_rows($result) < 1) {
+    if ($result->num_rows < 1) {
         unset($_SESSION['email']);
         unset($_SESSION['senha']);
         header('Location: home/login.php');
     } else {
-        $row = mysqli_fetch_assoc($result);
+        $row = $result->fetch_assoc();
         if ($row['nivel_acesso'] == 'adm') {
             $_SESSION['email'] = $email;
             $_SESSION['senha'] = $senha;
             header('Location: homeadm/homeadm.php');
         } else {
-            $_SESSION['email'] = $email;
-            $_SESSION['senha'] = $senha;
-            header('Location: homeusuario/homeusuario.php');
+            unset($_SESSION['email']);
+            unset($_SESSION['senha']);
+            header('Location: home/login.php');
         }
     }
 } else {
     header('Location: home/login.php');
-} 
+}
