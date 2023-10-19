@@ -25,7 +25,7 @@ CREATE TABLE pedidos (
     comidas TEXT
 );
 
-INSERT INTO usuarios (nome, email, cidade, bairro, rua, senha, nivel_acesso)
+INSERT INTO usuarios (nome, email, senha, nivel_acesso)
 VALUES ('cantina', 'admin@gmail.com', '123123', 'adm');
 
 -- Recomendado para armazenar senhas com segurança

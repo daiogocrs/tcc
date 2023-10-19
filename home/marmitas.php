@@ -536,41 +536,34 @@ if (isset($_POST['submit'])) {
             font-size: large;
             text-decoration: none;
         }
-        .marmitas-options {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-top: 20px;
-        }
         .marmita-option {
-            text-align: center;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: inline-block;
-            width: 30%; 
-        }
-        .marmita-option:hover {
-            background-color: #f0f0f0;
-        }
-        .marmita-content {
-            display: block;
-        }
-        .marmita-title {
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .marmita-price {
-            font-size: 14px;
-        }
-        .marmita-option label {
-            list-style-type: none;
-        }
-        .marmita-option label::before {
-            display: none;
-        }
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+    width: 30%;
+    margin: 10px;
+    box-sizing: border-box; 
+}
+.marmita-option input[type="radio"] {
+    display: none;
+}
+
+.marmita-option label {
+    display: block;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+.marmita-option input[type="radio"]:checked + label {
+    background-color: #f0f0f0;
+}
+
         </style>
 </head>
 
@@ -655,7 +648,7 @@ if (isset($_POST['submit'])) {
                         <input type="checkbox" class="input" name="comida[]" value="maionese"> Maionese <br>
                         <input type="checkbox" class="input" name="comida[]" value="batata palha"> Batata Palha <br>
                         <input type="checkbox" class="input" name="comida[]" value="farofa"> Farofa <br>
-                        <select class="input" id="user_tamanho" autocomplete="off" name="carne" required>
+                        <select class="input" id="user_tamanho" autocomplete="off" name="comida[]" required>
                             <option value="" disabled selected>Selecione a Carne</option>
                             <option value="nenhuma">Nenhuma</option>
                             <option value="frango">Frango</option>
