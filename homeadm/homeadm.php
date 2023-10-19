@@ -82,7 +82,6 @@ $result = $conexao->query($sql);
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                             aria-haspopup="true" aria-expanded="false">Conta</a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="editarperfiladm.php">Editar Perfil</a>
                                             <a class="dropdown-item" href="../sair.php">Sair</a>
                                         </div>
                                 </ul>

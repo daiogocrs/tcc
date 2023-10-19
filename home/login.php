@@ -75,10 +75,6 @@
                     </div>
                     <input type="submit" class="button" name="submit" value="Entrar">
                 </form>
-                <div class="help-text">
-                    <p>Não possui uma conta ainda?</p>
-                    <p><a href="cadastroclientes.php">Cadastrar</a></p>
-                </div>
             </div>
         </div>
     </div>
