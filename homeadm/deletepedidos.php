@@ -1,18 +1,18 @@
 <?php
 
-    if(!empty($_GET['id']))
+    if(!empty($_GET['id_pedidos']))
     {
         include('../config.php');
 
-        $id = $_GET['id'];
+        $id_pedidos = $_GET['id_pedidos'];
 
-        $sqlSelect = "SELECT *  FROM pedidos WHERE id=$id";
+        $sqlSelect = "SELECT *  FROM pedidos WHERE id_pedidos=$id_pedidos";
 
         $result = $conexao->query($sqlSelect);
 
         if($result->num_rows > 0)
         {
-            $sqlDelete = "DELETE FROM pedidos WHERE id=$id";
+            $sqlDelete = "DELETE FROM pedidos WHERE id_pedidos=$id_pedidos";
             $resultDelete = $conexao->query($sqlDelete);
         }
     }

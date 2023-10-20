@@ -20,12 +20,15 @@
     if(!empty($_GET['search']))
     {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM usuarios WHERE id LIKE '%$data%' or nome LIKE '%$data%' or email LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM usuarios WHERE id_usuarios LIKE '%$data%' or nome LIKE '%$data%' or email LIKE '%$data%' ORDER BY id_usuarios DESC";
     }
     else
     {
-        $sql = "SELECT * FROM usuarios ORDER BY id DESC";
+        $sql = "SELECT * FROM usuarios ORDER BY id_usuarios DESC";
     }
+
+    $sql = "SELECT id_produtos, nome, preco, categoria FROM produtos";
+
     $result = $conexao->query($sql);
 ?>
 
@@ -111,6 +114,36 @@
                 Produtos</button>
         </a>
     </section>
+    <section>
+    <h2>Produtos Disponíveis</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            while ($row = $result->fetch_assoc()) {
+                echo '<tr>';
+                echo '<td>' . $row['nome'] . '</td>';
+                echo '<td>' . $row['preco'] . '</td>';
+                echo '<td>' . $row['categoria'] . '</td>';
+                echo '<td>';
+                echo '<a href="editprodutos.php?id=' . $row['id_produtos'] . '" class="btn btn-primary">Editar</a>';
+                echo ' <a href="deleteprodutos.php?id=' . $row['id_produtos'] . '" class="btn btn-danger">Excluir</a>';                
+                echo '</td>';
+                echo '</tr>';
+            }
+            ?>
+        </tbody>
+    </table>
+</section>
+
+
     <script type="text/javascript" src="../js/home.js"></script>
     <script type="text/javascript" src="../js/header.js"></script>
 </body>

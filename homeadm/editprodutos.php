@@ -9,9 +9,9 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
     header('Location: ../home/login.php');
 }
 
-if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $sqlSelect = "SELECT * FROM produtos WHERE id=$id";
+if (!empty($_GET['id_produtos'])) {
+    $id_produtos = $_GET['id_produtos'];
+    $sqlSelect = "SELECT * FROM produtos WHERE id_produtos=$id_produtos";
     $result = $conexao->query($sqlSelect);
     if ($result->num_rows > 0) {
         while ($user_data = mysqli_fetch_assoc($result)) {
@@ -73,7 +73,7 @@ if (!empty($_GET['id'])) {
                     </select>
                 </div>
                 <br><br>
-                <input type="hidden" name="id" value=<?php echo $id; ?>>
+                <input type="hidden" name="id_produtos" value=<?php echo $id_produtos; ?>>
                 <input type="submit" name="update" id="submit">
             </fieldset>
         </form>

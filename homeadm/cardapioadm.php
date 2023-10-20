@@ -12,14 +12,14 @@ if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)
 
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
-    $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id DESC";
+    $sql = "SELECT * FROM produtos WHERE id_produtos_produtos LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id_produtos DESC";
 } else {
-    $sql = "SELECT * FROM produtos ORDER BY id DESC";
+    $sql = "SELECT * FROM produtos ORDER BY id_produtos DESC";
 }
 
 function getProdutosByCategoria($conexao, $categoria)
 {
-    $sql = "SELECT * FROM produtos WHERE categoria = '$categoria' ORDER BY id DESC";
+    $sql = "SELECT * FROM produtos WHERE categoria = '$categoria' ORDER BY id_produtos DESC";
     $result = $conexao->query($sql);
     return $result;
 }

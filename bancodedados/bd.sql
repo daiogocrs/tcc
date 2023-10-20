@@ -5,7 +5,7 @@ CREATE DATABASE bdcantina;
 USE bdcantina;
 
 CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuarios INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL,
     senha VARCHAR(255) NOT NULL,
@@ -13,14 +13,14 @@ CREATE TABLE usuarios (
 );
 
 CREATE TABLE produtos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_produtos INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL, 
     categoria VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE pedidos (
-    id INT AUTO_INCREMENT PRIMARY KEY, 
+    id_pedidos INT AUTO_INCREMENT PRIMARY KEY, 
     tamanho VARCHAR(255) NOT NULL,
     comidas TEXT,
     data_hora_pedido DATETIME NOT NULL
