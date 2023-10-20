@@ -10,9 +10,9 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 }
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
-    $sql = "SELECT * FROM pedidos WHERE id LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id DESC";
+    $sql = "SELECT id, tamanho, comidas, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido FROM pedidos WHERE id LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id DESC";
 } else {
-    $sql = "SELECT * FROM pedidos ORDER BY id DESC";
+    $sql = "SELECT id, tamanho, comidas, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido FROM pedidos ORDER BY id DESC";
 }
 $result = $conexao->query($sql);
 ?>
@@ -75,6 +75,7 @@ $result = $conexao->query($sql);
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Data e Hora do Pedido</th>
                     <th scope="col">Tamanho</th>
                     <th scope="col">Comidas</th>
                     <th scope="col">...</th>
@@ -85,8 +86,9 @@ $result = $conexao->query($sql);
                 while ($user_data = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>" . $user_data['id'] . "</td>";
+                    echo "<td>" . $user_data['data_hora_pedido'] . "</td>";
                     echo "<td>" . $user_data['tamanho'] . "</td>";
-                    echo "<td>" . $user_data['comidas'] . "</td>";
+                    echo "<td>" . $user_data['comidas'] . "</td>"; 
                     echo "<td>
                             <a class='btn btn-sm btn-danger' href='deletepedidos.php?id=$user_data[id]' title='Deletar'>
                                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>

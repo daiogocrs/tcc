@@ -22,11 +22,9 @@ CREATE TABLE produtos (
 CREATE TABLE pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY, 
     tamanho VARCHAR(255) NOT NULL,
-    comidas TEXT
+    comidas TEXT,
+    data_hora_pedido DATETIME NOT NULL
 );
 
 INSERT INTO usuarios (nome, email, senha, nivel_acesso)
 VALUES ('cantina', 'admin@gmail.com', '123123', 'adm');
-
--- Recomendado para armazenar senhas com segurança
--- Aplique um algoritmo de hash e salting às senhas

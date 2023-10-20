@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $tamanho = limparDados($conexao, $_POST['tamanho']);
     $comidas = isset($_POST['comida']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['comida'])) : '';
 
-    $query = "INSERT INTO pedidos (tamanho, comidas) VALUES (?, ?)";
+    $query = "INSERT INTO pedidos (tamanho, comidas, data_hora_pedido) VALUES (?, ?, NOW())";
 
     $stmt = mysqli_prepare($conexao, $query);
     mysqli_stmt_bind_param($stmt, "ss", $tamanho, $comidas);

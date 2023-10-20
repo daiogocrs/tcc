@@ -50,7 +50,7 @@
                                         <a class="nav-link" href="home/marmitas.php">Delivery</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="home/login.php">Entrar</a>
+                                        <a class="nav-link" href="home/login.php">Administração</a>
                                     </li>
                                 </ul>
                             </div>
