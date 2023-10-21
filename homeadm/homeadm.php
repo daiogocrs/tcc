@@ -66,11 +66,11 @@ $result = $conexao->query($sql);
         <div class="menu-items">
             <ul class="nav-links">
                 <li><a href="homeadm.php">
-                        <i class="uil uil-shop"></i>
+                        <i class="uil uil-shopping-bag"></i>
                         <span class="link-name">Produtos</span>
                     </a></li>
                 <li><a href="marmitasadm.php">
-                        <i class="uil uil-files-landscapes"></i>
+                        <i class="uil uil-truck"></i>
                         <span class="link-name">Delivery</span>
                     </a></li>
             </ul>
@@ -86,13 +86,12 @@ $result = $conexao->query($sql);
     <section class="dashboard">
         <div class="dash-content">
             <div class="overview">
-                <a href="cadastroprodutos.php" style="text-decoration: none;">
+                <a href="#" id="openModal" style="text-decoration: none;">
                     <div class="title">
                         <i class="uil uil-plus"></i>
                         <span class="text">Novos Produtos</span>
                     </div>
                 </a>
-
                 <h2>Produtos Disponíveis</h2>
                 <table class="table">
                     <thead>
@@ -113,23 +112,60 @@ $result = $conexao->query($sql);
                             echo "<td>" . $user_data['preco'] . "</td>";
                             echo "<td>" . $user_data['categoria'] . "</td>";
                             echo "<td>
-                        <a class='btn btn-sm btn-primary' href='editprodutos.php?id_produtos=$user_data[id_produtos]' title='Editar'>
-                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
-                                <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
-                            </svg>
-                            </a> 
-                            <a class='btn btn-sm btn-danger' href='deleteprodutos.php?id_produtos=$user_data[id_produtos]' title='Deletar'>
-                                <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
-                                    <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
-                                </svg>
-                            </a>
+                                <a class='btn btn-sm btn-primary' href='editprodutos.php?id_produtos=$user_data[id_produtos]' title='Editar'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
+                                        <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.650l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106.106a.5.5 0 0 1 0 .708l-10 10-.106.106a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708l10-10 .106-.106a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3zM3 13.5a.5.5 0 0 1 .5-.5H4V12a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5V12h.5a.5.5 0 0 1 .5.5V13a.5.5 0 0 1-.5.5H5V14a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V13H3a.5.5 0 0 1-.5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
+                                    </svg>
+                                </a>
+                                <a class='btn btn-sm btn-danger' href='deleteprodutos.php?id_produtos=$user_data[id_produtos]' title='Deletar'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
+                                        <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
+                                    </svg>
+                                </a>
                             </td>";
                             echo "</tr>";
                         }
                         ?>
                     </tbody>
                 </table>
+            </div>
+        </div>
     </section>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <form action="cadastrar_produto.php" method="post">
+                <label for="nome">Nome do Produto:</label>
+                <input type="text" id="nome" name="nome">
+
+                <label for="preco">Preço:</label>
+                <input type="text" id="preco" name="preco">
+
+                <label for="categoria">Categoria:</label>
+                <input type="text" id="categoria" name="categoria">
+
+                <input type="submit" value="Cadastrar">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("openModal").addEventListener("click", function () {
+            document.getElementById("productModal").style.display = "block";
+        });
+
+        document.getElementById("closeModal").addEventListener("click", function () {
+            document.getElementById("productModal").style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+            var modal = document.getElementById("productModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
     <script type="text/javascript" src="../js/homeadm.js"></script>
 </body>
 

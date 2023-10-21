@@ -55,11 +55,11 @@ $result = $conexao->query($sql);
         <div class="menu-items">
             <ul class="nav-links">
                 <li><a href="homeadm.php">
-                        <i class="uil uil-shop"></i>
+                        <i class="uil uil-shopping-bag"></i>
                         <span class="link-name">Produtos</span>
                     </a></li>
                 <li><a href="marmitasadm.php">
-                        <i class="uil uil-files-landscapes"></i>
+                        <i class="uil uil-truck"></i>
                         <span class="link-name">Delivery</span>
                     </a></li>
             </ul>
@@ -76,7 +76,7 @@ $result = $conexao->query($sql);
         <div class="dash-content">
             <div class="overview">
                     <div class="title">
-                        <i class="uil uil-shop"></i>
+                        <i class="uil uil-truck"></i>
                         <span class="text">Delivery</span>
                     </div>
 
