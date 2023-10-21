@@ -10,12 +10,13 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 }
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
-    $sql = "SELECT id_pedidos, tamanho, comidas, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido FROM pedidos WHERE id_pedidos LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id_pedidos DESC";
+    $sql = "SELECT id_pedidos, tamanho, comidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido FROM pedidos WHERE id_pedidos LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id_pedidos DESC";
 } else {
-    $sql = "SELECT id_pedidos, tamanho, comidas, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido FROM pedidos ORDER BY id_pedidos DESC";
+    $sql = "SELECT id_pedidos, tamanho, comidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido FROM pedidos ORDER BY id_pedidos DESC";
 }
 $result = $conexao->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -78,6 +79,7 @@ $result = $conexao->query($sql);
                     <th scope="col">Data e Hora do Pedido</th>
                     <th scope="col">Tamanho</th>
                     <th scope="col">Comidas</th>
+                    <th scope="col">Preço</th>
                     <th scope="col">...</th>
                 </tr>
             </thead>
@@ -88,7 +90,8 @@ $result = $conexao->query($sql);
                     echo "<td>" . $user_data['id_pedidos'] . "</td>";
                     echo "<td>" . $user_data['data_hora_pedido'] . "</td>";
                     echo "<td>" . $user_data['tamanho'] . "</td>";
-                    echo "<td>" . $user_data['comidas'] . "</td>"; 
+                    echo "<td>" . $user_data['comidas'] . "</td>";
+                    echo "<td>" . 'R$' . $user_data['preco'] . "</td>";
                     echo "<td>
                             <a class='btn btn-sm btn-danger' href='deletepedidos.php?id_pedidos=$user_data[id_pedidos]' title='Deletar'>
                                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
@@ -103,5 +106,4 @@ $result = $conexao->query($sql);
         </table>
     </div>
 </body>
-
 </html>

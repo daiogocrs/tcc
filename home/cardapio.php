@@ -2,14 +2,14 @@
 include('../config.php');
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
-    $sql = "SELECT * FROM produtos WHERE id LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id DESC";
+    $sql = "SELECT * FROM produtos WHERE id_produtos LIKE '%$data%' or nome LIKE '%$data%' or preco LIKE '%$data%' ORDER BY id_produtos DESC";
 } else {
-    $sql = "SELECT * FROM produtos ORDER BY id DESC";
+    $sql = "SELECT * FROM produtos ORDER BY id_produtos DESC";
 }
 
 function getProdutosByCategoria($conexao, $categoria)
 {
-    $sql = "SELECT * FROM produtos WHERE categoria = '$categoria' ORDER BY id DESC";
+    $sql = "SELECT * FROM produtos WHERE categoria = '$categoria' ORDER BY id_produtos DESC";
     $result = $conexao->query($sql);
     return $result;
 }
@@ -98,8 +98,7 @@ $result = $conexao->query($sql);
                                     <ul class="nav nav-pills category-buttons" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link <?php if ($index === 0)
-                                                echo 'active'; ?>" data-toggle="pill"
-                                                href="#<?= $categoria ?>">
+                                                echo 'active'; ?>" data-toggle="pill" href="#<?= $categoria ?>">
                                                 <?php echo ucfirst($categoria); ?>
                                             </a>
                                         </li>

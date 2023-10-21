@@ -88,7 +88,7 @@
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false">Administração</a>
+                                            aria-haspopup="true" aria-expanded="false">Conta</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="../sair.php">Sair</a>
                                         </div>
