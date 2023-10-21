@@ -10,9 +10,9 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 }
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
-    $sql = "SELECT id_pedidos, tamanho, comidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido FROM pedidos WHERE id_pedidos LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id_pedidos DESC";
+    $sql = "SELECT id_pedidos, tamanho, comidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos WHERE id_pedidos LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id_pedidos DESC";
 } else {
-    $sql = "SELECT id_pedidos, tamanho, comidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido FROM pedidos ORDER BY id_pedidos DESC";
+    $sql = "SELECT id_pedidos, tamanho, comidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos ORDER BY id_pedidos DESC";
 }
 $result = $conexao->query($sql);
 ?>
@@ -40,18 +40,22 @@ $result = $conexao->query($sql);
             color: white;
             text-align: center;
         }
+
         .table-bg {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 15px 15px 0 0;
         }
+
         .box-search {
             display: flex;
             gap: .1%;
             justify-content: center;
         }
+
         .navbar-bg {
             background-color: #6e1100;
         }
+
         .navbar-brand {
             color: white;
         }
@@ -79,6 +83,12 @@ $result = $conexao->query($sql);
                     <th scope="col">Data e Hora do Pedido</th>
                     <th scope="col">Tamanho</th>
                     <th scope="col">Comidas</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Bairro</th>
+                    <th scope="col">Rua</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Complemento</th>
+                    <th scope="col">Forma de Pagamento</th>
                     <th scope="col">Preço</th>
                     <th scope="col">...</th>
                 </tr>
@@ -91,14 +101,20 @@ $result = $conexao->query($sql);
                     echo "<td>" . $user_data['data_hora_pedido'] . "</td>";
                     echo "<td>" . $user_data['tamanho'] . "</td>";
                     echo "<td>" . $user_data['comidas'] . "</td>";
+                    echo "<td>" . $user_data['cidade'] . "</td>";
+                    echo "<td>" . $user_data['bairro'] . "</td>";
+                    echo "<td>" . $user_data['rua'] . "</td>";
+                    echo "<td>" . $user_data['numero'] . "</td>";
+                    echo "<td>" . $user_data['complemento'] . "</td>";
+                    echo "<td>" . $user_data['forma_pagamento'] . "</td>";
                     echo "<td>" . 'R$' . $user_data['preco'] . "</td>";
                     echo "<td>
-                            <a class='btn btn-sm btn-danger' href='deletepedidos.php?id_pedidos=$user_data[id_pedidos]' title='Deletar'>
-                                <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
-                                    <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
-                                </svg>
-                            </a>
-                        </td>";
+                        <a class='btn btn-sm btn-danger' href='deletepedidos.php?id_pedidos=$user_data[id_pedidos]' title='Deletar'>
+                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
+                                <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
+                            </svg>
+                        </a>
+                    </td>";
                     echo "</tr>";
                 }
                 ?>
@@ -106,4 +122,5 @@ $result = $conexao->query($sql);
         </table>
     </div>
 </body>
+
 </html>

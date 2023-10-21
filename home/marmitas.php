@@ -13,7 +13,13 @@ if (isset($_POST['submit_pedido'])) {
 
     $tamanho = limparDados($conexao, $_POST['tamanho']);
     $comidas = isset($_POST['comida']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['comida'])) : '';
-    $forma_pagamento = limparDados($conexao, $_POST['forma_pagamento']); // Nova linha para capturar a forma de pagamento
+    $forma_pagamento = limparDados($conexao, $_POST['forma_pagamento']);
+
+    $cidade = limparDados($conexao, $_POST['cidade']);
+    $bairro = limparDados($conexao, $_POST['bairro']);
+    $rua = limparDados($conexao, $_POST['rua']);
+    $numero = limparDados($conexao, $_POST['numero']);
+    $complemento = limparDados($conexao, $_POST['complemento']);
 
     $precoMarmita = 0;
     if ($tamanho === "pequena") {
@@ -24,9 +30,10 @@ if (isset($_POST['submit_pedido'])) {
         $precoMarmita = 25.00;
     }
 
-    $queryInserirPedido = "INSERT INTO pedidos (tamanho, comidas, preco, forma_pagamento, data_hora_pedido) VALUES (?, ?, ?, ?, NOW())"; // Adicionada a coluna forma_pagamento
+    $queryInserirPedido = "INSERT INTO pedidos (tamanho, comidas, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+
     $stmtInserirPedido = mysqli_prepare($conexao, $queryInserirPedido);
-    mysqli_stmt_bind_param($stmtInserirPedido, "ssds", $tamanho, $comidas, $precoMarmita, $forma_pagamento); // Adicionada a forma de pagamento
+    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdssssss', $tamanho, $comidas, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento);
 
     if (mysqli_stmt_execute($stmtInserirPedido)) {
         $mensagemPedido = 'Seu pedido foi feito!';
@@ -721,7 +728,7 @@ if (isset($_POST['submit_pedido'])) {
         </div>
         <div class="tabs-content">
             <div id="signup-tab-content" class="active">
-                <form class="form_cadastro" action="marmitas.php" method="POST">
+                <form action="marmitas.php" method="POST">
                     <div class="marmitas-options">
                         <label class="marmita-option">
                             <input type="radio" name="tamanho" value="pequena" id="tamanho-pequena">
@@ -746,7 +753,7 @@ if (isset($_POST['submit_pedido'])) {
                         </label>
                     </div>
                     <div class="comidas-options" style="display: none;">
-                        <label>Escolha suas comidas:</label>
+                        <label>Escolha suas comidas:</label><br>
                         <input type="checkbox" class="input" name="comida[]" value="arroz"> Arroz <br>
                         <input type="checkbox" class="input" name="comida[]" value="arroz temperado"> Arroz Temperado
                         <br>
@@ -758,50 +765,62 @@ if (isset($_POST['submit_pedido'])) {
                         <input type="checkbox" class="input" name="comida[]" value="maionese"> Maionese <br>
                         <input type="checkbox" class="input" name="comida[]" value="batata palha"> Batata Palha <br>
                         <input type="checkbox" class="input" name="comida[]" value="farofa"> Farofa <br>
-                        <select class="input" id="user_tamanho" autocomplete="off" name="comida[]" required>
+                        <select class="input" id="user_tamanho" autocomplete="off" name="comida[]">
                             <option value="" disabled selected>Selecione a Carne</option>
                             <option value="nenhuma">Nenhuma</option>
                             <option value="frango">Frango</option>
                             <option value="salsichao">Salsichao</option>
                             <option value="porco">Porco</option>
                         </select>
-                        <label for="localizacao">Localização:</label>
-                        <input type="text" id="localizacao" name="localizacao" placeholder="Digite sua localização"
-                            required>
+                        <button id="btn-finalizar" class="button">Finalizar</button>
+                    </div>
+                    <div class="localizacao-form" style="display: none;">
+                        <label>Localização:</label>
+                        <input type="text" class="input" id="cidade" name="cidade" placeholder="Cidade" required>
+                        <input type="text" class="input" id="bairro" name="bairro" placeholder="Bairro" required>
+                        <input type="text" class="input" id="rua" name="rua" placeholder="Rua" required>
+                        <input type="text" class="input" id="numero" name="numero" placeholder="Número" required>
+                        <input type="text" class="input" id="complemento" name="complemento" placeholder="Complemento">
 
-                        <label for="forma_pagamento">Forma de Pagamento:</label>
-                        <select id="forma_pagamento" name="forma_pagamento" required>
+                        <label>Forma de Pagamento:</label>
+                        <select class="input" id="forma_pagamento" name="forma_pagamento" required>
+                            <option value="" disabled selected>Selecione a forma de pagamento</option>
                             <option value="dinheiro">Dinheiro</option>
                             <option value="cartao">Cartão de Crédito</option>
                             <option value="pix">PIX</option>
                         </select>
 
                         <input type="submit" class="button" name="submit_pedido" value="Enviar Pedido">
+                    </div>
+
                 </form>
             </div>
         </div>
     </div>
-    </div>
-    </form>
-    </div>
-    </div>
-    </div>
-
-
     <script type="text/javascript" src="../js/header.js"></script>
     <script>
-        const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
-        const comidasOptions = document.querySelector('.comidas-options');
+        document.addEventListener('DOMContentLoaded', function () {
+            const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
+            const comidasOptions = document.querySelector('.comidas-options');
+            const finalizarButton = document.getElementById('btn-finalizar');
 
-        tamanhoOptions.forEach((option) => {
-            option.addEventListener("change", () => {
-                if (option.checked) {
-                    document.querySelector('.marmitas-options').style.display = 'none';
-                    comidasOptions.style.display = 'block';
-                }
+            tamanhoOptions.forEach((option) => {
+                option.addEventListener("change", () => {
+                    if (option.checked) {
+                        document.querySelector('.marmitas-options').style.display = 'none';
+                        comidasOptions.style.display = 'block';
+                    }
+                });
+            });
+
+            finalizarButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                document.querySelector('.localizacao-form').style.display = 'block';
             });
         });
     </script>
+
 </body>
 
 </html>

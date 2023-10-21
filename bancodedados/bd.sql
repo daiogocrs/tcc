@@ -20,12 +20,17 @@ CREATE TABLE produtos (
 );
 
 CREATE TABLE pedidos (
-    id_pedidos INT AUTO_INCREMENT PRIMARY KEY, 
+    id_pedidos INT AUTO_INCREMENT PRIMARY KEY,
     tamanho VARCHAR(255) NOT NULL,
-    preco DECIMAL(10, 2) NOT NULL, 
+    preco DECIMAL(10, 2) NOT NULL,
     comidas TEXT,
+    cidade VARCHAR(255) NOT NULL,
+    bairro VARCHAR(255) NOT NULL,
+    rua VARCHAR(255) NOT NULL,
+    numero DECIMAL(3, 0) NOT NULL,
+    complemento VARCHAR(255) NOT NULL,
     data_hora_pedido DATETIME NOT NULL,
-    forma_pagamento VARCHAR(100) NOT NULL,
+    forma_pagamento VARCHAR(100) NOT NULL
 );
 
 INSERT INTO usuarios (nome, email, senha, nivel_acesso)
