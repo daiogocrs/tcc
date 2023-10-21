@@ -16,6 +16,6 @@
             $resultDelete = $conexao->query($sqlDelete);
         }
     }
-    header('Location: produtos.php');
+    header('Location: homeadm.php');
    
 ?>

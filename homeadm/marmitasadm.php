@@ -22,61 +22,67 @@ $result = $conexao->query($sql);
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
-    <title>Pedidos de Marmitas</title>
-    <style>
-        body {
-            background-color: #801300;
-            color: white;
-            text-align: center;
-        }
-
-        .table-bg {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px 15px 0 0;
-        }
-
-        .box-search {
-            display: flex;
-            gap: .1%;
-            justify-content: center;
-        }
-
-        .navbar-bg {
-            background-color: #6e1100;
-        }
-
-        .navbar-brand {
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
+    <title>Cantina Federal</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-bg">
-        <div class="container-fluid">
-            <a class="navbar-brand">Marmitas</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="../fotos/cantinalogo.png" alt="">
+            </div>
+
+            <span class="logo_name">Cantina</span>
         </div>
-        <div class="d-flex">
-            <a href="homeadm.php" class="btn btn-danger me-5">Voltar</a>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="homeadm.php">
+                        <i class="uil uil-shop"></i>
+                        <span class="link-name">Produtos</span>
+                    </a></li>
+                <li><a href="marmitasadm.php">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Delivery</span>
+                    </a></li>
+            </ul>
+            <ul class="logout-mode">
+                <li><a href="../sair.php">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                    </a></li>
+            </ul>
         </div>
     </nav>
-    <div class="m-5">
-        <table class="table text-white table-bg">
+
+    <section class="dashboard">
+        <div class="dash-content">
+            <div class="overview">
+                    <div class="title">
+                        <i class="uil uil-shop"></i>
+                        <span class="text">Delivery</span>
+                    </div>
+
+                <h2>Pedidos</h2>
+                <div class="m-5">
+        <table class="table table-bg">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -121,6 +127,8 @@ $result = $conexao->query($sql);
             </tbody>
         </table>
     </div>
+    </section>
+    <script type="text/javascript" src="../js/homeadm.js"></script>
 </body>
 
 </html>
