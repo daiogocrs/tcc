@@ -20,10 +20,10 @@ if (!empty($_GET['id_produtos'])) {
             $categoria = $user_data['categoria'];
         }
     } else {
-        header('Location: sistemaprodutos.php');
+        header('Location: produtos.php');
     }
 } else {
-    header('Location: sistemaprodutos.php');
+    header('Location: produtos.php');
 }
     
 ?>
@@ -47,7 +47,7 @@ if (!empty($_GET['id_produtos'])) {
 </head>
 
 <body>
-    <a href="sistemaprodutos.php">Voltar</a>
+    <a href="produtos.php">Voltar</a>
     <div class="box">
         <form action="saveEditprodutos.php" method="POST">
             <fieldset>

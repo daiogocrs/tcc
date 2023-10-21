@@ -13,6 +13,6 @@
         $result = $conexao->query($sqlInsert);
         print_r($result);
     }
-    header('Location: sistemaprodutos.php');
+    header('Location: produtos.php');
 
 ?>

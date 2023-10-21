@@ -61,7 +61,6 @@ if (isset($_POST['submit_pedido'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Tela de Pedido de Marmitas</title>
     <style>
@@ -772,6 +771,7 @@ if (isset($_POST['submit_pedido'])) {
                             <option value="salsichao">Salsichao</option>
                             <option value="porco">Porco</option>
                         </select>
+                        <button id="btn-voltar" class="button">Voltar</button>
                         <button id="btn-finalizar" class="button">Finalizar</button>
                     </div>
                     <div class="localizacao-form" style="display: none;">
@@ -789,7 +789,7 @@ if (isset($_POST['submit_pedido'])) {
                             <option value="cartao">Cartão de Crédito</option>
                             <option value="pix">PIX</option>
                         </select>
-
+                        <button id="btn-voltar" class="button">Voltar</button>
                         <input type="submit" class="button" name="submit_pedido" value="Enviar Pedido">
                     </div>
 
@@ -802,13 +802,18 @@ if (isset($_POST['submit_pedido'])) {
         document.addEventListener('DOMContentLoaded', function () {
             const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
             const comidasOptions = document.querySelector('.comidas-options');
+            const localizacaoForm = document.querySelector('.localizacao-form');
             const finalizarButton = document.getElementById('btn-finalizar');
+            const voltarButton = document.getElementById('btn-voltar');
+            let tamanhoSelecionado = null;
 
             tamanhoOptions.forEach((option) => {
                 option.addEventListener("change", () => {
                     if (option.checked) {
+                        tamanhoSelecionado = option.value;
                         document.querySelector('.marmitas-options').style.display = 'none';
                         comidasOptions.style.display = 'block';
+                        voltarButton.style.display = 'block';
                     }
                 });
             });
@@ -816,7 +821,22 @@ if (isset($_POST['submit_pedido'])) {
             finalizarButton.addEventListener('click', (event) => {
                 event.preventDefault();
                 comidasOptions.style.display = 'none';
-                document.querySelector('.localizacao-form').style.display = 'block';
+                localizacaoForm.style.display = 'block';
+            });
+
+            voltarButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                localizacaoForm.style.display = 'none';
+                document.querySelector('.marmitas-options').style.display = 'block';
+                voltarButton.style.display = 'none';
+
+                // Limpar a seleção para que o mesmo item possa ser selecionado novamente
+                tamanhoOptions.forEach((option) => {
+                    option.checked = false;
+                });
+
+                tamanhoSelecionado = null;
             });
         });
     </script>
