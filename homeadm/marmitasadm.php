@@ -40,6 +40,42 @@ $result = $conexao->query($sql);
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
     <title>Cantina Federal</title>
+    <style>
+        /* Style the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            /* Background color for the table */
+        }
+
+        /* Style table headers */
+        th {
+            background-color: #801300;
+            /* Header background color */
+            font-weight: bold;
+            text-align: center;
+            /* Centralize o texto no cabeçalho */
+            padding: 10px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            /* Centralize o texto nas células da tabela */
+        }
+
+        /* Style table rows */
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 
 <body>
@@ -66,7 +102,7 @@ $result = $conexao->query($sql);
             <ul class="logout-mode">
                 <li><a href="../sair.php">
                         <i class="uil uil-signout"></i>
-                        <span class="link-name">Logout</span>
+                        <span class="link-name">Sair</span>
                     </a></li>
             </ul>
         </div>
@@ -75,58 +111,56 @@ $result = $conexao->query($sql);
     <section class="dashboard">
         <div class="dash-content">
             <div class="overview">
-                    <div class="title">
-                        <i class="uil uil-truck"></i>
-                        <span class="text">Delivery</span>
-                    </div>
+                <div class="title">
+                    <i class="uil uil-truck"></i>
+                    <span class="text">Delivery</span>
+                </div>
 
                 <h2>Pedidos</h2>
-                <div class="m-5">
-        <table class="table table-bg">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Data e Hora do Pedido</th>
-                    <th scope="col">Tamanho</th>
-                    <th scope="col">Comidas</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">Rua</th>
-                    <th scope="col">Número</th>
-                    <th scope="col">Complemento</th>
-                    <th scope="col">Forma de Pagamento</th>
-                    <th scope="col">Preço</th>
-                    <th scope="col">...</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                while ($user_data = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td>" . $user_data['id_pedidos'] . "</td>";
-                    echo "<td>" . $user_data['data_hora_pedido'] . "</td>";
-                    echo "<td>" . $user_data['tamanho'] . "</td>";
-                    echo "<td>" . $user_data['comidas'] . "</td>";
-                    echo "<td>" . $user_data['cidade'] . "</td>";
-                    echo "<td>" . $user_data['bairro'] . "</td>";
-                    echo "<td>" . $user_data['rua'] . "</td>";
-                    echo "<td>" . $user_data['numero'] . "</td>";
-                    echo "<td>" . $user_data['complemento'] . "</td>";
-                    echo "<td>" . $user_data['forma_pagamento'] . "</td>";
-                    echo "<td>" . 'R$' . $user_data['preco'] . "</td>";
-                    echo "<td>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Data e Hora do Pedido</th>
+                                <th scope="col">Tamanho</th>
+                                <th scope="col">Comidas</th>
+                                <th scope="col">Cidade</th>
+                                <th scope="col">Bairro</th>
+                                <th scope="col">Rua</th>
+                                <th scope="col">Número</th>
+                                <th scope="col">Complemento</th>
+                                <th scope="col">Forma de Pagamento</th>
+                                <th scope="col">Preço</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            while ($user_data = mysqli_fetch_assoc($result)) {
+                                echo "<tr>";
+                                echo "<td>" . $user_data['data_hora_pedido'] . "</td>";
+                                echo "<td>" . $user_data['tamanho'] . "</td>";
+                                echo "<td>" . $user_data['comidas'] . "</td>";
+                                echo "<td>" . $user_data['cidade'] . "</td>";
+                                echo "<td>" . $user_data['bairro'] . "</td>";
+                                echo "<td>" . $user_data['rua'] . "</td>";
+                                echo "<td>" . $user_data['numero'] . "</td>";
+                                echo "<td>" . $user_data['complemento'] . "</td>";
+                                echo "<td>" . $user_data['forma_pagamento'] . "</td>";
+                                echo "<td>" . 'R$' . $user_data['preco'] . "</td>";
+                                echo "<td>
                         <a class='btn btn-sm btn-danger' href='deletepedidos.php?id_pedidos=$user_data[id_pedidos]' title='Deletar'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
                                 <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                             </svg>
                         </a>
                     </td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
     </section>
     <script type="text/javascript" src="../js/homeadm.js"></script>
 </body>

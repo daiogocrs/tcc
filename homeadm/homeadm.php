@@ -77,6 +77,44 @@ $result = $conexao->query($sql);
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
     <title>Cantina Federal</title>
+    <style>
+        /* Style the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            /* Background color for the table */
+        }
+
+        /* Style table headers */
+        th {
+            background-color: #801300;
+            /* Header background color */
+            font-weight: bold;
+            text-align: center;
+            /* Centralize o texto no cabeçalho */
+            padding: 10px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            /* Centralize o texto nas células da tabela */
+        }
+
+        /* Style table rows */
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -85,7 +123,6 @@ $result = $conexao->query($sql);
             <div class="logo-image">
                 <img src="../fotos/cantinalogo.png" alt="">
             </div>
-
             <span class="logo_name">Cantina</span>
         </div>
 
@@ -103,7 +140,7 @@ $result = $conexao->query($sql);
             <ul class="logout-mode">
                 <li><a href="../sair.php">
                         <i class="uil uil-signout"></i>
-                        <span class="link-name">Logout</span>
+                        <span class="link-name">Sair</span>
                     </a></li>
             </ul>
         </div>
@@ -122,7 +159,6 @@ $result = $conexao->query($sql);
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nome</th>
                             <th>Preço</th>
                             <th>Categoria</th>
@@ -133,7 +169,6 @@ $result = $conexao->query($sql);
                         <?php
                         while ($user_data = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
-                            echo "<td>" . $user_data['id_produtos'] . "</td>";
                             echo "<td>" . $user_data['nome'] . "</td>";
                             echo "<td>" . $user_data['preco'] . "</td>";
                             echo "<td>" . $user_data['categoria'] . "</td>";
@@ -162,8 +197,10 @@ $result = $conexao->query($sql);
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
             <form class="form_cadastro" action="homeadm.php" method="POST">
-                <input type="text" class="input" id="user_nome" autocomplete="off" placeholder="Nome" name="nome" required>
-                <input type="text" class="input" id="user_preco" autocomplete="off" placeholder="Preço" name="preco" required>
+                <input type="text" class="input" id="user_nome" autocomplete="off" placeholder="Nome" name="nome"
+                    required>
+                <input type="text" class="input" id="user_preco" autocomplete="off" placeholder="Preço" name="preco"
+                    required>
                 <select id="user_categoria" class="input" name="categoria" required>
                     <option value="" disabled selected>Selecione a categoria</option>
                     <option value="salgados">Salgados</option>
@@ -193,4 +230,5 @@ $result = $conexao->query($sql);
         });
     </script>
 </body>
+
 </html>
