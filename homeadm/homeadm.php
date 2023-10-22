@@ -78,21 +78,15 @@ $result = $conexao->query($sql);
     <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
     <title>Cantina Federal</title>
     <style>
-        /* Style the table */
         table {
             width: 100%;
             border-collapse: collapse;
             background-color: #fff;
-            /* Background color for the table */
         }
-
-        /* Style table headers */
         th {
             background-color: #801300;
-            /* Header background color */
             font-weight: bold;
             text-align: center;
-            /* Centralize o texto no cabeçalho */
             padding: 10px;
         }
 
@@ -101,20 +95,14 @@ $result = $conexao->query($sql);
             padding: 10px;
             border: 1px solid #ccc;
             text-align: center;
-            /* Centralize o texto nas células da tabela */
         }
-
-        /* Style table rows */
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-
         tr:hover {
             background-color: #ddd;
         }
     </style>
-
-
 </head>
 
 <body>

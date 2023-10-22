@@ -525,7 +525,7 @@ if (isset($_POST['submit_pedido'])) {
             background-color: #fff;
             box-shadow: 0px 1px 8px #BEBEBE;
             margin: 8em auto;
-            width: 320px;
+            width: 95%;
         }
 
         .form-wrap .tabs {
@@ -656,11 +656,26 @@ if (isset($_POST['submit_pedido'])) {
             padding: 20px;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, box-shadow 0.3s;
             display: inline-block;
             width: 30%;
             margin: 10px;
             box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .marmita-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .marmita-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .marmita-price {
+            font-size: 16px;
+            color: #801300;
         }
 
         .marmita-option input[type="radio"] {
@@ -831,7 +846,6 @@ if (isset($_POST['submit_pedido'])) {
                 document.querySelector('.marmitas-options').style.display = 'block';
                 voltarButton.style.display = 'none';
 
-                // Limpar a seleção para que o mesmo item possa ser selecionado novamente
                 tamanhoOptions.forEach((option) => {
                     option.checked = false;
                 });

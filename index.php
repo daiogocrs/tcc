@@ -227,42 +227,6 @@
 
         </div>
     </section>
-    <section class="bg-staff" id="staff">
-        <div class="container-fluid">
-            <h3>Nossa Equipe</h3>
-            <hr class="hr-h3s">
-            <div class="row text-center slideanim thumbnail-row">
-                <div class="col-sm-3">
-                    <div class="staff">
-                        <img src="" class="" alt="" style="width:170px; height: 170px">
-                        <h5 class="">X</h5>
-                        <h6>X</h6>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="staff">
-                        <img src="" class="" alt="" style="width:170px; height: 170px">
-                        <h5 class="">X</h5>
-                        <h6>X</h6>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="staff">
-                        <img src="" class="" alt="" style="width:170px; height: 170px">
-                        <h5 class="">X</h5>
-                        <h6>X</h6>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="staff">
-                        <img src="" class="" alt="" style="width:170px; height: 170px">
-                        <h5 class="">X</h5>
-                        <h6>X</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="bg-contato bg-section" id="contato">
         <div class="container-fluid">
             <h1 class="container-h1">Entre em contato</h1>

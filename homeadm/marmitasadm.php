@@ -38,24 +38,18 @@ $result = $conexao->query($sql);
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
+    <link rel="stylesheet" type="text/css" href="../css/marmitasadm.css">
     <title>Cantina Federal</title>
     <style>
-        /* Style the table */
         table {
             width: 100%;
             border-collapse: collapse;
             background-color: #fff;
-            /* Background color for the table */
         }
-
-        /* Style table headers */
         th {
             background-color: #801300;
-            /* Header background color */
             font-weight: bold;
             text-align: center;
-            /* Centralize o texto no cabeçalho */
             padding: 10px;
         }
 
@@ -64,14 +58,10 @@ $result = $conexao->query($sql);
             padding: 10px;
             border: 1px solid #ccc;
             text-align: center;
-            /* Centralize o texto nas células da tabela */
         }
-
-        /* Style table rows */
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-
         tr:hover {
             background-color: #ddd;
         }
