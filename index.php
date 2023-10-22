@@ -220,6 +220,8 @@
                     <div class="social-networks">
                         <a href="https://www.instagram.com/cantina_federal/" target="_blank" class="instagram"><i
                                 class="fa fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/cantinafederal?mibextid=ZbWKwL" target="_blank" class="instagram"><i
+                                class="fa fa-facebook"></i></a>
                     </div>
                 </div>
 
@@ -236,26 +238,29 @@
                         <address class="contato">
                             <span class="span-contato">Telefone:</span>
                             <br>
-                            +55 (48) 12345-6789
+                            <a href="https://api.whatsapp.com/send/?phone=5548998228233&text&type=phone_number&app_absent=0"
+                                style="text-decoration: none; color: white;">+55 (48) 99822-8233</a>
                             <br>
                             <span class="span-contato">Email:</span>
                             <br>
-                            cantinafederal@gmail.com
+                            joseartur@hotmail.com
                             <br>
                             <span class="span-contato">Localização:</span>
                             <br>
-                            Rua x
+                            Bairro Januária
                             <br>
                             Sombrio, Santa Catarina
                             <br>
-                            Brasil
+                            <a href="https://maps.app.goo.gl/8mKSrc17zimr1EoXAy"
+                                style="text-decoration: none; color: white; font-weight: bold; font-size: 16px;">Google
+                                Maps Aqui</a>
                         </address>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-6 contato-right">
 
-                    <form novalidate action="mailto:anttnew@gmmmail.com" name="frm" method="post">
+                    <form novalidate action="mailto:joseartur@hotmail.com" name="frm" method="post">
                         <div class="form-group has-feedback">
                             <label class="sr-only">Nome:</label>
                             <input type="text" name="name" class="form-control" placeholder="Nome" required>
@@ -295,16 +300,18 @@
                     <hr class="hr-foot">
                     <div class="footer-items">
                         <address>
-                            Rua x
+                            Bairro Januária
                             <br>
                             Sombrio, Santa Catarina
                             <br>
                             Brasil
                             <br>
-                            <i class="fa fa-phone address"></i> +55 (48) 12345-6789
+                            <i class="fa fa-phone address"></i> <a
+                                href="https://api.whatsapp.com/send/?phone=5548998228233&text&type=phone_number&app_absent=0">+55
+                                (48) 99822-8233</a>
                             <br>
                             <i class="fa fa-envelope address"></i> <a
-                                href="mailto:cantinafederal@gmail.com">cantinafederal@gmail.com</a>
+                                href="mailto:joseartur@hotmail.com">joseartur@hotmail.com</a>
                         </address>
                     </div>
                 </div>
@@ -313,9 +320,9 @@
                     <hr class="hr-foot">
                     <div class="footer-items">
                         <ul>
-                            <li>Seg-Sex: 08:00-22:00</li>
-                            <li>Sábado: 09:00-22:00</li>
-                            <li>Domingo: 09:00-16:00</li>
+                            <li>Seg-Sex: 07:30-18:30</li>
+                            <li>Sábado: FECHADOS</li>
+                            <li>Domingo: FECHADOS</li>
                         </ul>
                     </div>
                 </div>
