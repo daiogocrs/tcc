@@ -25,9 +25,9 @@ if (isset($_POST['submit_pedido'])) {
     if ($tamanho === "pequena") {
         $precoMarmita = 15.00;
     } elseif ($tamanho === "media") {
-        $precoMarmita = 20.00;
+        $precoMarmita = 18.00;
     } elseif ($tamanho === "grande") {
-        $precoMarmita = 25.00;
+        $precoMarmita = 22.00;
     }
 
     $queryInserirPedido = "INSERT INTO pedidos (tamanho, comidas, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";

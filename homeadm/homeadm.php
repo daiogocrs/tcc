@@ -77,32 +77,6 @@ $result = $conexao->query($sql);
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
     <title>Cantina Federal</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-        }
-        th {
-            background-color: #801300;
-            font-weight: bold;
-            text-align: center;
-            padding: 10px;
-        }
-
-        th,
-        td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #ddd;
-        }
-    </style>
 </head>
 
 <body>
