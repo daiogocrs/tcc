@@ -64,9 +64,7 @@ if (isset($_POST['submit_pedido'])) {
     <link rel="stylesheet" type="text/css" href="../css/marmitas.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Tela de Pedido de Marmitas</title>
-    <style>
-
-    </style>
+    <style></style>
 </head>
 
 <body>
@@ -108,6 +106,7 @@ if (isset($_POST['submit_pedido'])) {
             </div>
         </div>
     </header>
+
     <div class="form-wrap">
         <div class="tabs">
             <h3 class="signup-tab"><a>Faça seu Pedido</a></h3>
@@ -116,24 +115,9 @@ if (isset($_POST['submit_pedido'])) {
             <div id="signup-tab-content" class="active">
                 <form action="marmitas.php" method="POST">
                     <div class="options">
-                        <label class="option">
-                            <input type="radio" name="marmitas" id="marmitas">
-                            <div class="option-content">
-                                <span class="option-title">Marmitas</span>
-                            </div>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="lanches" id="lanches">
-                            <div class="option-content">
-                                <span class="option-title">Lanches</span>
-                            </div>
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="bebidas" id="bebidas">
-                            <div class="option-content">
-                                <span class="option-title">Bebidas</span>
-                            </div>
-                        </label>
+                        <button class="button" id="btn-marmitas" type="button">Marmitas</button>
+                        <button class="button" id="btn-lanches" type="button">Lanches</button>
+                        <button class="button" id="btn-bebidas" type="button">Bebidas</button>
                     </div>
                     <div id="marmitas-container" style="display: none;">
                         <div class="marmitas-options">
@@ -158,129 +142,96 @@ if (isset($_POST['submit_pedido'])) {
                                     <span class="marmita-price">R$25</span>
                                 </div>
                             </label>
-                            <button id="btn-voltar-tamanhos" class="button">Voltar</button>
+                            <button class="button" id="btn-voltar-marmitas" type="button">Voltar</button>
                         </div>
                     </div>
-                    <div class="comidas-options" style="display: none;">
-                        <label>Escolha suas comidas:</label><br>
-                        <input type="checkbox" class="input" name="comida[]" value="arroz"> Arroz <br>
-                        <input type="checkbox" class="input" name="comida[]" value="arroz temperado"> Arroz Temperado
-                        <br>
-                        <input type="checkbox" class="input" name="comida[]" value="macarrao"> Macarrão <br>
-                        <input type="checkbox" class="input" name="comida[]" value="tomate"> Tomate <br>
-                        <input type="checkbox" class="input" name="comida[]" value="alface"> Alface <br>
-                        <input type="checkbox" class="input" name="comida[]" value="pepino"> Pepino <br>
-                        <input type="checkbox" class="input" name="comida[]" value="batata frita"> Batata Frita <br>
-                        <input type="checkbox" class="input" name="comida[]" value="maionese"> Maionese <br>
-                        <input type="checkbox" class="input" name="comida[]" value="batata palha"> Batata Palha <br>
-                        <input type="checkbox" class="input" name="comida[]" value="farofa"> Farofa <br>
-                        <select class="input" id="user_tamanho" autocomplete="off" name="comida[]">
-                            <option value="" disabled selected>Selecione a Carne</option>
-                            <option value="nenhuma">Nenhuma</option>
-                            <option value="frango">Frango</option>
-                            <option value="salsichao">Salsichao</option>
-                            <option value="porco">Porco</option>
-                        </select>
-                        <button id="btn-voltar" class="button">Voltar</button>
-                        <button id="btn-finalizar" class="button">Finalizar</button>
+                    <div id="lanches-container" style="display: none;">
+                        <label>Lanches:</label><br>
+                        <button id="salgados" class="button" type="button">Salgados</button>
+                        <button id="doces" class="button" type="button">Doces</button>
+                        <button class="button" id="btn-voltar-lanches" type="button">Voltar</button>
+                        <button id="btn-proximo" class="button" type="button">Próximo</button>
                     </div>
-                    <div class="localizacao-form" style="display: none;">
-                        <label>Localização:</label>
-                        <input type="text" class="input" id="cidade" name="cidade" placeholder="Cidade" required>
-                        <input type="text" class="input" id="bairro" name="bairro" placeholder="Bairro" required>
-                        <input type="text" class="input" id="rua" name="rua" placeholder="Rua" required>
-                        <input type="text" class="input" id="numero" name="numero" placeholder="Número" required>
-                        <input type="text" class="input" id="complemento" name="complemento" placeholder="Complemento">
-
-                        <label>Forma de Pagamento:</label>
-                        <select class="input" id="forma_pagamento" name="forma_pagamento" required>
-                            <option value="" disabled selected>Selecione a forma de pagamento</option>
-                            <option value="dinheiro">Dinheiro</option>
-                            <option value="cartao">Cartão de Crédito</option>
-                            <option value="pix">PIX</option>
-                        </select>
-                        <button id="btn-voltar" class="button">Voltar</button>
-                        <input type="submit" class="button" name="submit_pedido" value="Enviar Pedido">
+                    <div id="bebidas-container" style="display: none;">
+                        <label>Escolha sua bebida:</label><br>
+                        <input type="checkbox" class="input" name="bebidas[]" value="pepsi"> Pepsi <br>
+                        <input type="checkbox" class="input" name="bebidas[]" value="cocacola"> Coca-Cola <br>
+                        <button class="button" id="btn-voltar-bebidas" type="button">Voltar</button>
+                        <button id="btn-proximo" class="button" type="button">Próximo</button>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
+
     <script type="text/javascript" src="../js/header.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
-        const comidasOptions = document.querySelector('.comidas-options');
-        const localizacaoForm = document.querySelector('.localizacao-form');
-        const finalizarButton = document.getElementById('btn-finalizar');
-        const voltarTamanhosButton = document.getElementById('btn-voltar-tamanhos');
-        const voltarButton = document.getElementById('btn-voltar');
-        const marmitasButton = document.querySelector('input[name="marmitas"]');
-        const marmitasContainer = document.getElementById('marmitas-container');
-        const optionsContainer = document.querySelector('.options');
-        let tamanhoSelecionado = null;
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnMarmitas = document.getElementById('btn-marmitas');
+            const btnLanches = document.getElementById('btn-lanches');
+            const btnBebidas = document.getElementById('btn-bebidas');
+            const btnVoltarMarmitas = document.getElementById('btn-voltar-marmitas');
+            const btnVoltarLanches = document.getElementById('btn-voltar-lanches');
+            const btnVoltarBebidas = document.getElementById('btn-voltar-bebidas');
+            const marmitasContainer = document.getElementById('marmitas-container');
+            const lanchesContainer = document.getElementById('lanches-container');
+            const bebidasContainer = document.getElementById('bebidas-container');
 
-        function ocultarOpcoesPrincipais() {
-            optionsContainer.style.display = 'none';
-        }
-
-        marmitasButton.addEventListener("change", () => {
-            if (marmitasButton.checked) {
+            btnMarmitas.addEventListener('click', () => {
                 marmitasContainer.style.display = 'block';
-                ocultarOpcoesPrincipais();
-            }
-        });
-
-        tamanhoOptions.forEach((option) => {
-            option.addEventListener("change", () => {
-                if (option.checked) {
-                    tamanhoSelecionado = option.value;
-                    document.querySelector('.marmitas-options').style.display = 'none';
-                    comidasOptions.style.display = 'block';
-                    voltarTamanhosButton.style.display = 'block';
-                }
-            });
-        });
-
-        finalizarButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            comidasOptions.style.display = 'none';
-            localizacaoForm.style.display = 'block';
-        });
-
-        voltarTamanhosButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            comidasOptions.style.display = 'none';
-            localizacaoForm.style.display = 'none';
-            optionsContainer.style.display = 'block';
-            voltarTamanhosButton.style.display = 'none';
-            marmitasContainer.style.display = 'none';
-
-            tamanhoOptions.forEach((option) => {
-                option.checked = false;
+                lanchesContainer.style.display = 'none';
+                bebidasContainer.style.display = 'none';
+                btnMarmitas.style.display = 'none';
+                btnLanches.style.display = 'none';
+                btnBebidas.style.display = 'none';
             });
 
-            tamanhoSelecionado = null;
-        });
-
-        voltarButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            comidasOptions.style.display = 'none';
-            localizacaoForm.style.display = 'none';
-            optionsContainer.style.display = 'block';
-            voltarTamanhosButton.style.display = 'none';
-            marmitasContainer.style.display = 'block';
-
-            tamanhoOptions.forEach((option) => {
-                option.checked = false;
+            btnLanches.addEventListener('click', () => {
+                marmitasContainer.style.display = 'none';
+                lanchesContainer.style.display = 'block';
+                bebidasContainer.style.display = 'none';
+                btnMarmitas.style.display = 'none';
+                btnLanches.style.display = 'none';
+                btnBebidas.style.display = 'none';
             });
 
-            tamanhoSelecionado = null;
-        });
-    });
-</script>
+            btnBebidas.addEventListener('click', () => {
+                marmitasContainer.style.display = 'none';
+                lanchesContainer.style.display = 'none';
+                bebidasContainer.style.display = 'block';
+                btnMarmitas.style.display = 'none';
+                btnLanches.style.display = 'none';
+                btnBebidas.style.display = 'none';
+            });
 
+            btnVoltarMarmitas.addEventListener('click', () => {
+                marmitasContainer.style.display = 'none';
+                lanchesContainer.style.display = 'none';
+                bebidasContainer.style.display = 'none';
+                btnMarmitas.style.display = 'block';
+                btnLanches.style.display = 'block';
+                btnBebidas.style.display = 'block';
+            });
+
+            btnVoltarLanches.addEventListener('click', () => {
+                marmitasContainer.style.display = 'none';
+                lanchesContainer.style.display = 'none';
+                bebidasContainer.style.display = 'none';
+                btnMarmitas.style.display = 'block';
+                btnLanches.style.display = 'block';
+                btnBebidas.style.display = 'block';
+            });
+
+            btnVoltarBebidas.addEventListener('click', () => {
+                marmitasContainer.style.display = 'none';
+                lanchesContainer.style.display = 'none';
+                bebidasContainer.style.display = 'none';
+                btnMarmitas.style.display = 'block';
+                btnLanches.style.display = 'block';
+                btnBebidas.style.display = 'block';
+            });
+        });
+    </script>
 </body>
 
 </html>
