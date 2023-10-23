@@ -209,59 +209,77 @@ if (isset($_POST['submit_pedido'])) {
     </div>
     <script type="text/javascript" src="../js/header.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
-        const comidasOptions = document.querySelector('.comidas-options');
-        const localizacaoForm = document.querySelector('.localizacao-form');
-        const finalizarButton = document.getElementById('btn-finalizar');
-        const voltarButton = document.getElementById('btn-voltar');
-        const marmitasButton = document.querySelector('input[name="marmitas"]');
-        const marmitasContainer = document.getElementById('marmitas-container');
-        let tamanhoSelecionado = null;
+        document.addEventListener('DOMContentLoaded', function () {
+            const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
+            const comidasOptions = document.querySelector('.comidas-options');
+            const localizacaoForm = document.querySelector('.localizacao-form');
+            const finalizarButton = document.getElementById('btn-finalizar');
+            const voltarTamanhosButton = document.getElementById('btn-voltar-tamanhos');
+            const voltarButton = document.getElementById('btn-voltar');
+            const marmitasButton = document.querySelector('input[name="marmitas"]');
+            const marmitasContainer = document.getElementById('marmitas-container');
+            const optionsContainer = document.querySelector('.options');
+            let tamanhoSelecionado = null;
 
-        function ocultarOpcoesPrincipais() {
-            document.querySelector('.options').style.display = 'none';
-        }
-
-        marmitasButton.addEventListener("change", () => {
-            if (marmitasButton.checked) {
-                marmitasContainer.style.display = 'block';
-                ocultarOpcoesPrincipais();
+            function ocultarOpcoesPrincipais() {
+                optionsContainer.style.display = 'none';
             }
-        });
 
-        tamanhoOptions.forEach((option) => {
-            option.addEventListener("change", () => {
-                if (option.checked) {
-                    tamanhoSelecionado = option.value;
-                    document.querySelector('.marmitas-options').style.display = 'none';
-                    comidasOptions.style.display = 'block';
-                    voltarButton.style.display = 'block';
+            marmitasButton.addEventListener("change", () => {
+                if (marmitasButton.checked) {
+                    marmitasContainer.style.display = 'block';
+                    ocultarOpcoesPrincipais();
                 }
             });
-        });
-
-        finalizarButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            comidasOptions.style.display = 'none';
-            localizacaoForm.style.display = 'block';
-        });
-
-        voltarButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            comidasOptions.style.display = 'none';
-            localizacaoForm.style.display = 'none';
-            document.querySelector('.marmitas-options').style.display = 'block';
-            voltarButton.style.display = 'none';
 
             tamanhoOptions.forEach((option) => {
-                option.checked = false;
+                option.addEventListener("change", () => {
+                    if (option.checked) {
+                        tamanhoSelecionado = option.value;
+                        document.querySelector('.marmitas-options').style.display = 'none';
+                        comidasOptions.style.display = 'block';
+                        voltarTamanhosButton.style.display = 'block';
+                    }
+                });
             });
 
-            tamanhoSelecionado = null;
+            finalizarButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                localizacaoForm.style.display = 'block';
+            });
+
+            voltarTamanhosButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                localizacaoForm.style.display = 'none';
+                optionsContainer.style.display = 'block';
+                voltarTamanhosButton.style.display = 'none';
+
+                tamanhoOptions.forEach((option) => {
+                    option.checked = false;
+                });
+
+                tamanhoSelecionado = null;
+            });
+
+            voltarButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                localizacaoForm.style.display = 'none';
+                optionsContainer.style.display = 'block'; 
+                voltarTamanhosButton.style.display = 'none';
+                marmitasContainer.style.display = 'none'; 
+
+                tamanhoOptions.forEach((option) => {
+                    option.checked = false;
+                });
+
+                tamanhoSelecionado = null;
+            });
         });
-    });
-</script>
+
+    </script>
 
 </body>
 
