@@ -24,6 +24,8 @@ CREATE TABLE pedidos (
     tamanho VARCHAR(255) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL,
     comidas TEXT,
+    lanches TEXT,
+    bebidas TEXT,
     cidade VARCHAR(255) NOT NULL,
     bairro VARCHAR(255) NOT NULL,
     rua VARCHAR(255) NOT NULL,
