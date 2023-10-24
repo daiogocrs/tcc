@@ -34,10 +34,14 @@ if (isset($_POST['submit_pedido'])) {
         $precoMarmita = 22.00;
     }
 
-    $queryInserirPedido = "INSERT INTO pedidos (tamanho, retirar_algo, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+    // Capturar as bebidas selecionadas
+    $bebidasSelecionadas = isset($_POST['bebidas']) ? $_POST['bebidas'] : [];
+    $bebidasTexto = implode(', ', $bebidasSelecionadas);
+
+    $queryInserirPedido = "INSERT INTO pedidos (tamanho, retirar_algo, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, bebidas, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmtInserirPedido = mysqli_prepare($conexao, $queryInserirPedido);
-    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdssssss', $tamanho, $retirar_algo, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento);
+    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdsssssss', $tamanho, $retirar_algo, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento, $bebidasTexto);
 
     if (mysqli_stmt_execute($stmtInserirPedido)) {
         $mensagemPedido = 'Seu pedido foi feito!';
