@@ -1,6 +1,10 @@
 <?php
 $mensagemPedido = '';
 
+$diaSemana = '';
+$comidas = '';
+$sobremesa = '';
+
 if (isset($_POST['submit_pedido'])) {
     include('../config.php');
 
@@ -44,6 +48,24 @@ if (isset($_POST['submit_pedido'])) {
     mysqli_stmt_close($stmtInserirPedido);
     mysqli_close($conexao);
 }
+
+$diaSemana = date('l');
+
+include('../config.php');
+$queryCardapio = "SELECT comidas, sobremesa FROM cardapio WHERE dia_semana = ?";
+$stmt = mysqli_prepare($conexao, $queryCardapio);
+mysqli_stmt_bind_param($stmt, 's', $diaSemana);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $comidas, $sobremesa);
+
+if (mysqli_stmt_fetch($stmt)) {
+} else {
+    $comidas = 'Cardápio não disponível';
+    $sobremesa = 'Sobremesa não disponível';
+}
+
+mysqli_stmt_close($stmt);
+mysqli_close($conexao);
 ?>
 
 <!DOCTYPE html>
@@ -159,6 +181,15 @@ if (isset($_POST['submit_pedido'])) {
             <div id="signup-tab-content" class="active">
                 <form action="marmitas.php" method="POST">
                     <div class="marmitas-options">
+                        <h2>Cardápio do Dia (
+                            <?php echo $diaSemana; ?>):
+                        </h2>
+                        <p>Comidas:
+                            <?php echo $comidas; ?>
+                        </p>
+                        <p>Sobremesa:
+                            <?php echo $sobremesa; ?>
+                        </p>
                         <label class="marmita-option">
                             <input type="radio" name="tamanho" value="pequena" id="tamanho-pequena">
                             <div class="marmita-content">
