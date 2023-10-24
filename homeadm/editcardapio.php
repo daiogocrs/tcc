@@ -57,7 +57,7 @@ if (!empty($_GET['id_cardapio'])) {
                     <label for="dia_semana" class="labelInput">Dia da Semana</label>
                     <select class="inputSelect" id="dia_semana" name="dia_semana" required>
                         <option value="segunda">Segunda-feira</option>
-                        <option value="terca">Terça-feira</option>
+                        <option value="terça">Terça-feira</option>
                         <option value="quarta">Quarta-feira</option>
                         <option value="quinta">Quinta-feira</option>
                         <option value="sexta">Sexta-feira</option>

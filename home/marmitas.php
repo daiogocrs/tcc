@@ -49,7 +49,23 @@ if (isset($_POST['submit_pedido'])) {
     mysqli_close($conexao);
 }
 
-$diaSemana = date('l');
+$diaSemana = date('l'); 
+
+$traducaoDias = array(
+    'Monday'    => 'segunda',
+    'Tuesday'   => 'terça',
+    'Wednesday' => 'quarta',
+    'Thursday'  => 'quinta',
+    'Friday'    => 'sexta',
+    'Saturday'  => 'sabado',
+    'Sunday'    => 'domingo'
+);
+
+if (array_key_exists($diaSemana, $traducaoDias)) {
+    $diaSemana = $traducaoDias[$diaSemana]; 
+} else {
+    $diaSemana = 'Dia desconhecido';
+}
 
 include('../config.php');
 $queryCardapio = "SELECT comidas, sobremesa FROM cardapio WHERE dia_semana = ?";
@@ -181,8 +197,7 @@ mysqli_close($conexao);
             <div id="signup-tab-content" class="active">
                 <form action="marmitas.php" method="POST">
                     <div class="marmitas-options">
-                        <h2>Cardápio do Dia (
-                            <?php echo $diaSemana; ?>):
+                        <h2>Cardápio do Dia
                         </h2>
                         <p>Comidas:
                             <?php echo $comidas; ?>
@@ -233,7 +248,16 @@ mysqli_close($conexao);
                             <option value="porco">Porco</option>
                         </select>
                         <button id="btn-voltar" class="button">Voltar</button>
-                        <button id="btn-finalizar" class="button">Finalizar</button>
+                        <button id="btn-proximo" class="button">Próximo</button>
+                    </div>
+                    <div class="comidas-options" style="display: none;">
+                        <label>Escolha suas bebidas:</label><br>
+                        <input type="checkbox" class="input" name="bebidas[]" value="pepsi"> Pepsi <br>
+                        <input type="checkbox" class="input" name="bebidas[]" value="cocacola"> Coca-cola
+                        <br>
+                        <input type="checkbox" class="input" name="bebidas[]" value="guarana"> Guaraná <br>
+                        <button id="btn-voltar" class="button">Voltar</button>
+                        <button id="btn-proximo" class="button">Próximo</button>
                     </div>
                     <div class="localizacao-form" style="display: none;">
                         <label>Localização:</label>

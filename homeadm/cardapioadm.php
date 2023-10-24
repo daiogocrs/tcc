@@ -157,7 +157,7 @@ $result = $conexao->query($sql);
             <form class="form_cadastro" action="cardapioadm.php" method="POST">
                 <select class="input" id="dia_semana" name="dia_semana" required>
                     <option value="segunda">Segunda-feira</option>
-                    <option value="terca">Terça-feira</option>
+                    <option value="terça">Terça-feira</option>
                     <option value="quarta">Quarta-feira</option>
                     <option value="quinta">Quinta-feira</option>
                     <option value="sexta">Sexta-feira</option>
