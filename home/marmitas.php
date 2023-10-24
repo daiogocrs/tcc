@@ -1,24 +1,6 @@
 <?php
 $mensagemPedido = '';
 
-$traducaoDiasSemana = array(
-    'monday' => 'segunda',
-    'tuesday' => 'terca',
-    'wednesday' => 'quarta',
-    'thursday' => 'quinta',
-    'friday' => 'sexta',
-    'saturday' => 'sábado',
-    'sunday' => 'domingo'
-);
-
-$diaSemana = strtolower(date('l'));
-
-if (array_key_exists($diaSemana, $traducaoDiasSemana)) {
-    $diaSemana = $traducaoDiasSemana[$diaSemana];
-} else {
-    $diaSemana = 'Dia da semana desconhecido';
-}
-
 if (isset($_POST['submit_pedido'])) {
     include('../config.php');
 
@@ -30,25 +12,8 @@ if (isset($_POST['submit_pedido'])) {
     }
 
     $tamanho = limparDados($conexao, $_POST['tamanho']);
-    $bebida = limparDados($conexao, $_POST['bebida']);
+    $comidas = isset($_POST['comida']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['comida'])) : '';
     $forma_pagamento = limparDados($conexao, $_POST['forma_pagamento']);
-
-    $diaSemana = strtolower(date('l'));
-
-    $queryCardapio = "SELECT comidas, sobremesa FROM cardapio WHERE dia_semana = '$diaSemana'";
-    $resultadoCardapio = mysqli_query($conexao, $queryCardapio);
-
-    if ($resultadoCardapio && mysqli_num_rows($resultadoCardapio) > 0) {
-        $row = mysqli_fetch_assoc($resultadoCardapio);
-        $comidas = explode(', ', $row['comidas']);
-        $sobremesa = $row['sobremesa'];
-    } else {
-        $comidas = array();
-        $sobremesa = 'Não disponível';
-        echo "Consulta SQL não retornou resultados ou ocorreu um erro: " . mysqli_error($conexao);
-        echo "Dia da Semana: " . $diaSemana;
-        echo "Consulta SQL: " . $queryCardapio;
-    }
 
     $cidade = limparDados($conexao, $_POST['cidade']);
     $bairro = limparDados($conexao, $_POST['bairro']);
@@ -65,10 +30,10 @@ if (isset($_POST['submit_pedido'])) {
         $precoMarmita = 22.00;
     }
 
-    $queryInserirPedido = "INSERT INTO pedidos (tamanho, comidas, bebidas, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+    $queryInserirPedido = "INSERT INTO pedidos (tamanho, comidas, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmtInserirPedido = mysqli_prepare($conexao, $queryInserirPedido);
-    mysqli_stmt_bind_param($stmtInserirPedido, 'sssdssssss', $tamanho, implode(', ', array_map('mysqli_real_escape_string', $comidas)), $bebida, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento);
+    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdssssss', $tamanho, $comidas, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento);
 
     if (mysqli_stmt_execute($stmtInserirPedido)) {
         $mensagemPedido = 'Seu pedido foi feito!';
@@ -154,12 +119,15 @@ if (isset($_POST['submit_pedido'])) {
                 <div class="row">
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
+
                             <a class="navbar-brand" href="../index.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
+
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
+
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
@@ -176,6 +144,7 @@ if (isset($_POST['submit_pedido'])) {
                                     </li>
                                 </ul>
                             </div>
+
                         </nav>
                     </div>
                 </div>
@@ -201,57 +170,39 @@ if (isset($_POST['submit_pedido'])) {
                             <input type="radio" name="tamanho" value="media" id="tamanho-media">
                             <div class="marmita-content">
                                 <span class="marmita-title">Marmita Média</span>
-                                <span class="marmita-price">R$18</span>
+                                <span class="marmita-price">R$20</span>
                             </div>
                         </label>
                         <label class="marmita-option">
                             <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
                             <div class="marmita-content">
                                 <span class="marmita-title">Marmita Grande</span>
-                                <span class="marmita-price">R$22</span>
+                                <span class="marmita-price">R$25</span>
                             </div>
                         </label>
                     </div>
-
                     <div class="comidas-options" style="display: none;">
-                        <label>Comidas do Dia:</label><br>
-                        <?php
-                        // Define um array associativo com as comidas disponíveis para cada dia da semana
-                        $comidasPorDia = array(
-                            'segunda' => 'Comida 1, Comida 2, Comida 3',
-                            'terca' => 'Comida 4, Comida 5, Comida 6',
-                            'quarta' => 'Comida 7, Comida 8, Comida 9',
-                            'quinta' => 'Comida 10, Comida 11, Comida 12',
-                            'sexta' => 'Comida 13, Comida 14, Comida 15'
-                        );
-
-                        if (array_key_exists($diaSemana, $comidasPorDia)) {
-                            $comidasDisponiveis = $comidasPorDia[$diaSemana];
-                            $comidas = explode(', ', $comidasDisponiveis);
-                            foreach ($comidas as $comida) {
-                                echo '<input type="checkbox" class="input" name="comida[]" value="' . htmlspecialchars($comida) . '"> ' . htmlspecialchars($comida) . '<br>';
-                            }
-                        } else {
-                            echo '<p>Não há comidas disponíveis para hoje.</p>';
-                        }
-                        ?>
-                    </div>
-                    <div class="sobremesa-options" style="display: none;">
-                        <label>Sobremesa do Dia:</label><br>
-                        <p>
-                            <?= htmlspecialchars($sobremesa) ?>
-                        </p>
-                    </div>
-                    <div class="bebidas-options" style="display: none;">
-                        <label>Escolha sua bebida:</label><br>
-                        <select class="input" name="bebida">
-                            <option value="agua">Água</option>
-                            <option value="refrigerante">Refrigerante</option>
-                            <option value="suco">Suco</option>
-                            <option value="cerveja">Cerveja</option>
+                        <label>Escolha suas comidas:</label><br>
+                        <input type="checkbox" class="input" name="comida[]" value="arroz"> Arroz <br>
+                        <input type="checkbox" class="input" name="comida[]" value="arroz temperado"> Arroz Temperado
+                        <br>
+                        <input type="checkbox" class="input" name="comida[]" value="macarrao"> Macarrão <br>
+                        <input type="checkbox" class="input" name="comida[]" value="tomate"> Tomate <br>
+                        <input type="checkbox" class="input" name="comida[]" value="alface"> Alface <br>
+                        <input type="checkbox" class="input" name="comida[]" value="pepino"> Pepino <br>
+                        <input type="checkbox" class="input" name="comida[]" value="batata frita"> Batata Frita <br>
+                        <input type="checkbox" class="input" name="comida[]" value="maionese"> Maionese <br>
+                        <input type="checkbox" class="input" name="comida[]" value="batata palha"> Batata Palha <br>
+                        <input type="checkbox" class="input" name="comida[]" value="farofa"> Farofa <br>
+                        <select class="input" id="user_tamanho" autocomplete="off" name="comida[]">
+                            <option value="" disabled selected>Selecione a Carne</option>
+                            <option value="nenhuma">Nenhuma</option>
+                            <option value="frango">Frango</option>
+                            <option value="salsichao">Salsichao</option>
+                            <option value="porco">Porco</option>
                         </select>
-                        <button id="btn-voltar-comida" class="button">Voltar</button>
-                        <button id="btn-proximo-bebida" class="button">Próximo</button>
+                        <button id="btn-voltar" class="button">Voltar</button>
+                        <button id="btn-finalizar" class="button">Finalizar</button>
                     </div>
                     <div class="localizacao-form" style="display: none;">
                         <label>Localização:</label>
@@ -260,17 +211,18 @@ if (isset($_POST['submit_pedido'])) {
                         <input type="text" class="input" id="rua" name="rua" placeholder="Rua" required>
                         <input type="text" class="input" id="numero" name="numero" placeholder="Número" required>
                         <input type="text" class="input" id="complemento" name="complemento" placeholder="Complemento">
+
                         <label>Forma de Pagamento:</label>
                         <select class="input" id="forma_pagamento" name="forma_pagamento" required>
                             <option value="" disabled selected>Selecione a forma de pagamento</option>
                             <option value="dinheiro">Dinheiro</option>
-                            <option value="credito">Cartão de Crédito</option>
-                            <option value="debito">Cartão de Débito</option>
+                            <option value="cartao">Cartão de Crédito</option>
                             <option value="pix">PIX</option>
                         </select>
                         <button id="btn-voltar" class="button">Voltar</button>
                         <input type="submit" class="button" name="submit_pedido" value="Enviar Pedido">
                     </div>
+
                 </form>
             </div>
         </div>
@@ -280,13 +232,9 @@ if (isset($_POST['submit_pedido'])) {
         document.addEventListener('DOMContentLoaded', function () {
             const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
             const comidasOptions = document.querySelector('.comidas-options');
-            const bebidasOptions = document.querySelector('.bebidas-options');
             const localizacaoForm = document.querySelector('.localizacao-form');
-            const proximoButton = document.getElementById('btn-proximo');
+            const finalizarButton = document.getElementById('btn-finalizar');
             const voltarButton = document.getElementById('btn-voltar');
-            const proximoBebidaButton = document.getElementById('btn-proximo-bebida');
-            const voltarComidaButton = document.getElementById('btn-voltar-comida');
-            const voltarBebidaButton = document.getElementById('btn-voltar-bebida');
             let tamanhoSelecionado = null;
 
             tamanhoOptions.forEach((option) => {
@@ -300,35 +248,26 @@ if (isset($_POST['submit_pedido'])) {
                 });
             });
 
-            proximoButton.addEventListener('click', (event) => {
+            finalizarButton.addEventListener('click', (event) => {
                 event.preventDefault();
                 comidasOptions.style.display = 'none';
-                bebidasOptions.style.display = 'block';
-                voltarComidaButton.style.display = 'block';
-            });
-
-            voltarComidaButton.addEventListener('click', (event) => {
-                event.preventDefault();
-                bebidasOptions.style.display = 'none';
-                comidasOptions.style.display = 'block';
-                voltarComidaButton.style.display = 'none';
-            });
-
-            proximoBebidaButton.addEventListener('click', (event) => {
-                event.preventDefault();
-                bebidasOptions.style.display = 'none';
                 localizacaoForm.style.display = 'block';
-                voltarBebidaButton.style.display = 'block';
             });
 
-            voltarBebidaButton.addEventListener('click', (event) => {
+            voltarButton.addEventListener('click', (event) => {
                 event.preventDefault();
+                comidasOptions.style.display = 'none';
                 localizacaoForm.style.display = 'none';
-                bebidasOptions.style.display = 'block';
-                voltarBebidaButton.style.display = 'none';
+                document.querySelector('.marmitas-options').style.display = 'block';
+                voltarButton.style.display = 'none';
+
+                tamanhoOptions.forEach((option) => {
+                    option.checked = false;
+                });
+
+                tamanhoSelecionado = null;
             });
         });
-
     </script>
 
 </body>
