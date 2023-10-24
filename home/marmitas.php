@@ -49,20 +49,20 @@ if (isset($_POST['submit_pedido'])) {
     mysqli_close($conexao);
 }
 
-$diaSemana = date('l'); 
+$diaSemana = date('l');
 
 $traducaoDias = array(
-    'Monday'    => 'segunda',
-    'Tuesday'   => 'terça',
+    'Monday' => 'segunda',
+    'Tuesday' => 'terça',
     'Wednesday' => 'quarta',
-    'Thursday'  => 'quinta',
-    'Friday'    => 'sexta',
-    'Saturday'  => 'sabado',
-    'Sunday'    => 'domingo'
+    'Thursday' => 'quinta',
+    'Friday' => 'sexta',
+    'Saturday' => 'sabado',
+    'Sunday' => 'domingo'
 );
 
 if (array_key_exists($diaSemana, $traducaoDias)) {
-    $diaSemana = $traducaoDias[$diaSemana]; 
+    $diaSemana = $traducaoDias[$diaSemana];
 } else {
     $diaSemana = 'Dia desconhecido';
 }
@@ -197,14 +197,6 @@ mysqli_close($conexao);
             <div id="signup-tab-content" class="active">
                 <form action="marmitas.php" method="POST">
                     <div class="marmitas-options">
-                        <h2>Cardápio do Dia
-                        </h2>
-                        <p>Comidas:
-                            <?php echo $comidas; ?>
-                        </p>
-                        <p>Sobremesa:
-                            <?php echo $sobremesa; ?>
-                        </p>
                         <label class="marmita-option">
                             <input type="radio" name="tamanho" value="pequena" id="tamanho-pequena">
                             <div class="marmita-content">
@@ -216,14 +208,14 @@ mysqli_close($conexao);
                             <input type="radio" name="tamanho" value="media" id="tamanho-media">
                             <div class="marmita-content">
                                 <span class="marmita-title">Marmita Média</span>
-                                <span class="marmita-price">R$20</span>
+                                <span class="marmita-price">R$18</span>
                             </div>
                         </label>
                         <label class="marmita-option">
                             <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
-                            <div class="marmita-content">
+                            <div class "marmita-content">
                                 <span class="marmita-title">Marmita Grande</span>
-                                <span class="marmita-price">R$25</span>
+                                <span class="marmita-price">R$22</span>
                             </div>
                         </label>
                     </div>
@@ -247,26 +239,24 @@ mysqli_close($conexao);
                             <option value="salsichao">Salsichao</option>
                             <option value="porco">Porco</option>
                         </select>
-                        <button id="btn-voltar" class="button">Voltar</button>
-                        <button id="btn-proximo" class="button">Próximo</button>
+                        <button id="btn-voltar-comidas" class="button">Voltar</button>
+                        <button id="btn-proximo-comidas" class="button">Próximo</button>
                     </div>
                     <div class="comidas-options" style="display: none;">
                         <label>Escolha suas bebidas:</label><br>
                         <input type="checkbox" class="input" name="bebidas[]" value="pepsi"> Pepsi <br>
-                        <input type="checkbox" class="input" name="bebidas[]" value="cocacola"> Coca-cola
-                        <br>
+                        <input type="checkbox" class="input" name="bebidas[]" value="cocacola"> Coca-cola <br>
                         <input type="checkbox" class="input" name="bebidas[]" value="guarana"> Guaraná <br>
-                        <button id="btn-voltar" class="button">Voltar</button>
-                        <button id="btn-proximo" class="button">Próximo</button>
+                        <button id="btn-voltar-localizacao" class="button">Voltar</button>
+                        <button id="btn-finalizar" class="button">Finalizar</button>
                     </div>
                     <div class="localizacao-form" style="display: none;">
                         <label>Localização:</label>
                         <input type="text" class="input" id="cidade" name="cidade" placeholder="Cidade" required>
-                        <input type="text" class="input" id="bairro" name="bairro" placeholder="Bairro" required>
+                        <input type="text" class="input" id "bairro" name="bairro" placeholder="Bairro" required>
                         <input type="text" class="input" id="rua" name="rua" placeholder="Rua" required>
                         <input type="text" class="input" id="numero" name="numero" placeholder="Número" required>
                         <input type="text" class="input" id="complemento" name="complemento" placeholder="Complemento">
-
                         <label>Forma de Pagamento:</label>
                         <select class="input" id="forma_pagamento" name="forma_pagamento" required>
                             <option value="" disabled selected>Selecione a forma de pagamento</option>
@@ -274,10 +264,9 @@ mysqli_close($conexao);
                             <option value="cartao">Cartão de Crédito</option>
                             <option value="pix">PIX</option>
                         </select>
-                        <button id="btn-voltar" class="button">Voltar</button>
+                        <button id="btn-voltar-comidas" class="button">Voltar</button>
                         <input type="submit" class="button" name="submit_pedido" value="Enviar Pedido">
                     </div>
-
                 </form>
             </div>
         </div>
@@ -288,8 +277,11 @@ mysqli_close($conexao);
             const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
             const comidasOptions = document.querySelector('.comidas-options');
             const localizacaoForm = document.querySelector('.localizacao-form');
-            const finalizarButton = document.getElementById('btn-finalizar');
-            const voltarButton = document.getElementById('btn-voltar');
+            const btnVoltarComidas = document.getElementById('btn-voltar-comidas');
+            const btnProximoComidas = document.getElementById('btn-proximo-comidas');
+            const btnVoltarLocalizacao = document.getElementById('btn-voltar-localizacao');
+            const btnFinalizar = document.getElementById('btn-finalizar');
+
             let tamanhoSelecionado = null;
 
             tamanhoOptions.forEach((option) => {
@@ -298,29 +290,43 @@ mysqli_close($conexao);
                         tamanhoSelecionado = option.value;
                         document.querySelector('.marmitas-options').style.display = 'none';
                         comidasOptions.style.display = 'block';
-                        voltarButton.style.display = 'block';
+                        btnVoltarComidas.style.display = 'block';
                     }
                 });
             });
 
-            finalizarButton.addEventListener('click', (event) => {
+            btnProximoComidas.addEventListener('click', (event) => {
                 event.preventDefault();
                 comidasOptions.style.display = 'none';
                 localizacaoForm.style.display = 'block';
+                btnVoltarComidas.style.display = 'none';
+                btnVoltarLocalizacao.style.display = 'block';
             });
 
-            voltarButton.addEventListener('click', (event) => {
+            btnVoltarComidas.addEventListener('click', (event) => {
                 event.preventDefault();
                 comidasOptions.style.display = 'none';
-                localizacaoForm.style.display = 'none';
                 document.querySelector('.marmitas-options').style.display = 'block';
-                voltarButton.style.display = 'none';
+                btnVoltarComidas.style.display = 'none';
 
                 tamanhoOptions.forEach((option) => {
                     option.checked = false;
                 });
 
                 tamanhoSelecionado = null;
+            });
+
+            btnVoltarLocalizacao.addEventListener('click', (event) => {
+                event.preventDefault();
+                localizacaoForm.style.display = 'none';
+                comidasOptions.style.display = 'block';
+                btnVoltarLocalizacao.style.display = 'none';
+                btnVoltarComidas.style.display = 'block';
+            });
+
+            btnFinalizar.addEventListener('click', (event) => {
+                event.preventDefault();
+                alert('Pedido finalizado!');
             });
         });
     </script>
