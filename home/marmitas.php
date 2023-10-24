@@ -12,8 +12,26 @@ if (isset($_POST['submit_pedido'])) {
     }
 
     $tamanho = limparDados($conexao, $_POST['tamanho']);
-    $comidas = isset($_POST['comida']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['comida'])) : '';
+    $bebida = limparDados($conexao, $_POST['bebida']); 
     $forma_pagamento = limparDados($conexao, $_POST['forma_pagamento']);
+
+    // Obtém o dia da semana atual
+    $diaSemana = strtolower(date('l'));
+
+    // Consulta SQL para obter o cardápio do dia
+    $queryCardapio = "SELECT comidas, sobremesa FROM cardapio WHERE dia_semana = '$diaSemana'";
+    $resultadoCardapio = mysqli_query($conexao, $queryCardapio);
+
+    if ($resultadoCardapio && mysqli_num_rows($resultadoCardapio) > 0) {
+        $row = mysqli_fetch_assoc($resultadoCardapio);
+        $comidas = explode(', ', $row['comidas']);
+        $sobremesa = $row['sobremesa'];
+    } else {
+        // Se não houver um cardápio correspondente, você pode definir um valor padrão ou mostrar uma mensagem de erro.
+        // Por exemplo:
+        $comidas = array();
+        $sobremesa = 'Não disponível';
+    }
 
     $cidade = limparDados($conexao, $_POST['cidade']);
     $bairro = limparDados($conexao, $_POST['bairro']);
@@ -25,15 +43,15 @@ if (isset($_POST['submit_pedido'])) {
     if ($tamanho === "pequena") {
         $precoMarmita = 15.00;
     } elseif ($tamanho === "media") {
-        $precoMarmita = 18.00;
+        $precoMarmita = 20.00;
     } elseif ($tamanho === "grande") {
-        $precoMarmita = 22.00;
+        $precoMarmita = 25.00;
     }
 
-    $queryInserirPedido = "INSERT INTO pedidos (tamanho, comidas, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+    $queryInserirPedido = "INSERT INTO pedidos (tamanho, comidas, bebidas, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmtInserirPedido = mysqli_prepare($conexao, $queryInserirPedido);
-    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdssssss', $tamanho, $comidas, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento);
+    mysqli_stmt_bind_param($stmtInserirPedido, 'sssdssssss', $tamanho, implode(', ', array_map('mysqli_real_escape_string', $comidas)), $bebida, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento);
 
     if (mysqli_stmt_execute($stmtInserirPedido)) {
         $mensagemPedido = 'Seu pedido foi feito!';
@@ -64,7 +82,52 @@ if (isset($_POST['submit_pedido'])) {
     <link rel="stylesheet" type="text/css" href="../css/marmitas.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Tela de Pedido de Marmitas</title>
-    <style></style>
+    <style>
+        .marmita-option {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            width: 30%;
+            margin: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .marmita-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .marmita-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .marmita-price {
+            font-size: 16px;
+            color: #801300;
+        }
+
+        .marmita-option input[type="radio"] {
+            display: none;
+        }
+
+        .marmita-option label {
+            display: block;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .marmita-option input[type="radio"]:checked+label {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 
 <body>
@@ -74,15 +137,12 @@ if (isset($_POST['submit_pedido'])) {
                 <div class="row">
                     <div class="col-12">
                         <nav class="navbar navbar-expand-md navbar-light">
-
                             <a class="navbar-brand" href="../index.php"><img src="../fotos/cantinalogo2.png" alt=""></a>
-
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto py-4 py-md-0">
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
@@ -99,14 +159,12 @@ if (isset($_POST['submit_pedido'])) {
                                     </li>
                                 </ul>
                             </div>
-
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
     <div class="form-wrap">
         <div class="tabs">
             <h3 class="signup-tab"><a>Faça seu Pedido</a></h3>
@@ -114,124 +172,136 @@ if (isset($_POST['submit_pedido'])) {
         <div class="tabs-content">
             <div id="signup-tab-content" class="active">
                 <form action="marmitas.php" method="POST">
-                    <div class="options">
-                        <button class="button" id="btn-marmitas" type="button">Marmitas</button>
-                        <button class="button" id="btn-lanches" type="button">Lanches</button>
-                        <button class="button" id="btn-bebidas" type="button">Bebidas</button>
+                    <div class="marmitas-options">
+                        <label class="marmita-option">
+                            <input type="radio" name="tamanho" value="pequena" id="tamanho-pequena">
+                            <div class="marmita-content">
+                                <span class="marmita-title">Marmita Pequena</span>
+                                <span class="marmita-price">R$15</span>
+                            </div>
+                        </label>
+                        <label class="marmita-option">
+                            <input type="radio" name="tamanho" value="media" id="tamanho-media">
+                            <div class="marmita-content">
+                                <span class="marmita-title">Marmita Média</span>
+                                <span class="marmita-price">R$20</span>
+                            </div>
+                        </label>
+                        <label class="marmita-option">
+                            <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
+                            <div class="marmita-content">
+                                <span class="marmita-title">Marmita Grande</span>
+                                <span class="marmita-price">R$25</span>
+                            </div>
+                        </label>
                     </div>
-                    <div id="marmitas-container" style="display: none;">
-                        <div class="marmitas-options">
-                            <label class="marmita-option">
-                                <input type="radio" name="tamanho" value="pequena" id="tamanho-pequena">
-                                <div class="marmita-content">
-                                    <span class="marmita-title">Marmita Pequena</span>
-                                    <span class="marmita-price">R$15</span>
-                                </div>
-                            </label>
-                            <label class="marmita-option">
-                                <input type="radio" name="tamanho" value="media" id="tamanho-media">
-                                <div class="marmita-content">
-                                    <span class="marmita-title">Marmita Média</span>
-                                    <span class="marmita-price">R$20</span>
-                                </div>
-                            </label>
-                            <label class="marmita-option">
-                                <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
-                                <div class="marmita-content">
-                                    <span class="marmita-title">Marmita Grande</span>
-                                    <span class="marmita-price">R$25</span>
-                                </div>
-                            </label>
-                            <button class="button" id="btn-voltar-marmitas" type="button">Voltar</button>
-                        </div>
+                    <div class="comidas-options" style="display: none;">
+                        <label>Comidas do Dia:</label><br>
+                        <?php
+                        if (isset($comidas) && is_array($comidas)) {
+                            foreach ($comidas as $comida) {
+                                echo '<input type="checkbox" class="input" name="comida[]" value="' . htmlspecialchars($comida) . '"> ' . htmlspecialchars($comida) . '<br>';
+                            }
+                        } else {
+                            echo '<p>Não há comidas disponíveis para hoje.</p>';
+                        }
+                        ?>
                     </div>
-                    <div id="lanches-container" style="display: none;">
-                        <label>Lanches:</label><br>
-                        <button id="salgados" class="button" type="button">Salgados</button>
-                        <button id="doces" class="button" type="button">Doces</button>
-                        <button class="button" id="btn-voltar-lanches" type="button">Voltar</button>
-                        <button id="btn-proximo" class="button" type="button">Próximo</button>
+                    <div class="sobremesa-options" style="display: none;">
+                        <label>Sobremesa do Dia:</label><br>
+                        <p>
+                            <?= htmlspecialchars($sobremesa) ?>
+                        </p>
                     </div>
-                    <div id="bebidas-container" style="display: none;">
+                    <div class="bebidas-options" style="display: none;">
                         <label>Escolha sua bebida:</label><br>
-                        <input type="checkbox" class="input" name="bebidas[]" value="pepsi"> Pepsi <br>
-                        <input type="checkbox" class="input" name="bebidas[]" value="cocacola"> Coca-Cola <br>
-                        <button class="button" id="btn-voltar-bebidas" type="button">Voltar</button>
-                        <button id="btn-proximo" class="button" type="button">Próximo</button>
+                        <select class="input" name="bebida">
+                            <option value="agua">Água</option>
+                            <option value="refrigerante">Refrigerante</option>
+                            <option value="suco">Suco</option>
+                            <option value="cerveja">Cerveja</option>
+                        </select>
+                        <button id="btn-voltar-comida" class="button">Voltar</button>
+                        <button id="btn-proximo-bebida" class="button">Próximo</button>
+                    </div>
+                    <div class="localizacao-form" style="display: none;">
+                        <label>Localização:</label>
+                        <input type="text" class="input" id="cidade" name="cidade" placeholder="Cidade" required>
+                        <input type="text" class="input" id="bairro" name="bairro" placeholder="Bairro" required>
+                        <input type="text" class="input" id="rua" name="rua" placeholder="Rua" required>
+                        <input type="text" class="input" id="numero" name="numero" placeholder="Número" required>
+                        <input type="text" class="input" id="complemento" name="complemento" placeholder="Complemento">
+                        <label>Forma de Pagamento:</label>
+                        <select class="input" id="forma_pagamento" name="forma_pagamento" required>
+                            <option value="" disabled selected>Selecione a forma de pagamento</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="credito">Cartão de Crédito</option>
+                            <option value="debito">Cartão de Débito</option>
+                            <option value="pix">PIX</option>
+                        </select>
+                        <button id="btn-voltar" class="button">Voltar</button>
+                        <input type="submit" class="button" name="submit_pedido" value="Enviar Pedido">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <script type="text/javascript" src="../js/header.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const btnMarmitas = document.getElementById('btn-marmitas');
-            const btnLanches = document.getElementById('btn-lanches');
-            const btnBebidas = document.getElementById('btn-bebidas');
-            const btnVoltarMarmitas = document.getElementById('btn-voltar-marmitas');
-            const btnVoltarLanches = document.getElementById('btn-voltar-lanches');
-            const btnVoltarBebidas = document.getElementById('btn-voltar-bebidas');
-            const marmitasContainer = document.getElementById('marmitas-container');
-            const lanchesContainer = document.getElementById('lanches-container');
-            const bebidasContainer = document.getElementById('bebidas-container');
+            const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
+            const comidasOptions = document.querySelector('.comidas-options');
+            const bebidasOptions = document.querySelector('.bebidas-options');
+            const localizacaoForm = document.querySelector('.localizacao-form');
+            const proximoButton = document.getElementById('btn-proximo');
+            const voltarButton = document.getElementById('btn-voltar');
+            const proximoBebidaButton = document.getElementById('btn-proximo-bebida');
+            const voltarComidaButton = document.getElementById('btn-voltar-comida');
+            const voltarBebidaButton = document.getElementById('btn-voltar-bebida');
+            let tamanhoSelecionado = null;
 
-            btnMarmitas.addEventListener('click', () => {
-                marmitasContainer.style.display = 'block';
-                lanchesContainer.style.display = 'none';
-                bebidasContainer.style.display = 'none';
-                btnMarmitas.style.display = 'none';
-                btnLanches.style.display = 'none';
-                btnBebidas.style.display = 'none';
+            tamanhoOptions.forEach((option) => {
+                option.addEventListener("change", () => {
+                    if (option.checked) {
+                        tamanhoSelecionado = option.value;
+                        document.querySelector('.marmitas-options').style.display = 'none';
+                        comidasOptions.style.display = 'block';
+                        voltarButton.style.display = 'block';
+                    }
+                });
             });
 
-            btnLanches.addEventListener('click', () => {
-                marmitasContainer.style.display = 'none';
-                lanchesContainer.style.display = 'block';
-                bebidasContainer.style.display = 'none';
-                btnMarmitas.style.display = 'none';
-                btnLanches.style.display = 'none';
-                btnBebidas.style.display = 'none';
+            proximoButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                bebidasOptions.style.display = 'block';
+                voltarComidaButton.style.display = 'block';
             });
 
-            btnBebidas.addEventListener('click', () => {
-                marmitasContainer.style.display = 'none';
-                lanchesContainer.style.display = 'none';
-                bebidasContainer.style.display = 'block';
-                btnMarmitas.style.display = 'none';
-                btnLanches.style.display = 'none';
-                btnBebidas.style.display = 'none';
+            voltarComidaButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                bebidasOptions.style.display = 'none';
+                comidasOptions.style.display = 'block';
+                voltarComidaButton.style.display = 'none';
             });
 
-            btnVoltarMarmitas.addEventListener('click', () => {
-                marmitasContainer.style.display = 'none';
-                lanchesContainer.style.display = 'none';
-                bebidasContainer.style.display = 'none';
-                btnMarmitas.style.display = 'block';
-                btnLanches.style.display = 'block';
-                btnBebidas.style.display = 'block';
+            proximoBebidaButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                bebidasOptions.style.display = 'none';
+                localizacaoForm.style.display = 'block';
+                voltarBebidaButton.style.display = 'block';
             });
 
-            btnVoltarLanches.addEventListener('click', () => {
-                marmitasContainer.style.display = 'none';
-                lanchesContainer.style.display = 'none';
-                bebidasContainer.style.display = 'none';
-                btnMarmitas.style.display = 'block';
-                btnLanches.style.display = 'block';
-                btnBebidas.style.display = 'block';
-            });
-
-            btnVoltarBebidas.addEventListener('click', () => {
-                marmitasContainer.style.display = 'none';
-                lanchesContainer.style.display = 'none';
-                bebidasContainer.style.display = 'none';
-                btnMarmitas.style.display = 'block';
-                btnLanches.style.display = 'block';
-                btnBebidas.style.display = 'block';
+            voltarBebidaButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                localizacaoForm.style.display = 'none';
+                bebidasOptions.style.display = 'block';
+                voltarBebidaButton.style.display = 'none';
             });
         });
+
     </script>
+
 </body>
 
 </html>

@@ -10,9 +10,9 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 }
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
-    $sql = "SELECT id_pedidos, tamanho, comidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos WHERE id_pedidos LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id_pedidos DESC";
+    $sql = "SELECT id_pedidos, tamanho, comidas, bebidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos WHERE id_pedidos LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id_pedidos DESC";
 } else {
-    $sql = "SELECT id_pedidos, tamanho, comidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos ORDER BY id_pedidos DESC";
+    $sql = "SELECT id_pedidos, tamanho, comidas, bebidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos ORDER BY id_pedidos DESC";
 }
 $result = $conexao->query($sql);
 ?>
@@ -57,17 +57,25 @@ $result = $conexao->query($sql);
                 <li><a href="homeadm.php">
                         <i class="uil uil-shopping-bag"></i>
                         <span class="link-name">Produtos</span>
-                    </a></li>
+                    </a>
+                </li>
                 <li><a href="marmitasadm.php">
                         <i class="uil uil-truck"></i>
                         <span class="link-name">Delivery</span>
-                    </a></li>
+                    </a>
+                </li>
+                <li><a href="cardapioadm.php">
+                        <i class="uil uil-book"></i>
+                        <span class="link-name">Cardápio</span>
+                    </a>
+                </li>
             </ul>
             <ul class="logout-mode">
                 <li><a href="../sair.php">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Sair</span>
-                    </a></li>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -88,6 +96,7 @@ $result = $conexao->query($sql);
                                 <th scope="col">Data e Hora do Pedido</th>
                                 <th scope="col">Tamanho</th>
                                 <th scope="col">Comidas</th>
+                                <th scope="col">Bebidas</th>
                                 <th scope="col">Cidade</th>
                                 <th scope="col">Bairro</th>
                                 <th scope="col">Rua</th>
@@ -105,6 +114,7 @@ $result = $conexao->query($sql);
                                 echo "<td>" . $user_data['data_hora_pedido'] . "</td>";
                                 echo "<td>" . $user_data['tamanho'] . "</td>";
                                 echo "<td>" . $user_data['comidas'] . "</td>";
+                                echo "<td>" . $user_data['bebidas'] . "</td>";
                                 echo "<td>" . $user_data['cidade'] . "</td>";
                                 echo "<td>" . $user_data['bairro'] . "</td>";
                                 echo "<td>" . $user_data['rua'] . "</td>";

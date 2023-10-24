@@ -19,13 +19,19 @@ CREATE TABLE produtos (
     categoria VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE cardapio (
+    id_cardapio INT AUTO_INCREMENT PRIMARY KEY,
+    comidas TEXT NOT NULL,
+    sobremesa VARCHAR(255),
+    dia_semana VARCHAR(10)
+);
+
 CREATE TABLE pedidos (
     id_pedidos INT AUTO_INCREMENT PRIMARY KEY,
     tamanho VARCHAR(255) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL,
     comidas TEXT,
-    lanches TEXT,
-    bebidas TEXT,
+    bebidas TEXT, 
     cidade VARCHAR(255) NOT NULL,
     bairro VARCHAR(255) NOT NULL,
     rua VARCHAR(255) NOT NULL,
