@@ -45,7 +45,7 @@ if (!empty($_GET['id_produtos'])) {
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/editprodutos.css">
     <script type="text/javascript" src="js/bibliotecas.js"></script>
-    <title>Editar Cadastro de Produto</title>
+    <title>Cantina Federal</title>
 
 </head>
 

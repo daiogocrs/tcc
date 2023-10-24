@@ -44,7 +44,7 @@ $result = $conexao->query($sql);
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/cardapio.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
-    <title>Tela de Cardápio</title>
+    <title>Cantina Federal</title>
 </head>
 
 <body>

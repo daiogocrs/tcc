@@ -16,8 +16,8 @@ if (isset($_POST['submit_pedido'])) {
     }
 
     $tamanho = limparDados($conexao, $_POST['tamanho']);
-    $comidas = isset($_POST['comida']) ? implode(', ', array_map([$conexao, 'real_escape_string'], $_POST['comida'])) : '';
     $forma_pagamento = limparDados($conexao, $_POST['forma_pagamento']);
+    $retirar_algo = isset($_POST['retirar_algo']) ? limparDados($conexao, $_POST['retirar_algo']) : '';
 
     $cidade = limparDados($conexao, $_POST['cidade']);
     $bairro = limparDados($conexao, $_POST['bairro']);
@@ -34,10 +34,10 @@ if (isset($_POST['submit_pedido'])) {
         $precoMarmita = 22.00;
     }
 
-    $queryInserirPedido = "INSERT INTO pedidos (tamanho, comidas, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+    $queryInserirPedido = "INSERT INTO pedidos (tamanho, retirar_algo, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmtInserirPedido = mysqli_prepare($conexao, $queryInserirPedido);
-    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdssssss', $tamanho, $comidas, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento);
+    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdssssss', $tamanho, $retirar_algo, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento);
 
     if (mysqli_stmt_execute($stmtInserirPedido)) {
         $mensagemPedido = 'Seu pedido foi feito!';
@@ -101,7 +101,7 @@ mysqli_close($conexao);
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/marmitas.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
-    <title>Tela de Pedido de Marmitas</title>
+    <title>Cantina Federal</title>
     <style>
         .marmita-option {
             text-align: center;
@@ -213,47 +213,31 @@ mysqli_close($conexao);
                         </label>
                         <label class="marmita-option">
                             <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
-                            <div class "marmita-content">
+                            <div class="marmita-content">
                                 <span class="marmita-title">Marmita Grande</span>
                                 <span class="marmita-price">R$22</span>
                             </div>
                         </label>
                     </div>
                     <div class="comidas-options" style="display: none;">
-                        <label>Escolha suas comidas:</label><br>
-                        <input type="checkbox" class="input" name="comida[]" value="arroz"> Arroz <br>
-                        <input type="checkbox" class="input" name="comida[]" value="arroz temperado"> Arroz Temperado
-                        <br>
-                        <input type="checkbox" class="input" name="comida[]" value="macarrao"> Macarrão <br>
-                        <input type="checkbox" class="input" name="comida[]" value="tomate"> Tomate <br>
-                        <input type="checkbox" class="input" name="comida[]" value="alface"> Alface <br>
-                        <input type="checkbox" class="input" name="comida[]" value="pepino"> Pepino <br>
-                        <input type="checkbox" class="input" name="comida[]" value="batata frita"> Batata Frita <br>
-                        <input type="checkbox" class="input" name="comida[]" value="maionese"> Maionese <br>
-                        <input type="checkbox" class="input" name="comida[]" value="batata palha"> Batata Palha <br>
-                        <input type="checkbox" class="input" name="comida[]" value="farofa"> Farofa <br>
-                        <select class="input" id="user_tamanho" autocomplete="off" name="comida[]">
-                            <option value="" disabled selected>Selecione a Carne</option>
-                            <option value="nenhuma">Nenhuma</option>
-                            <option value="frango">Frango</option>
-                            <option value="salsichao">Salsichao</option>
-                            <option value="porco">Porco</option>
-                        </select>
-                        <button id="btn-voltar-comidas" class="button">Voltar</button>
-                        <button id="btn-proximo-comidas" class="button">Próximo</button>
-                    </div>
-                    <div class="comidas-options" style="display: none;">
-                        <label>Escolha suas bebidas:</label><br>
+                        <label>Comidas:</label><br>
+                        <?php echo $comidas; ?>
+                        <label>Deseja retirar algo:</label><br>
+                        <input type="text" class="input" id="retirar_algo" name="retirar_algo"
+                            placeholder="Fale o que deseja retirar aqui" required><br>
+                        <label>Sobremesa:</label><br>
+                        <?php echo $sobremesa; ?><br>
+                        <label>Bebidas:</label><br>
                         <input type="checkbox" class="input" name="bebidas[]" value="pepsi"> Pepsi <br>
                         <input type="checkbox" class="input" name="bebidas[]" value="cocacola"> Coca-cola <br>
                         <input type="checkbox" class="input" name="bebidas[]" value="guarana"> Guaraná <br>
-                        <button id="btn-voltar-localizacao" class="button">Voltar</button>
-                        <button id="btn-finalizar" class="button">Finalizar</button>
+                        <button id="btn-voltar-comidas" class="button">Voltar</button>
+                        <button id="btn-proximo-comidas" class="button">Próximo</button>
                     </div>
                     <div class="localizacao-form" style="display: none;">
                         <label>Localização:</label>
                         <input type="text" class="input" id="cidade" name="cidade" placeholder="Cidade" required>
-                        <input type="text" class="input" id "bairro" name="bairro" placeholder="Bairro" required>
+                        <input type="text" class="input" id="bairro" name="bairro" placeholder="Bairro" required>
                         <input type="text" class="input" id="rua" name="rua" placeholder="Rua" required>
                         <input type="text" class="input" id="numero" name="numero" placeholder="Número" required>
                         <input type="text" class="input" id="complemento" name="complemento" placeholder="Complemento">
