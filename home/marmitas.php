@@ -15,10 +15,8 @@ if (isset($_POST['submit_pedido'])) {
     $bebida = limparDados($conexao, $_POST['bebida']); 
     $forma_pagamento = limparDados($conexao, $_POST['forma_pagamento']);
 
-    // Obtém o dia da semana atual
     $diaSemana = strtolower(date('l'));
 
-    // Consulta SQL para obter o cardápio do dia
     $queryCardapio = "SELECT comidas, sobremesa FROM cardapio WHERE dia_semana = '$diaSemana'";
     $resultadoCardapio = mysqli_query($conexao, $queryCardapio);
 
@@ -27,8 +25,6 @@ if (isset($_POST['submit_pedido'])) {
         $comidas = explode(', ', $row['comidas']);
         $sobremesa = $row['sobremesa'];
     } else {
-        // Se não houver um cardápio correspondente, você pode definir um valor padrão ou mostrar uma mensagem de erro.
-        // Por exemplo:
         $comidas = array();
         $sobremesa = 'Não disponível';
     }
@@ -43,9 +39,9 @@ if (isset($_POST['submit_pedido'])) {
     if ($tamanho === "pequena") {
         $precoMarmita = 15.00;
     } elseif ($tamanho === "media") {
-        $precoMarmita = 20.00;
+        $precoMarmita = 18.00;
     } elseif ($tamanho === "grande") {
-        $precoMarmita = 25.00;
+        $precoMarmita = 22.00;
     }
 
     $queryInserirPedido = "INSERT INTO pedidos (tamanho, comidas, bebidas, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
@@ -184,14 +180,14 @@ if (isset($_POST['submit_pedido'])) {
                             <input type="radio" name="tamanho" value="media" id="tamanho-media">
                             <div class="marmita-content">
                                 <span class="marmita-title">Marmita Média</span>
-                                <span class="marmita-price">R$20</span>
+                                <span class="marmita-price">R$18</span>
                             </div>
                         </label>
                         <label class="marmita-option">
                             <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
                             <div class="marmita-content">
                                 <span class="marmita-title">Marmita Grande</span>
-                                <span class="marmita-price">R$25</span>
+                                <span class="marmita-price">R$22</span>
                             </div>
                         </label>
                     </div>

@@ -43,3 +43,10 @@ CREATE TABLE pedidos (
 
 INSERT INTO usuarios (nome, email, senha, nivel_acesso)
 VALUES ('cantina', 'admin@gmail.com', '123123', 'adm');
+
+INSERT INTO cardapio (comidas, sobremesa, dia_semana) VALUES
+    ('Comida de segunda', 'Sobremesa de segunda', 'segunda'),
+    ('Comida de terça', 'Sobremesa de terça', 'terca'),
+    ('Comida de quarta', 'Sobremesa de quarta', 'quarta'),
+    ('Comida de quinta', 'Sobremesa de quinta', 'quinta'),
+    ('Comida de sexta', 'Sobremesa de sexta', 'sexta');
