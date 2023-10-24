@@ -1,6 +1,24 @@
 <?php
 $mensagemPedido = '';
 
+$traducaoDiasSemana = array(
+    'monday' => 'segunda',
+    'tuesday' => 'terca',
+    'wednesday' => 'quarta',
+    'thursday' => 'quinta',
+    'friday' => 'sexta',
+    'saturday' => 'sábado',
+    'sunday' => 'domingo'
+);
+
+$diaSemana = strtolower(date('l'));
+
+if (array_key_exists($diaSemana, $traducaoDiasSemana)) {
+    $diaSemana = $traducaoDiasSemana[$diaSemana];
+} else {
+    $diaSemana = 'Dia da semana desconhecido';
+}
+
 if (isset($_POST['submit_pedido'])) {
     include('../config.php');
 
@@ -12,7 +30,7 @@ if (isset($_POST['submit_pedido'])) {
     }
 
     $tamanho = limparDados($conexao, $_POST['tamanho']);
-    $bebida = limparDados($conexao, $_POST['bebida']); 
+    $bebida = limparDados($conexao, $_POST['bebida']);
     $forma_pagamento = limparDados($conexao, $_POST['forma_pagamento']);
 
     $diaSemana = strtolower(date('l'));
@@ -27,6 +45,9 @@ if (isset($_POST['submit_pedido'])) {
     } else {
         $comidas = array();
         $sobremesa = 'Não disponível';
+        echo "Consulta SQL não retornou resultados ou ocorreu um erro: " . mysqli_error($conexao);
+        echo "Dia da Semana: " . $diaSemana;
+        echo "Consulta SQL: " . $queryCardapio;
     }
 
     $cidade = limparDados($conexao, $_POST['cidade']);
@@ -191,10 +212,22 @@ if (isset($_POST['submit_pedido'])) {
                             </div>
                         </label>
                     </div>
+
                     <div class="comidas-options" style="display: none;">
                         <label>Comidas do Dia:</label><br>
                         <?php
-                        if (isset($comidas) && is_array($comidas)) {
+                        // Define um array associativo com as comidas disponíveis para cada dia da semana
+                        $comidasPorDia = array(
+                            'segunda' => 'Comida 1, Comida 2, Comida 3',
+                            'terca' => 'Comida 4, Comida 5, Comida 6',
+                            'quarta' => 'Comida 7, Comida 8, Comida 9',
+                            'quinta' => 'Comida 10, Comida 11, Comida 12',
+                            'sexta' => 'Comida 13, Comida 14, Comida 15'
+                        );
+
+                        if (array_key_exists($diaSemana, $comidasPorDia)) {
+                            $comidasDisponiveis = $comidasPorDia[$diaSemana];
+                            $comidas = explode(', ', $comidasDisponiveis);
                             foreach ($comidas as $comida) {
                                 echo '<input type="checkbox" class="input" name="comida[]" value="' . htmlspecialchars($comida) . '"> ' . htmlspecialchars($comida) . '<br>';
                             }
