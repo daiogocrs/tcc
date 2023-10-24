@@ -11,9 +11,9 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 
 if (!empty($_GET['search'])) {
     $data = $_GET['search'];
-    $sql = "SELECT id_pedidos, tamanho, bebidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos WHERE id_pedidos LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id_pedidos DESC";
+    $sql = "SELECT id_pedidos, tamanho, bebidas, retirar_algo, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos WHERE id_pedidos LIKE '%$data%' or tamanho LIKE '%$data%' ORDER BY id_pedidos DESC";
 } else {
-    $sql = "SELECT id_pedidos, tamanho, bebidas, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos ORDER BY id_pedidos DESC";
+    $sql = "SELECT id_pedidos, tamanho, bebidas, retirar_algo, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos ORDER BY id_pedidos DESC";
 }
 $result = $conexao->query($sql);
 ?>
@@ -96,6 +96,7 @@ $result = $conexao->query($sql);
                                 <th scope="col">Data e Hora</th>
                                 <th scope="col">Tamanho</th>
                                 <th scope="col">Bebidas</th>
+                                <th scope="col">Retirar Algo</th>
                                 <th scope="col">Localização</th>
                                 <th scope="col">Forma de Pagamento</th>
                                 <th scope="col">Preço</th>
@@ -109,6 +110,7 @@ $result = $conexao->query($sql);
                                 echo "<td>" . $user_data['data_hora_pedido'] . "</td>";
                                 echo "<td>" . $user_data['tamanho'] . "</td>";
                                 echo "<td>" . $user_data['bebidas'] . "</td>";
+                                echo "<td>" . $user_data['retirar_algo'] . "</td>";
                                 echo "<td>
                                     <button class='btn btn-sm btn-primary show-location' data-id='" . $user_data['id_pedidos'] . "'>Localização</button>
                                 </td>";
