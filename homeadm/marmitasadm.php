@@ -34,8 +34,11 @@ $result = $conexao->query($sql);
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/marmitasadm.css">
+    <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
     <title>Cantina Federal</title>
+    <style>
+        
+    </style>
 </head>
 
 <body>
@@ -84,7 +87,6 @@ $result = $conexao->query($sql);
                     <span class="text">Delivery</span>
                 </div>
                 <h2>Pedidos</h2>
-                <div>
                     <table class="table">
                         <thead>
                             <tr>
@@ -123,7 +125,6 @@ $result = $conexao->query($sql);
                             ?>
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
     </section>
