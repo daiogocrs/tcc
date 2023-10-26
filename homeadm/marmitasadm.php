@@ -27,14 +27,9 @@ $result = $conexao->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -139,7 +134,7 @@ $result = $conexao->query($sql);
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="locationModalLabel">Informações de Localização</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <button type="button" class="close" id="closeModal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -194,6 +189,11 @@ $result = $conexao->query($sql);
                 xhr.send();
             });
         });
+
+        document.getElementById('closeModal').addEventListener('click', function () {
+            $('#locationModal').modal('hide');
+        });
     </script>
 </body>
+
 </html>

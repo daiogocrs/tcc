@@ -51,14 +51,9 @@ $result = $conexao->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -151,38 +146,47 @@ $result = $conexao->query($sql);
         </div>
     </section>
 
-    <div id="cardapioModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeCardapioModal">&times;</span>
-            <form class="form_cadastro" action="cardapioadm.php" method="POST">
-                <select class="input" id="dia_semana" name="dia_semana" required>
-                    <option value="segunda">Segunda-feira</option>
-                    <option value="terça">Terça-feira</option>
-                    <option value="quarta">Quarta-feira</option>
-                    <option value="quinta">Quinta-feira</option>
-                    <option value="sexta">Sexta-feira</option>
-                </select>
-                <input class="input" id="cardapio_comidas" name="comidas" placeholder="Comidas" required>
-                <input type="text" class="input" id="cardapio_sobremesa" name="sobremesa" placeholder="Sobremesa">
-                <input type="submit" class="button" name="submit" id="submitCardapio" value="Cadastrar Cardápio">
-            </form>
+    <div class="modal fade" id="cardapioModal" tabindex="-1" role="dialog" aria-labelledby="cardapioModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cardapioModalLabel">Novo Cardápio</h5>
+                    <button type="button" class="close" id="closeCardapioModal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form_cadastro" action="cardapioadm.php" method="POST">
+                        <select class="form-control" id="dia_semana" name="dia_semana" required>
+                            <option value="" disabled selected>Selecione o dia da semana</option>
+                            <option value="segunda">Segunda-feira</option>
+                            <option value="terça">Terça-feira</option>
+                            <option value="quarta">Quarta-feira</option>
+                            <option value="quinta">Quinta-feira</option>
+                            <option value="sexta">Sexta-feira</option>
+                        </select>
+                        <br>
+                        <input class="form-control" id="cardapio_comidas" name="comidas" placeholder="Comidas" required>
+                        <br>
+                        <input type="text" class="form-control" id="cardapio_sobremesa" name="sobremesa"
+                            placeholder="Sobremesa">
+                        <br>
+                        <input type="submit" class="btn btn-primary" name="submit" id="submitCardapio"
+                            value="Cadastrar Cardápio">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         document.getElementById("openCardapioModal").addEventListener("click", function () {
-            document.getElementById("cardapioModal").style.display = "block";
+            $('#cardapioModal').modal('show');
         });
 
         document.getElementById("closeCardapioModal").addEventListener("click", function () {
-            document.getElementById("cardapioModal").style.display = "none";
-        });
-
-        window.addEventListener("click", function (event) {
-            var cardapioModal = document.getElementById("cardapioModal");
-            if (event.target == cardapioModal) {
-                cardapioModal.style.display = "none";
-            }
+            $('#cardapioModal').modal('hide');
         });
     </script>
 </body>

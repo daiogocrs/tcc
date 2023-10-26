@@ -63,14 +63,9 @@ $result = $conexao->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -163,42 +158,49 @@ $result = $conexao->query($sql);
         </div>
     </section>
 
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <form class="form_cadastro" action="homeadm.php" method="POST">
-                <input type="text" class="input" id="user_nome" autocomplete="off" placeholder="Nome" name="nome"
-                    required>
-                <input type="text" class="input" id="user_preco" autocomplete="off" placeholder="Preço" name="preco"
-                    required>
-                <select id="user_categoria" class="input" name="categoria" required>
-                    <option value="" disabled selected>Selecione a categoria</option>
-                    <option value="salgados">Salgados</option>
-                    <option value="doces">Doces</option>
-                    <option value="bebidas">Bebidas</option>
-                    <option value="sorvetes">Sorvetes</option>
-                </select>
-                <input type="submit" class="button" name="submit" id="submit" value="Cadastrar">
-            </form>
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Novos Produtos</h5>
+                    <button type="button" class="close" id="closeModal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form_cadastro" action="homeadm.php" method="POST">
+                        <input type="text" class="form-control" id="user_nome" autocomplete="off" placeholder="Nome"
+                            name="nome" required>
+                        <br>
+                        <input type="text" class="form-control" id="user_preco" autocomplete="off" placeholder="Preço"
+                            name="preco" required>
+                        <br>
+                        <select id="user_categoria" class="form-control" name="categoria" required>
+                            <option value="" disabled selected>Selecione a categoria</option>
+                            <option value="salgados">Salgados</option>
+                            <option value="doces">Doces</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="sorvetes">Sorvetes</option>
+                        </select>
+                        <br>
+                        <input type="submit" class="btn btn-primary" name="submit" id="submit" value="Cadastrar">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         document.getElementById("openModal").addEventListener("click", function () {
-            document.getElementById("productModal").style.display = "block";
+            $('#productModal').modal('show');
         });
 
         document.getElementById("closeModal").addEventListener("click", function () {
-            document.getElementById("productModal").style.display = "none";
-        });
-
-        window.addEventListener("click", function (event) {
-            var modal = document.getElementById("productModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+            $('#productModal').modal('hide');
         });
     </script>
+
 </body>
 
 </html>

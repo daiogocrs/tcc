@@ -216,10 +216,11 @@ nav .menu-items {
         pointer-events: none;
     }
 
-    nav~.dashboard {
+    nav.dashboard {
         left: 0;
         width: 100%;
     }
+}
 
     /*---HOME---*/
     section {
