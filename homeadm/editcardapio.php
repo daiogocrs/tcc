@@ -78,7 +78,7 @@ if (!empty($_GET['id_cardapio'])) {
                 </div>
                 <br><br>
                 <input type="hidden" name="id_cardapio" value=<?php echo $id_cardapio; ?>>
-                <input type="submit" name="update" id="submit">
+                <input type="submit" name="update" id="submit" value="Atualizar">
             </fieldset>
         </form>
     </div>
