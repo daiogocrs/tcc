@@ -7,7 +7,7 @@
 
     $dbHost = 'localhost';
     $dbUsername = 'root';
-    $dbPassword = '';
+    $dbPassword = 'aluno01';
     $dbName = 'bdcantina';
     
     $conexao = new mysqli($dbHost,$dbUsername,$dbPassword,$dbName);

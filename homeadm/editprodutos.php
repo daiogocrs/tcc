@@ -77,7 +77,7 @@ if (!empty($_GET['id_produtos'])) {
                 </div>
                 <br><br>
                 <input type="hidden" name="id_produtos" value=<?php echo $id_produtos; ?>>
-                <input type="submit" name="update" id="submit">
+                <input type="submit" name="update" id="submit" value="Atualizar">
             </fieldset>
         </form>
     </div>
