@@ -27,11 +27,6 @@ $result = $conexao->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
@@ -47,9 +42,9 @@ $result = $conexao->query($sql);
             <div class="logo-image">
                 <img src="../fotos/cantinalogo.png" alt="">
             </div>
-
             <span class="logo_name">Cantina</span>
         </div>
+
 
         <div class="menu-items">
             <ul class="nav-links">
@@ -69,17 +64,20 @@ $result = $conexao->query($sql);
                     </a>
                 </li>
             </ul>
+
             <ul class="logout-mode">
                 <li><a href="../sair.php">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Sair</span>
-                    </a>
-                </li>
+                    </a></li>
             </ul>
         </div>
     </nav>
 
     <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+        </div>
         <div class="dash-content">
             <div class="overview">
                 <div class="title">
@@ -158,6 +156,7 @@ $result = $conexao->query($sql);
         </div>
     </div>
 
+    <script src="../js/homeadm.js"></script>
     <script>
         const showLocationButtons = document.querySelectorAll('.show-location');
         const locationDataContainer = document.getElementById('locationData');

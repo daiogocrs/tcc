@@ -62,13 +62,8 @@ $result = $conexao->query($sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
     <title>Cantina Federal</title>
@@ -82,6 +77,7 @@ $result = $conexao->query($sql);
             </div>
             <span class="logo_name">Cantina</span>
         </div>
+
 
         <div class="menu-items">
             <ul class="nav-links">
@@ -101,17 +97,20 @@ $result = $conexao->query($sql);
                     </a>
                 </li>
             </ul>
+
             <ul class="logout-mode">
                 <li><a href="../sair.php">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Sair</span>
-                    </a>
-                </li>
+                    </a></li>
             </ul>
         </div>
     </nav>
 
     <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+        </div>
         <div class="dash-content">
             <div class="overview">
                 <a href="#" id="openProductModal" style="text-decoration: none;">
@@ -157,76 +156,79 @@ $result = $conexao->query($sql);
             </div>
         </div>
     </section>
-
-    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="productModalLabel">Novos Produtos</h5>
-                    <button type="button" class="close" id="closeModal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="form_cadastro" action="homeadm.php" method="POST">
-                        <input type="text" class="form-control" id="user_nome" autocomplete="off" placeholder="Nome"
-                            name="nome" required>
-                        <br>
-                        <input type="text" class="form-control" id="user_preco" autocomplete="off" placeholder="Preço"
-                            name="preco" required>
-                        <br>
-                        <select id="user_categoria" class="form-control" name="categoria" required>
-                            <option value="" disabled selected>Selecione a categoria</option>
-                            <option value="salgados">Salgados</option>
-                            <option value="doces">Doces</option>
-                            <option value="bebidas">Bebidas</option>
-                            <option value="sorvetes">Sorvetes</option>
-                        </select>
-                        <br>
-                        <input type="submit" class="btn btn-primary" name="submit" id="submit" value="Cadastrar">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editProductModalLabel">Editar Produto</h5>
-                    <button type="button" class="close" id="closeEditModal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="saveEditprodutos.php" method="POST">
-                        <input type="hidden" name="id_produtos" id="editProductID" value="">
-                        <div class="form-group">
-                            <label for="editProductName">Nome:</label>
-                            <input type="text" class="form-control" id="editProductName" name="nome" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editProductPrice">Preço:</label>
-                            <input type="text" class="form-control" id="editProductPrice" name="preco" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editProductCategory">Categoria:</label>
-                            <select class="form-control" id="editProductCategory" name="categoria" required>
+    <section>
+        <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabel">Novos Produtos</h5>
+                        <button type="button" class="close" id="closeModal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form_cadastro" action="homeadm.php" method="POST">
+                            <input type="text" class="form-control" id="user_nome" autocomplete="off" placeholder="Nome"
+                                name="nome" required>
+                            <br>
+                            <input type="text" class="form-control" id="user_preco" autocomplete="off"
+                                placeholder="Preço" name="preco" required>
+                            <br>
+                            <select id="user_categoria" class="form-control" name="categoria" required>
+                                <option value="" disabled selected>Selecione a categoria</option>
                                 <option value="salgados">Salgados</option>
                                 <option value="doces">Doces</option>
                                 <option value="bebidas">Bebidas</option>
                                 <option value="sorvetes">Sorvetes</option>
                             </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary" name="update">Atualizar</button>
-                    </form>
+                            <br>
+                            <input type="submit" class="btn btn-primary" name="submit" id="submit" value="Cadastrar">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog"
+            aria-labelledby="editProductModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProductModalLabel">Editar Produto</h5>
+                        <button type="button" class="close" id="closeEditModal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="saveEditprodutos.php" method="POST">
+                            <input type="hidden" name="id_produtos" id="editProductID" value="">
+                            <div class="form-group">
+                                <label for="editProductName">Nome:</label>
+                                <input type="text" class="form-control" id="editProductName" name="nome" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editProductPrice">Preço:</label>
+                                <input type="text" class="form-control" id="editProductPrice" name="preco" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editProductCategory">Categoria:</label>
+                                <select class="form-control" id="editProductCategory" name="categoria" required>
+                                    <option value="salgados">Salgados</option>
+                                    <option value="doces">Doces</option>
+                                    <option value="bebidas">Bebidas</option>
+                                    <option value="sorvetes">Sorvetes</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="update">Atualizar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/homeadm.js"></script>
 
     <script>
         document.getElementById("openProductModal").addEventListener("click", function () {
