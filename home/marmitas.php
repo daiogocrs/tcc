@@ -102,8 +102,6 @@ mysqli_close($conexao);
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Cantina Federal</title>
     <style>
-       @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
-
         .marmitas-container {
             display: flex;
             justify-content: center;
@@ -158,7 +156,7 @@ mysqli_close($conexao);
         }
 
         .marmita-pequena {
-            background-image: url('../fotos/marmitapequena.png');
+            background-image: url('../fotos/marmita.png');
         }
 
         .marmita-media {
