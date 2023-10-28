@@ -125,12 +125,12 @@ $result = $conexao->query($sql);
                             echo "<td>" . $cardapio_data['comidas'] . "</td>";
                             echo "<td>" . $cardapio_data['sobremesa'] . "</td>";
                             echo "<td>" . $cardapio_data['dia_semana'] . "</td>";
-                            echo "<td>
-                                <a class='btn btn-sm btn-primary' href='editcardapio.php?id_cardapio=$cardapio_data[id_cardapio]' title='Editar'>
+                            echo "<td> 
+                                <a class='btn btn-sm btn-primary' href='javascript:void(0);' onclick=\"openEditCardapioModal('{$cardapio_data['id_cardapio']}', '{$cardapio_data['comidas']}', '{$cardapio_data['sobremesa']}', '{$cardapio_data['dia_semana']}')\" title='Editar'>
                                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
                                         <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.650l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106.106a.5.5 0 0 1 0 .708l-10-10-.106.106a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0 .708l10-10 .106-.106a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3zM3 13.5a.5.5 0 0 1 .5-.5H4V12a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5V12h.5a.5.5 0 0 1 .5.5V13a.5.5 0 0 1-.5.5H5V14a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V13H3a.5.5 0 0 1-.5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                                     </svg>
-                                </a>
+                                </a>           
                                 <a class='btn btn-sm btn-danger' href='deletecardapio.php?id_cardapio=$cardapio_data[id_cardapio]' title='Deletar'>
                                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
                                         <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
@@ -180,9 +180,59 @@ $result = $conexao->query($sql);
         </div>
     </div>
 
+    <div class="modal fade" id="editCardapioModal" tabindex="-1" role="dialog" aria-labelledby="editCardapioModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCardapioModalLabel">Editar Produto</h5>
+                    <button type="button" class="close" id="closeEditCardapioModal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="saveEditcardapio.php" method="POST">
+                        <input type="hidden" name="id_cardapio" id="editCardapioID" value="">
+                        <div class="form-group">
+                            <label for="editCardapioDay">Dia da semana:</label>
+                            <select class="form-control" id="editCardapioDay" name="dia_semana" required>
+                                <option value="segunda">Segunda-feira</option>
+                                <option value="terça">Terça-feira</option>
+                                <option value="quarta">Quarta-feira</option>
+                                <option value="quinta">Quinta-feira</option>
+                                <option value="sexta">Sexta-feira</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCardapioFood">Comidas:</label>
+                            <input type="text" class="form-control" name="comidas" id="editCardapioFood" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCardapioDessert">Categoria:</label>
+                            <input type="text" class="form-control" name="sobremesa" id="editCardapioDessert" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="update">Atualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.getElementById("openCardapioModal").addEventListener("click", function () {
             $('#cardapioModal').modal('show');
+        });
+
+        function openEditCardapioModal(id, food, dessert, day) {
+            document.getElementById("editCardapioID").value = id;
+            document.getElementById("editCardapioFood").value = food;
+            document.getElementById("editCardapioDessert").value = dessert;
+            document.getElementById("editCardapioDay").value = day;
+            $('#editCardapioModal').modal('show');
+        }
+
+        document.getElementById("closeEditCardapioModal").addEventListener("click", function () {
+            $('#editCardapioModal').modal('hide');
         });
 
         document.getElementById("closeCardapioModal").addEventListener("click", function () {

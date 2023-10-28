@@ -114,7 +114,7 @@ $result = $conexao->query($sql);
     <section class="dashboard">
         <div class="dash-content">
             <div class="overview">
-                <a href="#" id="openModal" style="text-decoration: none;">
+                <a href="#" id="openProductModal" style="text-decoration: none;">
                     <div class="title">
                         <i class="uil uil-plus"></i>
                         <span class="text">Novos Produtos</span>
@@ -138,9 +138,9 @@ $result = $conexao->query($sql);
                             echo "<td>" . $user_data['preco'] . "</td>";
                             echo "<td>" . $user_data['categoria'] . "</td>";
                             echo "<td>
-                                <a class='btn btn-sm btn-primary' href='editprodutos.php?id_produtos=$user_data[id_produtos]' title='Editar'>
+                                <a class='btn btn-sm btn-primary' href='javascript:void(0);' onclick=\"openEditModal('{$user_data['id_produtos']}', '{$user_data['nome']}', '{$user_data['preco']}', '{$user_data['categoria']}')\" title='Editar'>
                                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
-                                        <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.650l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106.106a.5.5 0 0 1 0 .708l-10 10-.106.106a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0 .708l10-10 .106-.106a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3zM3 13.5a.5.5 0 0 1 .5-.5H4V12a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5V12h.5a.5.5 0 0 1 .5.5V13a.5.5 0 0 1-.5.5H5V14a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V13H3a.5.5 0 0 1-.5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
+                                        <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.650l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106.106a.5.5 0 0 1 0 .708l-10-10-.106.106a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0 .708l10-10 .106-.106a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3zM3 13.5a.5.5 0 0 1 .5-.5H4V12a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5V12h.5a.5.5 0 0 1 .5.5V13a.5.5 0 0 1-.5.5H5V14a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V13H3a.5.5 0 0 1-.5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                                     </svg>
                                 </a>
                                 <a class='btn btn-sm btn-danger' href='deleteprodutos.php?id_produtos=$user_data[id_produtos]' title='Deletar'>
@@ -191,9 +191,58 @@ $result = $conexao->query($sql);
         </div>
     </div>
 
+    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">Editar Produto</h5>
+                    <button type="button" class="close" id="closeEditModal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="saveEditprodutos.php" method="POST">
+                        <input type="hidden" name="id_produtos" id="editProductID" value="">
+                        <div class="form-group">
+                            <label for="editProductName">Nome:</label>
+                            <input type="text" class="form-control" id="editProductName" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductPrice">Preço:</label>
+                            <input type="text" class="form-control" id="editProductPrice" name="preco" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductCategory">Categoria:</label>
+                            <select class="form-control" id="editProductCategory" name="categoria" required>
+                                <option value="salgados">Salgados</option>
+                                <option value="doces">Doces</option>
+                                <option value="bebidas">Bebidas</option>
+                                <option value="sorvetes">Sorvetes</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="update">Atualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.getElementById("openModal").addEventListener("click", function () {
+        document.getElementById("openProductModal").addEventListener("click", function () {
             $('#productModal').modal('show');
+        });
+
+        function openEditModal(id, name, price, category) {
+            document.getElementById("editProductID").value = id;
+            document.getElementById("editProductName").value = name;
+            document.getElementById("editProductPrice").value = price;
+            document.getElementById("editProductCategory").value = category;
+            $('#editProductModal').modal('show');
+        }
+
+        document.getElementById("closeEditModal").addEventListener("click", function () {
+            $('#editProductModal').modal('hide');
         });
 
         document.getElementById("closeModal").addEventListener("click", function () {
