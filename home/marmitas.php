@@ -128,12 +128,14 @@ mysqli_close($conexao);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             background-size: cover;
             background-position: center;
-            width: 30%;
+            width: auto;
+            height: auto;
         }
 
         @media (max-width: 768px) {
             .marmita-option {
                 width: 93%;
+                height: 52%;
             }
         }
 
@@ -141,30 +143,16 @@ mysqli_close($conexao);
             background-color: #f0f0f0;
         }
 
-        .marmita-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 10px;
-            color: #fff;
-            text-shadow: 2px 2px 4px #000;
-        }
-
-        .marmita-price {
-            font-size: 16px;
-            color: #fff;
-            text-shadow: 2px 2px 4px #000;
-        }
-
         .marmita-pequena {
-            background-image: url('../fotos/marmita.png');
+            background-image: url('../fotos/marmitapequena.png');
         }
 
         .marmita-media {
-            background-image: url('../fotos/marmita.png');
+            background-image: url('../fotos/marmitamedia.png');
         }
 
         .marmita-grande {
-            background-image: url('../fotos/marmita.png');
+            background-image: url('../fotos/marmitagrande.png');
         }
 
         .marmita-option input[type="radio"] {
@@ -236,24 +224,12 @@ mysqli_close($conexao);
                         <div class="marmitas-options">
                             <label class="marmita-option marmita-pequena">
                                 <input type="radio" name="tamanho" value="pequena" id="tamanho-pequena">
-                                <div class="marmita-content">
-                                    <span class="marmita-title">Marmita Pequena</span>
-                                    <span class="marmita-price">R$15,00</span>
-                                </div>
                             </label>
                             <label class="marmita-option marmita-media">
                                 <input type="radio" name="tamanho" value="media" id="tamanho-media">
-                                <div class="marmita-content">
-                                    <span class="marmita-title">Marmita Média</span>
-                                    <span class="marmita-price">R$18,00</span>
-                                </div>
                             </label>
                             <label class="marmita-option marmita-grande">
                                 <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
-                                <div class="marmita-content">
-                                    <span class="marmita-title">Marmita Grande</span>
-                                    <span class="marmita-price">R$22,00</span>
-                                </div>
                             </label>
                         </div>
                     </div>
