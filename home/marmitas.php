@@ -95,11 +95,6 @@ mysqli_close($conexao);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -107,175 +102,41 @@ mysqli_close($conexao);
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Cantina Federal</title>
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
+       @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
 
-        div .form-wrap * {
-            margin: 0;
-            padding: 0;
+        .marmitas-container {
+            display: flex;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .form-wrap a {
-            color: #666;
-            text-decoration: none;
-        }
-
-        .form-wrap a:hover {
-            color: #4FDA8C;
-        }
-
-        input {
-            font: 16px/26px "Raleway", sans-serif;
-        }
-
-        .form-wrap {
-            background-color: #f1f2f2;
-            color: #666;
-            font: 16px/26px "Raleway", sans-serif;
-        }
-
-        .form-wrap {
-            -moz-box-shadow: 0px 1px 8px #BEBEBE;
-            -webkit-box-shadow: 0px 1px 8px #BEBEBE;
-            background-color: #fff;
-            box-shadow: 0px 1px 8px #BEBEBE;
-            margin: 8em auto;
-            width: 95%;
-        }
-
-        .form-wrap .tabs {
-            overflow: hidden;
-        }
-
-        .form-wrap .tabs h3 a {
-            background-color: #e6e7e8;
-            color: #666;
-            display: block;
-            font-weight: 400;
-            padding: 0.5em 0;
-            text-align: center;
-        }
-
-        .form-wrap .tabs-content {
-            padding: 1.5em;
-        }
-
-        .form-wrap .tabs-content div[id$="tab-content"] {
-            display: none;
-        }
-
-        .form-wrap .tabs-content .active {
-            display: block !important;
-        }
-
-        .form-wrap form .input#user_tamanho {
-            -moz-box-sizing: border-box;
-            border: 1px solid #CFCFCF;
-            box-sizing: border-box;
-            color: inherit;
-            display: inline-block;
-            font-family: inherit;
-            width: 100%;
-        }
-
-        .form-wrap form .input {
-            margin: 0 0 .8em 0;
-            outline: 0;
-            padding-right: 2em;
-            padding: .8em 0 10px .8em;
-        }
-
-        .form-wrap form .button {
-            background-color: #801300;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            padding: .8em 0 10px .8em;
-            text-transform: uppercase;
-            width: 100%;
-        }
-
-        .form-wrap form .button:hover {
-            background-color: #4FDA8C;
-        }
-
-        .form-wrap form label[for] {
-            cursor: pointer;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .form-wrap form label[for]:before {
-            border: 1px solid #CFCFCF;
-            content: '';
-            height: 17px;
-            left: -14px;
-            position: absolute;
-            top: 0px;
-            width: 17px;
-        }
-
-        .form-wrap form label[for]:after {
-            -moz-transform: rotate(-45deg);
-            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-            -ms-transform: rotate(-45deg);
-            -o-transform: rotate(-45deg);
-            -webkit-transform: rotate(-45deg);
-            background-color: transparent;
-            border-right: none;
-            border-top: none;
-            border: 3px solid #28A55F;
-            content: '';
-            filter: alpha(opacity=0);
-            height: 5px;
-            left: -10px;
-            opacity: 0;
-            position: absolute;
-            top: 4px;
-            transform: rotate(-45deg);
-            width: 9px;
-        }
-
-        .form-wrap .help-text {
-            margin-top: .6em;
-        }
-
-        .form-wrap .help-text p {
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .form-wrap nav ul {
-            list-style-type: none;
-            margin: 0 2% auto 0;
-            max-width: 100%;
-            padding-left: 0;
-            text-align: right;
-        }
-
-        .form-wrap nav ul li {
-            display: inline-block;
-            line-height: 60px;
-            margin-left: 10px;
-        }
-
-        .form-wrap nav ul li a {
-            color: black;
-            font-size: large;
-            text-decoration: none;
+        .marmita-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .marmita-option {
             text-align: center;
             border: 1px solid #ccc;
-            padding: 20px;
+            padding: 70px;
             border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s, box-shadow 0.3s;
             display: inline-block;
-            width: 30%;
             margin: 10px;
             box-sizing: border-box;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-size: cover;
+            background-position: center;
+            width: 30%;
+        }
+
+        @media (max-width: 768px) {
+            .marmita-option {
+                width: 93%;
+            }
         }
 
         .marmita-option:hover {
@@ -283,13 +144,29 @@ mysqli_close($conexao);
         }
 
         .marmita-title {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
+            margin-top: 10px;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
         }
 
         .marmita-price {
             font-size: 16px;
-            color: #801300;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .marmita-pequena {
+            background-image: url('../fotos/marmitapequena.png');
+        }
+
+        .marmita-media {
+            background-image: url('../fotos/marmita.png');
+        }
+
+        .marmita-grande {
+            background-image: url('../fotos/marmita.png');
         }
 
         .marmita-option input[type="radio"] {
@@ -357,28 +234,30 @@ mysqli_close($conexao);
         <div class="tabs-content">
             <div id="signup-tab-content" class="active">
                 <form action="marmitas.php" method="POST">
-                    <div class="marmitas-options">
-                        <label class="marmita-option">
-                            <input type="radio" name="tamanho" value="pequena" id="tamanho-pequena">
-                            <div class="marmita-content">
-                                <span class="marmita-title">Marmita Pequena</span>
-                                <span class="marmita-price">R$15</span>
-                            </div>
-                        </label>
-                        <label class="marmita-option">
-                            <input type="radio" name="tamanho" value="media" id="tamanho-media">
-                            <div class="marmita-content">
-                                <span class="marmita-title">Marmita Média</span>
-                                <span class="marmita-price">R$18</span>
-                            </div>
-                        </label>
-                        <label class="marmita-option">
-                            <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
-                            <div class="marmita-content">
-                                <span class="marmita-title">Marmita Grande</span>
-                                <span class="marmita-price">R$22</span>
-                            </div>
-                        </label>
+                    <div class="marmitas-container">
+                        <div class="marmitas-options">
+                            <label class="marmita-option marmita-pequena">
+                                <input type="radio" name="tamanho" value="pequena" id="tamanho-pequena">
+                                <div class="marmita-content">
+                                    <span class="marmita-title">Marmita Pequena</span>
+                                    <span class="marmita-price">R$15,00</span>
+                                </div>
+                            </label>
+                            <label class="marmita-option marmita-media">
+                                <input type="radio" name="tamanho" value="media" id="tamanho-media">
+                                <div class="marmita-content">
+                                    <span class="marmita-title">Marmita Média</span>
+                                    <span class="marmita-price">R$18,00</span>
+                                </div>
+                            </label>
+                            <label class="marmita-option marmita-grande">
+                                <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
+                                <div class="marmita-content">
+                                    <span class="marmita-title">Marmita Grande</span>
+                                    <span class="marmita-price">R$22,00</span>
+                                </div>
+                            </label>
+                        </div>
                     </div>
                     <div class="comidas-options" style="display: none;">
                         <label>Comidas:</label><br>
