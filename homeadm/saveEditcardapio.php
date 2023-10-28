@@ -11,7 +11,6 @@
         SET comidas='$comidas',sobremesa='$sobremesa',dia_semana='$dia_semana'
         WHERE id_cardapio=$id_cardapio";
         $result = $conexao->query($sqlInsert);
-        print_r($result);
     }
     header('Location: cardapioadm.php');
 

@@ -425,6 +425,10 @@ header .dropdown-item:focus {
 
 /*---HEADER---*/
 /*---HOME---*/
+body {
+	overflow-x: hidden;
+}
+
 section {
 	overflow-x: hidden;
 	font-family: 'Lato', sans-serif;

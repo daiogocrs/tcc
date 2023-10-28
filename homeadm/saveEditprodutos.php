@@ -11,7 +11,6 @@
         SET nome='$nome',preco='$preco',categoria='$categoria'
         WHERE id_produtos=$id_produtos";
         $result = $conexao->query($sqlInsert);
-        print_r($result);
     }
     header('Location: homeadm.php');
 
