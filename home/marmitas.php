@@ -101,6 +101,353 @@ mysqli_close($conexao);
     <link rel="stylesheet" type="text/css" href="../css/marmitas.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <title>Cantina Federal</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
+
+        div .form-wrap * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-wrap a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .form-wrap a:hover {
+            color: #4FDA8C;
+        }
+
+        input {
+            font: 16px/26px "Raleway", sans-serif;
+        }
+
+        .form-wrap {
+            background-color: #f1f2f2;
+            color: #666;
+            font: 16px/26px "Raleway", sans-serif;
+        }
+
+        .form-wrap {
+            -moz-box-shadow: 0px 1px 8px #BEBEBE;
+            -webkit-box-shadow: 0px 1px 8px #BEBEBE;
+            background-color: #fff;
+            box-shadow: 0px 1px 8px #BEBEBE;
+            margin: 8em auto;
+            width: 50%;
+        }
+
+        .form-wrap .tabs {
+            overflow: hidden;
+        }
+
+        .form-wrap .tabs h3 a {
+            background-color: #e6e7e8;
+            color: #666;
+            display: block;
+            font-weight: 400;
+            padding: 0.5em 0;
+            text-align: center;
+        }
+
+        .form-wrap .tabs-content {
+            padding: 1.5em;
+        }
+
+        .form-wrap .tabs-content .active {
+            display: block !important;
+        }
+
+        .form-wrap form .input#user_tamanho {
+            -moz-box-sizing: border-box;
+            border: 1px solid #CFCFCF;
+            box-sizing: border-box;
+            color: inherit;
+            display: inline-block;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .form-wrap form .input {
+            margin: 0 0 .8em 0;
+            outline: 0;
+            padding-right: 2em;
+            padding: .8em 0 10px .8em;
+        }
+
+        .form-wrap form .button {
+            background-color: #801300;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: .8em 0 10px .8em;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .form-wrap form .button:hover {
+            background-color: #4FDA8C;
+        }
+
+        .form-wrap form label[for] {
+            cursor: pointer;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .form-wrap form label[for]:before {
+            border: 1px solid #CFCFCF;
+            content: '';
+            height: 17px;
+            left: -14px;
+            position: absolute;
+            top: 0px;
+            width: 17px;
+        }
+
+        .form-wrap form label[for]:after {
+            -moz-transform: rotate(-45deg);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            background-color: transparent;
+            border-right: none;
+            border-top: none;
+            border: 3px solid #28A55F;
+            content: '';
+            filter: alpha(opacity=0);
+            height: 5px;
+            left: -10px;
+            opacity: 0;
+            position: absolute;
+            top: 4px;
+            transform: rotate(-45deg);
+            width: 9px;
+        }
+
+        .form-wrap .help-text {
+            margin-top: .6em;
+        }
+
+        .form-wrap .help-text p {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .form-wrap nav ul {
+            list-style-type: none;
+            margin: 0 2% auto 0;
+            max-width: 100%;
+            padding-left: 0;
+            text-align: right;
+        }
+
+        .form-wrap nav ul li {
+            display: inline-block;
+            line-height: 60px;
+            margin-left: 10px;
+        }
+
+        .form-wrap nav ul li a {
+            color: black;
+            font-size: large;
+            text-decoration: none;
+        }
+
+        .marmitas-container {
+            display: flex;
+            justify-content: center;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .marmita-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .marmita-option {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 70px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            margin: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-size: cover;
+            background-position: center;
+            width: auto;
+            height: auto;
+        }
+
+        .marmita-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .marmita-pequena {
+            background-image: url('../fotos/marmitapequena.png');
+        }
+
+        .marmita-media {
+            background-image: url('../fotos/marmitamedia.png');
+        }
+
+        .marmita-grande {
+            background-image: url('../fotos/marmitagrande.png');
+        }
+
+        .marmita-option label {
+            display: block;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .marmita-option input[type="radio"] {
+            display: none;
+        }
+
+        .marmita-option input[type="radio"]:checked+label {
+            background-color: #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .form-wrap {
+                width: 95%;
+                height: auto;
+            }
+
+            .marmita-option {
+                width: 93%;
+                height: 60%;
+            }
+        }
+
+        .comidas-options {
+            display: none;
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .comidas-content {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .input#retirar_algo {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .label-bebidas {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .bebidas-options {
+            margin-top: 10px;
+        }
+
+        .bebidas-options label {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .button {
+            background-color: #801300;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            text-transform: uppercase;
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #4FDA8C;
+        }
+
+        #btn-voltar-comidas,
+        #btn-voltar-localizacao {
+            background-color: #ccc;
+        }
+
+        #btn-voltar-comidas:hover,
+        #btn-voltar-localizacao:hover {
+            background-color: #999;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .help-text {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .localizacao-form {
+            display: none;
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .localizacao-form label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .localizacao-form .input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .localizacao-form .button {
+            background-color: #801300;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            text-transform: uppercase;
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .localizacao-form .button:hover {
+            background-color: #4FDA8C;
+        }
+    </style>
 </head>
 
 <body>
@@ -149,7 +496,7 @@ mysqli_close($conexao);
         <div class="tabs-content">
             <div id="signup-tab-content" class="active">
                 <form action="marmitas.php" method="POST">
-                    <div class="marmitas-container">
+                    <div class="marmitas-container custom-style">
                         <div class="marmitas-options">
                             <label class="marmita-option marmita-pequena">
                                 <input type="radio" name="tamanho" value="pequena" id="tamanho-pequena">
@@ -159,21 +506,58 @@ mysqli_close($conexao);
                             </label>
                             <label class="marmita-option marmita-grande">
                                 <input type="radio" name="tamanho" value="grande" id="tamanho-grande">
-                            </label>
                         </div>
                     </div>
                     <div class="comidas-options" style="display: none;">
-                        <label>Comidas:</label><br>
-                        <?php echo $comidas; ?>
+                        <label>Cardápio do dia:</label><br>
+                        <div class="comidas-content">
+                            <?php echo $comidas; ?>
+                        </div>
                         <label>Deseja retirar algo:</label><br>
                         <input type="text" class="input" id="retirar_algo" name="retirar_algo"
                             placeholder="Fale o que deseja retirar aqui" required><br>
                         <label>Sobremesa:</label><br>
-                        <?php echo $sobremesa; ?><br>
-                        <label>Bebidas:</label><br>
-                        <input type="checkbox" class="input" name="bebidas[]" value="pepsi"> Pepsi <br>
-                        <input type="checkbox" class="input" name="bebidas[]" value="cocacola"> Coca-cola <br>
-                        <input type="checkbox" class="input" name="bebidas[]" value="guarana"> Guaraná <br>
+                        <div class="comidas-content">
+                            <?php echo $sobremesa; ?><br>
+                        </div>
+                        <label>Bebidas:</label>
+                        <div class="bebidas-content">
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="pepsi-250"> Pepsi 250ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="pepsi-600"> Pepsi 600ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="pepsi-2L"> Pepsi 2L
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cocacola-250"> Coca-cola
+                                250ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cocacola-600"> Coca-cola
+                                600ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cocacola-2L"> Coca-cola 2L
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="guarana-250"> Guaraná 250ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class "input" name="bebidas[]" value="guarana-600"> Guaraná 600ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="guarana-2L"> Guaraná 2L
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cerveja-350"> Cerveja 350ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cerveja-600"> Cerveja 600ml
+                            </label>
+                        </div>
                         <button id="btn-voltar-comidas" class="button">Voltar</button>
                         <button id="btn-proximo-comidas" class="button">Próximo</button>
                     </div>
