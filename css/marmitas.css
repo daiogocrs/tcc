@@ -428,7 +428,7 @@
  /*---HEADER---*/
  /*---PEDIDOS---*/
 
- @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
 
         div .form-wrap * {
             margin: 0;
@@ -452,15 +452,12 @@
             background-color: #f1f2f2;
             color: #666;
             font: 16px/26px "Raleway", sans-serif;
-        }
-
-        .form-wrap {
             -moz-box-shadow: 0px 1px 8px #BEBEBE;
             -webkit-box-shadow: 0px 1px 8px #BEBEBE;
             background-color: #fff;
             box-shadow: 0px 1px 8px #BEBEBE;
             margin: 8em auto;
-            width: 50%;
+            width: 80%;
         }
 
         .form-wrap .tabs {
@@ -508,7 +505,8 @@
             cursor: pointer;
             padding: .8em 0 10px .8em;
             text-transform: uppercase;
-            width: 100%;
+            width: 95%;
+            height: auto;
         }
 
         .form-wrap form .button:hover {
@@ -529,27 +527,6 @@
             position: absolute;
             top: 0px;
             width: 17px;
-        }
-
-        .form-wrap form label[for]:after {
-            -moz-transform: rotate(-45deg);
-            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-            -ms-transform: rotate(-45deg);
-            -o-transform: rotate(-45deg);
-            -webkit-transform: rotate(-45deg);
-            background-color: transparent;
-            border-right: none;
-            border-top: none;
-            border: 3px solid #28A55F;
-            content: '';
-            filter: alpha(opacity=0);
-            height: 5px;
-            left: -10px;
-            opacity: 0;
-            position: absolute;
-            top: 4px;
-            transform: rotate(-45deg);
-            width: 9px;
         }
 
         .form-wrap .help-text {
@@ -645,14 +622,12 @@
         }
 
         @media (max-width: 768px) {
-            .form-wrap {
-                width: 95%;
-                height: auto;
-            }
-
             .marmita-option {
                 width: 93%;
                 height: 60%;
+            }
+            .form-wrap {
+                width: 95%;
             }
         }
 

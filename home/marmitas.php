@@ -99,7 +99,7 @@ mysqli_close($conexao);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/marmitas.css">  
+    <link rel="stylesheet" type="text/css" href="../css/marmitas.css">
     <title>Cantina Federal</title>
 </head>
 
@@ -166,9 +166,9 @@ mysqli_close($conexao);
                         <div class="comidas-content">
                             <?php echo $comidas; ?>
                         </div>
-                        <label>Deseja retirar algo:</label><br>
+                        <label>Observações:</label><br>
                         <input type="text" class="input" id="retirar_algo" name="retirar_algo"
-                            placeholder="Fale o que deseja retirar aqui" required><br>
+                            placeholder="Retirar saladas, etc." required><br>
                         <label>Sobremesa:</label><br>
                         <div class="comidas-content">
                             <?php echo $sobremesa; ?><br>

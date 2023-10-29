@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var swiper = new Swiper('.swiper-container', {
         slidesPerView: 'auto',
         spaceBetween: 2,
@@ -9,7 +9,7 @@ $(document).ready(function() {
         },
     });
 
-    $('.category-buttons .nav-link').on('click', function() {
+    $('.category-buttons .nav-link').on('click', function () {
         $('.category-buttons .nav-link').removeClass('active');
         $(this).addClass('active');
 
