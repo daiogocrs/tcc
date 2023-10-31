@@ -26,6 +26,12 @@ CREATE TABLE cardapio (
     dia_semana VARCHAR(10)
 );
 
+CREATE TABLE precos_marmitas (
+    id_marmita INT AUTO_INCREMENT PRIMARY KEY,
+    tamanho VARCHAR(50) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL
+);
+
 CREATE TABLE pedidos (
     id_pedidos INT AUTO_INCREMENT PRIMARY KEY,
     tamanho VARCHAR(255) NOT NULL,

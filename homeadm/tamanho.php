@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include('../config.php');
 
 if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true) and (!isset($_SESSION['nivel_acesso']) == 'adm')) {
@@ -17,6 +18,8 @@ if ($result->num_rows > 0) {
     $logado = $row['nome'];
 }
 
+$tamanhoExistsMessage = '';
+
 if (isset($_POST['submit'])) {
     function limparDados($conexao, $dados)
     {
@@ -25,26 +28,25 @@ if (isset($_POST['submit'])) {
         return $dados;
     }
 
-    $comidas = limparDados($conexao, $_POST['comidas']);
-    $sobremesa = limparDados($conexao, $_POST['sobremesa']);
-    $dia_semana = limparDados($conexao, $_POST['dia_semana']);
+    $tamanho = limparDados($conexao, $_POST['marmita_tamanho']);
+    $preco = limparDados($conexao, $_POST['preco']);
 
-    $existingCardapio = mysqli_query($conexao, "SELECT id_cardapio FROM cardapio WHERE dia_semana = '$dia_semana'");
-    if (mysqli_num_rows($existingCardapio) > 0) {
-        $mensagemCadastro = 'Já existe um cardápio cadastrado para o dia da semana selecionado.';
+    $verificar_sql = "SELECT tamanho FROM precos_marmitas WHERE tamanho = '$tamanho'";
+    $result_verificar = $conexao->query($verificar_sql);
+
+    if ($result_verificar->num_rows > 0) {
+        $tamanhoExistsMessage = 'Tamanho já existe. Por favor, escolha um tamanho diferente.';
     } else {
-        $result = mysqli_query($conexao, "INSERT INTO cardapio(comidas, sobremesa, dia_semana) 
-            VALUES ('$comidas', '$sobremesa', '$dia_semana')");
-
-        if ($result) {
-            $mensagemCadastro = 'Cardápio cadastrado!';
+        $inserir_sql = "INSERT INTO precos_marmitas (tamanho, preco) VALUES ('$tamanho', '$preco')";
+        if ($conexao->query($inserir_sql) === TRUE) {
+            header('Location: tamanho.php');
         } else {
-            $mensagemCadastro = 'Erro ao cadastrar o cardápio.';
+            echo "Erro: " . $conexao->error;
         }
     }
 }
 
-$sql = "SELECT id_cardapio, comidas, sobremesa, dia_semana FROM cardapio";
+$sql = "SELECT id_marmita, tamanho, preco FROM precos_marmitas";
 $result = $conexao->query($sql);
 ?>
 
@@ -55,11 +57,11 @@ $result = $conexao->query($sql);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="Website Icon" type="png" href="../fotos/cantinalogo.png">
+    <link rel="icon" type="image/png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
+    <script src="../js/bibliotecas.js"></script>
     <title>Cantina Federal</title>
 </head>
 
@@ -115,39 +117,37 @@ $result = $conexao->query($sql);
         </div>
         <div class="dash-content">
             <div class="overview">
-                <a href="#" id="openCardapioModal" style="text-decoration: none;">
+                <a href="#" id="openMarmitaModal" style="text-decoration: none;">
                     <div class="title">
                         <i class="uil uil-plus"></i>
-                        <span class="text">Novo Cardápio</span>
+                        <span class="text">Novo Preço</span>
                     </div>
                 </a>
-                <h2>Cardápio Disponível</h2>
+                <h2>Marmitas</h2>
                 <div class="table-container">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Comidas</th>
-                                <th>Sobremesa</th>
-                                <th>Dia da Semana</th>
+                                <th>Tamanho</th>
+                                <th>Preço</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            while ($cardapio_data = mysqli_fetch_assoc($result)) {
+                            while ($marmita_data = mysqli_fetch_assoc($result)) {
                                 echo "<tr>";
-                                echo "<td>" . $cardapio_data['comidas'] . "</td>";
-                                echo "<td>" . $cardapio_data['sobremesa'] . "</td>";
-                                echo "<td>" . $cardapio_data['dia_semana'] . "</td>";
+                                echo "<td>" . $marmita_data['tamanho'] . "</td>";
+                                echo "<td>" . $marmita_data['preco'] . "</td>";
                                 echo "<td> 
-                                <a class='btn btn-sm btn-primary' href='javascript:void(0);' onclick=\"openEditCardapioModal('{$cardapio_data['id_cardapio']}', '{$cardapio_data['comidas']}', '{$cardapio_data['sobremesa']}', '{$cardapio_data['dia_semana']}')\" title='Editar'>
+                                <a class='btn btn-sm btn-primary' href='javascript:void(0);' onclick=\"openEditMarmitaModal('{$marmita_data['id_marmita']}', '{$marmita_data['tamanho']}', '{$marmita_data['preco']}')\" title='Editar'>
                                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
                                         <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.650l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106.106a.5.5 0 0 1 0 .708l-10-10-.106.106a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0 .708l10-10 .106-.106a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3zM3 13.5a.5.5 0 0 1 .5-.5H4V12a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5V12h.5a.5.5 0 0 1 .5.5V13a.5.5 0 0 1-.5.5H5V14a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V13H3a.5.5 0 0 1-.5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                                     </svg>
                                 </a>           
-                                <a class='btn btn-sm btn-danger' href='deletecardapio.php?id_cardapio=$cardapio_data[id_cardapio]' title='Deletar'>
+                                <a class='btn btn-sm btn-danger' href='deletemarmita.php?id_marmita={$marmita_data['id_marmita']}' title='Deletar'>
                                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
-                                        <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
+                                        <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm8.761 4.175-.106.106-1.528 3.821 3.821-1.528.106.106a.5.5 0 0 1 0 .708l-10-10-.106.106a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0 .708l10-10 .106-.106a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3zM3 13.5a.5.5 0 0 1 .5-.5H4V12a.5.5 0 0 1 .5-.5H5a.5.5 0 0 1 .5.5V12h.5a.5.5 0 0 1 .5.5V13a.5.5 0 0 1-.5.5H5V14a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V13H3a.5.5 0 0 1-.5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                                     </svg>
                                 </a>
                             </td>";
@@ -161,77 +161,65 @@ $result = $conexao->query($sql);
         </div>
     </section>
 
-    <div class="modal fade custom-modal" id="cardapioModal" tabindex="-1" role="dialog"
-        aria-labelledby="cardapioModalLabel" aria-hidden="true">
+    <div class="modal fade custom-modal" id="marmitaModal" tabindex="-1" role="dialog"
+        aria-labelledby="marmitaModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cardapioModalLabel">Novo Cardápio</h5>
-                    <button type="button" class="close" id="closeCardapioModal" aria-label="Fechar">
+                    <h5 class="modal-title" id="marmitaModalLabel">Novo Cardápio</h5>
+                    <button type="button" class="close" id="closeMarmitaModal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form_cadastro" action="cardapioadm.php" method="POST">
-                        <select class="form-control" id="dia_semana" name="dia_semana" required>
-                            <option value="" disabled selected>Selecione o dia da semana</option>
-                            <option value="segunda">Segunda-feira</option>
-                            <option value="terça">Terça-feira</option>
-                            <option value="quarta">Quarta-feira</option>
-                            <option value="quinta">Quinta-feira</option>
-                            <option value="sexta">Sexta-feira</option>
+                    <form class="form_cadastro" action="tamanho.php" method="POST">
+                        <select class="form-control" id="marmita_tamanho" name="marmita_tamanho" required>
+                            <option value="pequena">Pequena</option>
+                            <option value="media">Média</option>
+                            <option value="grande">Grande</option>
                         </select>
                         <br>
-                        <input class="form-control" id="cardapio_comidas" name="comidas" placeholder="Comidas" required>
+                        <input class="form-control" id="marmita_preco" name="preco" placeholder="Preço" required>
                         <br>
-                        <input type="text" class="form-control" id="cardapio_sobremesa" name="sobremesa"
-                            placeholder="Sobremesa">
-                        <br>
-                        <input type="submit" class="btn btn-primary" name="submit" id="submitCardapio"
-                            value="Cadastrar Cardápio">
                         <?php
-                        if (isset($mensagemCadastro) && !empty($mensagemCadastro)) {
-                            if (strpos($mensagemCadastro, 'Já existe um cardápio cadastrado') !== false) {
-                                echo '<p style="color: red; font-weight: bold;">' . $mensagemCadastro . '</p>';
+                        if (isset($tamanhoExistsMessage) && !empty($tamanhoExistsMessage)) {
+                            if (strpos($tamanhoExistsMessage, 'Tamanho já existe. Por favor, escolha um tamanho diferente.') !== false) {
+                                echo '<p style="color: red; font-weight: bold;">' . $tamanhoExistsMessage . '</p>';
                             }
                         }
                         ?>
+                        <input type="submit" class="btn btn-primary" name="submit" id="submitMarmita"
+                            value="Cadastrar Marmita">
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade custom-modal" id="editCardapioModal" tabindex="-1" role="dialog"
-        aria-labelledby="editCardapioModalLabel" aria-hidden="true">
+    <div class="modal fade custom-modal" id="editMarmitaModal" tabindex="-1" role="dialog"
+        aria-labelledby="editMarmitaModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editCardapioModalLabel">Editar Produto</h5>
-                    <button type="button" class="close" id="closeEditCardapioModal" aria-label="Fechar">
+                    <h5 class="modal-title" id="editMarmitaModalLabel">Editar Marmita</h5>
+                    <button type="button" class="close" id="closeEditMarmitaModal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="saveEditcardapio.php" method="POST">
-                        <input type="hidden" name="id_cardapio" id="editCardapioID" value="">
+                    <form action="saveEditmarmita.php" method="POST">
+                        <input type="hidden" name="id_marmita" id="editMarmitaID" value="">
                         <div class="form-group">
-                            <label for="editCardapioDay">Dia da semana:</label>
-                            <select class="form-control" id="editCardapioDay" name="dia_semana" required>
-                                <option value="segunda">Segunda-feira</option>
-                                <option value="terça">Terça-feira</option>
-                                <option value="quarta">Quarta-feira</option>
-                                <option value="quinta">Quinta-feira</option>
-                                <option value="sexta">Sexta-feira</option>
+                            <label for="editMarmitaTamanho">Selecione o tamanho:</label>
+                            <select class="form-control" id="editMarmitaTamanho" name="tamanho" required>
+                                <option value="pequena">Pequena</option>
+                                <option value="media">Média</option>
+                                <option value="grande">Grande</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="editCardapioFood">Comidas:</label>
-                            <input type="text" class="form-control" name="comidas" id="editCardapioFood" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="editCardapioDessert">Categoria:</label>
-                            <input type="text" class="form-control" name="sobremesa" id="editCardapioDessert" required>
+                            <label for="editMarmitaPreco">Preço:</label>
+                            <input type="text" class="form-control" name="preco" id="editMarmitaPreco" required>
                         </div>
                         <button type="submit" class="btn btn-primary" name="update">Atualizar</button>
                     </form>
@@ -242,24 +230,23 @@ $result = $conexao->query($sql);
 
     <script src="../js/homeadm.js"></script>
     <script>
-        document.getElementById("openCardapioModal").addEventListener("click", function () {
-            $('#cardapioModal').modal('show');
+        document.getElementById("openMarmitaModal").addEventListener("click", function () {
+            $('#marmitaModal').modal('show');
         });
 
-        function openEditCardapioModal(id, food, dessert, day) {
-            document.getElementById("editCardapioID").value = id;
-            document.getElementById("editCardapioFood").value = food;
-            document.getElementById("editCardapioDessert").value = dessert;
-            document.getElementById("editCardapioDay").value = day;
-            $('#editCardapioModal').modal('show');
+        function openEditMarmitaModal(id, tamanho, preco) {
+            document.getElementById("editMarmitaID").value = id;
+            document.getElementById("editMarmitaTamanho").value = tamanho;
+            document.getElementById("editMarmitaPreco").value = preco;
+            $('#editMarmitaModal').modal('show');
         }
 
-        document.getElementById("closeEditCardapioModal").addEventListener("click", function () {
-            $('#editCardapioModal').modal('hide');
+        document.getElementById("closeEditMarmitaModal").addEventListener("click", function () {
+            $('#editMarmitaModal').modal('hide');
         });
 
-        document.getElementById("closeCardapioModal").addEventListener("click", function () {
-            $('#cardapioModal').modal('hide');
+        document.getElementById("closeMarmitaModal").addEventListener("click", function () {
+            $('#marmitaModal').modal('hide');
         });
     </script>
 </body>

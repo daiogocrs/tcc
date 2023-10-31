@@ -34,39 +34,47 @@ $result = $conexao->query($sql);
 </head>
 
 <body>
-    <nav>
+<nav>
         <div class="logo-name">
             <div class="logo-image">
                 <img src="../fotos/cantinalogo.png" alt="">
             </div>
             <span class="logo_name">Cantina</span>
         </div>
-
-
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="homeadm.php">
+                <li>
+                    <a href="homeadm.php">
                         <i class="uil uil-shopping-bag"></i>
                         <span class="link-name">Produtos</span>
                     </a>
                 </li>
-                <li><a href="marmitasadm.php">
+                <li>
+                    <a href="marmitasadm.php">
                         <i class="uil uil-truck"></i>
                         <span class="link-name">Delivery</span>
                     </a>
                 </li>
-                <li><a href="cardapioadm.php">
+                <li>
+                    <a href="cardapioadm.php">
                         <i class="uil uil-book"></i>
                         <span class="link-name">Cardápio</span>
                     </a>
                 </li>
+                <li>
+                    <a href="tamanho.php">
+                        <i class="uil uil-dollar-alt"></i>
+                        <span class="link-name">Marmitas</span>
+                    </a>
+                </li>
             </ul>
-
             <ul class="logout-mode">
-                <li><a href="../sair.php">
+                <li>
+                    <a href="../sair.php">
                         <i class="uil uil-signout"></i>
                         <span class="link-name">Sair</span>
-                    </a></li>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
