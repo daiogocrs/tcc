@@ -278,7 +278,7 @@
         .dash-content .title {
             display: flex;
             align-items: center;
-            margin: 60px 0 30px 0;
+            margin-bottom: 30px;
         }
 
         .dash-content .title i {

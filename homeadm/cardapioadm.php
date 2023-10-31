@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../config.php');
+
 if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true) and (!isset($_SESSION['nivel_acesso']) == 'adm')) {
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
@@ -28,13 +29,18 @@ if (isset($_POST['submit'])) {
     $sobremesa = limparDados($conexao, $_POST['sobremesa']);
     $dia_semana = limparDados($conexao, $_POST['dia_semana']);
 
-    $result = mysqli_query($conexao, "INSERT INTO cardapio(comidas, sobremesa, dia_semana) 
-        VALUES ('$comidas', '$sobremesa', '$dia_semana')");
-
-    if ($result) {
-        $mensagemCadastro = 'Cardápio cadastrado!';
+    $existingCardapio = mysqli_query($conexao, "SELECT id_cardapio FROM cardapio WHERE dia_semana = '$dia_semana'");
+    if (mysqli_num_rows($existingCardapio) > 0) {
+        $mensagemCadastro = 'Já existe um cardápio cadastrado para o dia da semana selecionado.';
     } else {
-        $mensagemCadastro = 'Erro ao cadastrar o cardápio.';
+        $result = mysqli_query($conexao, "INSERT INTO cardapio(comidas, sobremesa, dia_semana) 
+            VALUES ('$comidas', '$sobremesa', '$dia_semana')");
+
+        if ($result) {
+            $mensagemCadastro = 'Cardápio cadastrado!';
+        } else {
+            $mensagemCadastro = 'Erro ao cadastrar o cardápio.';
+        }
     }
 }
 
@@ -54,7 +60,7 @@ $result = $conexao->query($sql);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
-    <title>Cantina Federal</title>       
+    <title>Cantina Federal</title>
 </head>
 
 <body>
@@ -175,6 +181,13 @@ $result = $conexao->query($sql);
                         <br>
                         <input type="submit" class="btn btn-primary" name="submit" id="submitCardapio"
                             value="Cadastrar Cardápio">
+                        <?php
+                        if (isset($mensagemCadastro) && !empty($mensagemCadastro)) {
+                            if (strpos($mensagemCadastro, 'Já existe um cardápio cadastrado') !== false) {
+                                echo '<p style="color: red; font-weight: bold;">' . $mensagemCadastro . '</p>';
+                            }
+                        }
+                        ?>
                     </form>
                 </div>
             </div>
