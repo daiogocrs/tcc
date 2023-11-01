@@ -34,7 +34,7 @@ $result = $conexao->query($sql);
 </head>
 
 <body>
-<nav>
+    <nav>
         <div class="logo-name">
             <div class="logo-image">
                 <img src="../fotos/cantinalogo.png" alt="">
@@ -95,9 +95,7 @@ $result = $conexao->query($sql);
                         <thead>
                             <tr>
                                 <th scope="col">Data e Hora</th>
-                                <th scope="col">Tamanho</th>
-                                <th scope="col">Bebidas</th>
-                                <th scope="col">Retirar Algo</th>
+                                <th scope="col">Pedido</th>
                                 <th scope="col">Localização</th>
                                 <th scope="col">Forma de Pagamento</th>
                                 <th scope="col">Preço</th>
@@ -109,9 +107,9 @@ $result = $conexao->query($sql);
                             while ($user_data = mysqli_fetch_assoc($result)) {
                                 echo "<tr>";
                                 echo "<td>" . $user_data['data_hora_pedido'] . "</td>";
-                                echo "<td>" . $user_data['tamanho'] . "</td>";
-                                echo "<td>" . $user_data['bebidas'] . "</td>";
-                                echo "<td>" . $user_data['retirar_algo'] . "</td>";
+                                echo "<td>
+                                    <button class='btn btn-sm btn-primary show-details' data-id='" . $user_data['id_pedidos'] . "'>Detalhes</button>
+                                </td>";
                                 echo "<td>
                                     <button class='btn btn-sm btn-primary show-location' data-id='" . $user_data['id_pedidos'] . "'>Localização</button>
                                 </td>";
@@ -133,6 +131,33 @@ $result = $conexao->query($sql);
             </div>
         </div>
     </section>
+
+    <div class="modal fade custom-modal" id="detailsModal" tabindex="-1" role="dialog"
+        aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Detalhes do Pedido</h5>
+                    <button type="button" class="close" id="closeDetailsModal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tamanho</th>
+                                <th>Bebidas</th>
+                                <th>Retirar Algo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detailsData">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade custom-modal" id="locationModal" tabindex="-1" role="dialog"
         aria-labelledby="locationModalLabel" aria-hidden="true">
@@ -164,6 +189,41 @@ $result = $conexao->query($sql);
     </div>
 
     <script src="../js/homeadm.js"></script>
+    <script>
+        const showDetailsButtons = document.querySelectorAll('.show-details');
+        const detailsDataContainer = document.getElementById('detailsData');
+
+        showDetailsButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const pedidoID = button.getAttribute('data-id');
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', 'get_details_data.php?id=' + pedidoID, true);
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        const detailsData = JSON.parse(xhr.responseText);
+                        if (detailsData) {
+                            detailsDataContainer.innerHTML = `
+                            <tr>
+                                <td>${detailsData.tamanho}</td>
+                                <td>${detailsData.bebidas}</td>
+                                <td>${detailsData.retirar_algo}</td>
+                            </tr>
+                        `;
+
+                            $('#detailsModal').modal('show');
+                        }
+                    }
+                };
+
+                xhr.send();
+            });
+        });
+
+        document.getElementById('closeDetailsModal').addEventListener('click', function () {
+            $('#detailsModal').modal('hide');
+        });
+    </script>
     <script>
         const showLocationButtons = document.querySelectorAll('.show-location');
         const locationDataContainer = document.getElementById('locationData');
