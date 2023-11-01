@@ -3,7 +3,7 @@ include('../config.php');
 if(isset($_POST['update']))
 {
     $id_produtos = $_POST['id_produtos'];
-    $nome = ucwords($_POST['nome']);
+    $nome = ucfirst($_POST['nome']);
     $preco = $_POST['preco'];
     $categoria = $_POST['categoria'];
 

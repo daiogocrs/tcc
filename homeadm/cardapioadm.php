@@ -25,8 +25,8 @@ if (isset($_POST['submit'])) {
         return $dados;
     }
 
-    $comidas = limparDados($conexao, ucwords($_POST['comidas']));
-    $sobremesa = limparDados($conexao, $_POST['sobremesa']);
+    $comidas = limparDados($conexao, ucfirst($_POST['comidas']));
+    $sobremesa = limparDados($conexao, ucfirst($_POST['sobremesa']));
     $dia_semana = limparDados($conexao, $_POST['dia_semana']);
 
     $existingCardapio = mysqli_query($conexao, "SELECT id_cardapio FROM cardapio WHERE dia_semana = '$dia_semana'");

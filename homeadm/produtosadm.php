@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
         return $dados;
     }
 
-    $nome = limparDados($conexao, ucwords($_POST['nome']));
+    $nome = limparDados($conexao, ucfirst($_POST['nome']));
     $preco = limparDados($conexao, $_POST['preco']);
     $categoria = limparDados($conexao, $_POST['categoria']);
 
