@@ -65,12 +65,12 @@ $result = $conexao->query($sql);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/homeadm.css"> 
+    <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
     <title>Cantina Federal</title>
 </head>
 
 <body>
-<nav>
+    <nav>
         <div class="logo-name">
             <div class="logo-image">
                 <img src="../fotos/cantinalogo.png" alt="">
@@ -94,13 +94,13 @@ $result = $conexao->query($sql);
                 <li>
                     <a href="cardapioadm.php">
                         <i class="uil uil-book"></i>
-                        <span class="link-name">Cardápio</span>
+                        <span class="link-name">Marmita Cardápio</span>
                     </a>
                 </li>
                 <li>
                     <a href="tamanho.php">
                         <i class="uil uil-dollar-alt"></i>
-                        <span class="link-name">Marmitas</span>
+                        <span class="link-name">Marmita Preço</span>
                     </a>
                 </li>
             </ul>

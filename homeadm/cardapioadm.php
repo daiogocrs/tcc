@@ -88,13 +88,13 @@ $result = $conexao->query($sql);
                 <li>
                     <a href="cardapioadm.php">
                         <i class="uil uil-book"></i>
-                        <span class="link-name">Cardápio</span>
+                        <span class="link-name">Marmita Cardápio</span>
                     </a>
                 </li>
                 <li>
                     <a href="tamanho.php">
                         <i class="uil uil-dollar-alt"></i>
-                        <span class="link-name">Marmitas</span>
+                        <span class="link-name">Marmita Preço</span>
                     </a>
                 </li>
             </ul>
