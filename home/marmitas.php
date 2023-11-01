@@ -25,14 +25,18 @@ if (isset($_POST['submit_pedido'])) {
     $numero = limparDados($conexao, $_POST['numero']);
     $complemento = limparDados($conexao, $_POST['complemento']);
 
-    $precoMarmita = 0;
-    if ($tamanho === "pequena") {
-        $precoMarmita = 15.00;
-    } elseif ($tamanho === "media") {
-        $precoMarmita = 18.00;
-    } elseif ($tamanho === "grande") {
-        $precoMarmita = 22.00;
+    $queryPrecoMarmita = "SELECT preco FROM precos_marmitas WHERE tamanho = ?";
+    $stmtPrecoMarmita = mysqli_prepare($conexao, $queryPrecoMarmita);
+    mysqli_stmt_bind_param($stmtPrecoMarmita, 's', $tamanho);
+    mysqli_stmt_execute($stmtPrecoMarmita);
+    mysqli_stmt_bind_result($stmtPrecoMarmita, $precoMarmita);
+
+    if (mysqli_stmt_fetch($stmtPrecoMarmita)) {
+    } else {
+        $mensagemPedido = 'Tamanho de marmita não encontrado na tabela de preços';
     }
+
+    mysqli_stmt_close($stmtPrecoMarmita);
 
     $bebidasSelecionadas = isset($_POST['bebidas']) ? $_POST['bebidas'] : [];
     $bebidasTexto = implode(', ', $bebidasSelecionadas);
@@ -237,62 +241,62 @@ mysqli_close($conexao);
     </div>
     <script type="text/javascript" src="../js/header.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
-            const comidasOptions = document.querySelector('.comidas-options');
-            const localizacaoForm = document.querySelector('.localizacao-form');
-            const btnVoltarComidas = document.getElementById('btn-voltar-comidas');
-            const btnProximoComidas = document.getElementById('btn-proximo-comidas');
-            const btnVoltarLocalizacao = document.getElementById('btn-voltar-localizacao');
-            const btnFinalizar = document.getElementById('btn-finalizar');
+    document.addEventListener('DOMContentLoaded', function() {
+        const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
+        const comidasOptions = document.querySelector('.comidas-options');
+        const localizacaoForm = document.querySelector('.localizacao-form');
+        const btnVoltarComidas = document.getElementById('btn-voltar-comidas');
+        const btnProximoComidas = document.getElementById('btn-proximo-comidas');
+        const btnVoltarLocalizacao = document.getElementById('btn-voltar-localizacao');
+        const btnFinalizar = document.getElementById('btn-finalizar');
 
-            let tamanhoSelecionado = null;
+        let tamanhoSelecionado = null;
 
-            tamanhoOptions.forEach((option) => {
-                option.addEventListener("change", () => {
-                    if (option.checked) {
-                        tamanhoSelecionado = option.value;
-                        document.querySelector('.marmitas-options').style.display = 'none';
-                        comidasOptions.style.display = 'block';
-                        btnVoltarComidas.style.display = 'block';
-                    }
-                });
-            });
-
-            btnProximoComidas.addEventListener('click', (event) => {
-                event.preventDefault();
-                comidasOptions.style.display = 'none';
-                localizacaoForm.style.display = 'block';
-                btnVoltarComidas.style.display = 'none';
-                btnVoltarLocalizacao.style.display = 'block';
-            });
-
-            btnVoltarComidas.addEventListener('click', (event) => {
-                event.preventDefault();
-                comidasOptions.style.display = 'none';
-                document.querySelector('.marmitas-options').style.display = 'block';
-                btnVoltarComidas.style.display = 'none';
-
-                tamanhoOptions.forEach((option) => {
-                    option.checked = false;
-                });
-
-                tamanhoSelecionado = null;
-            });
-
-            btnVoltarLocalizacao.addEventListener('click', (event) => {
-                event.preventDefault();
-                localizacaoForm.style.display = 'none';
-                comidasOptions.style.display = 'block';
-                btnVoltarLocalizacao.style.display = 'none';
-                btnVoltarComidas.style.display = 'block';
-            });
-
-            btnFinalizar.addEventListener('click', (event) => {
-                event.preventDefault();
-                alert('Pedido finalizado!');
+        tamanhoOptions.forEach((option) => {
+            option.addEventListener("change", () => {
+                if (option.checked) {
+                    tamanhoSelecionado = option.value;
+                    document.querySelector('.marmitas-options').style.display = 'none';
+                    comidasOptions.style.display = 'block';
+                    btnVoltarComidas.style.display = 'block';
+                }
             });
         });
+
+        btnProximoComidas.addEventListener('click', (event) => {
+            event.preventDefault();
+            comidasOptions.style.display = 'none';
+            localizacaoForm.style.display = 'block';
+            btnVoltarComidas.style.display = 'none';
+            btnVoltarLocalizacao.style.display = 'block';
+        });
+
+        btnVoltarComidas.addEventListener('click', (event) => {
+            event.preventDefault();
+            comidasOptions.style.display = 'none';
+            document.querySelector('.marmitas-options').style.display = 'block';
+            btnVoltarComidas.style.display = 'none';
+
+            tamanhoOptions.forEach((option) => {
+                option.checked = false;
+            });
+
+            tamanhoSelecionado = null;
+        });
+
+        btnVoltarLocalizacao.addEventListener('click', (event) => {
+            event.preventDefault();
+            localizacaoForm.style.display = 'none';
+            comidasOptions.style.display = 'block';
+            btnVoltarLocalizacao.style.display = 'none';
+            btnVoltarComidas.style.display = 'block';
+        });
+
+        btnFinalizar.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('Pedido finalizado!');
+        });
+    });
     </script>
 
 </body>
