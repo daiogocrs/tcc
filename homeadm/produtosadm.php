@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
         return $dados;
     }
 
-    $nome = limparDados($conexao, $_POST['nome']);
+    $nome = limparDados($conexao, ucwords($_POST['nome']));
     $preco = limparDados($conexao, $_POST['preco']);
     $categoria = limparDados($conexao, $_POST['categoria']);
 
@@ -65,7 +65,7 @@ $result = $conexao->query($sql);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
+    <link rel="stylesheet" type="text/css" href="../css/produtosadm.css">
     <title>Cantina Federal</title>
 </head>
 
@@ -80,15 +80,15 @@ $result = $conexao->query($sql);
         <div class="menu-items">
             <ul class="nav-links">
                 <li>
-                    <a href="homeadm.php">
-                        <i class="uil uil-shopping-bag"></i>
-                        <span class="link-name">Produtos</span>
-                    </a>
-                </li>
-                <li>
                     <a href="marmitasadm.php">
                         <i class="uil uil-truck"></i>
                         <span class="link-name">Delivery</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="produtosadm.php">
+                        <i class="uil uil-shopping-bag"></i>
+                        <span class="link-name">Produtos</span>
                     </a>
                 </li>
                 <li>
@@ -178,7 +178,7 @@ $result = $conexao->query($sql);
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="form_cadastro" action="homeadm.php" method="POST">
+                        <form class="form_cadastro" action="produtosadm.php" method="POST">
                             <input type="text" class="form-control" id="user_nome" autocomplete="off" placeholder="Nome"
                                 name="nome" required>
                             <br>
@@ -238,7 +238,7 @@ $result = $conexao->query($sql);
         </div>
     </section>
 
-    <script src="../js/homeadm.js"></script>
+    <script src="../js/produtosadm.js"></script>
 
     <script>
         document.getElementById("openProductModal").addEventListener("click", function () {

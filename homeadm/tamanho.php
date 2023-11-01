@@ -60,7 +60,7 @@ $result = $conexao->query($sql);
     <link rel="icon" type="image/png" href="../fotos/cantinalogo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
+    <link rel="stylesheet" type="text/css" href="../css/produtosadm.css">
     <script src="../js/bibliotecas.js"></script>
     <title>Cantina Federal</title>
 </head>
@@ -75,16 +75,16 @@ $result = $conexao->query($sql);
         </div>
         <div class="menu-items">
             <ul class="nav-links">
-                <li>
-                    <a href="homeadm.php">
-                        <i class="uil uil-shopping-bag"></i>
-                        <span class="link-name">Produtos</span>
-                    </a>
-                </li>
-                <li>
+            <li>
                     <a href="marmitasadm.php">
                         <i class="uil uil-truck"></i>
                         <span class="link-name">Delivery</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="produtosadm.php">
+                        <i class="uil uil-shopping-bag"></i>
+                        <span class="link-name">Produtos</span>
                     </a>
                 </li>
                 <li>
@@ -228,7 +228,7 @@ $result = $conexao->query($sql);
         </div>
     </div>
 
-    <script src="../js/homeadm.js"></script>
+    <script src="../js/produtosadm.js"></script>
     <script>
         document.getElementById("openMarmitaModal").addEventListener("click", function () {
             $('#marmitaModal').modal('show');

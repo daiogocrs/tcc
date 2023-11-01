@@ -19,7 +19,7 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']
         if ($row['nivel_acesso'] == 'adm') {
             $_SESSION['email'] = $email;
             $_SESSION['senha'] = $senha;
-            header('Location: homeadm/homeadm.php');
+            header('Location: homeadm/marmitasadm.php');
         } else {
             $_SESSION['email'] = $email;
             $_SESSION['senha'] = $senha;

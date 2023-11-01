@@ -29,7 +29,7 @@ $result = $conexao->query($sql);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <script type="text/javascript" src="../js/bibliotecas.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/homeadm.css">
+    <link rel="stylesheet" type="text/css" href="../css/produtosadm.css">
     <title>Cantina Federal</title>
 </head>
 
@@ -44,15 +44,15 @@ $result = $conexao->query($sql);
         <div class="menu-items">
             <ul class="nav-links">
                 <li>
-                    <a href="homeadm.php">
-                        <i class="uil uil-shopping-bag"></i>
-                        <span class="link-name">Produtos</span>
-                    </a>
-                </li>
-                <li>
                     <a href="marmitasadm.php">
                         <i class="uil uil-truck"></i>
                         <span class="link-name">Delivery</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="produtosadm.php">
+                        <i class="uil uil-shopping-bag"></i>
+                        <span class="link-name">Produtos</span>
                     </a>
                 </li>
                 <li>
@@ -188,7 +188,7 @@ $result = $conexao->query($sql);
         </div>
     </div>
 
-    <script src="../js/homeadm.js"></script>
+    <script src="../js/produtosadm.js"></script>
     <script>
         const showDetailsButtons = document.querySelectorAll('.show-details');
         const detailsDataContainer = document.getElementById('detailsData');
@@ -260,6 +260,13 @@ $result = $conexao->query($sql);
         document.getElementById('closeModal').addEventListener('click', function () {
             $('#locationModal').modal('hide');
         });
+    </script>
+    <script>
+        function refreshPage() {
+            location.reload();
+        }
+
+        setInterval(refreshPage, 60000); 
     </script>
 </body>
 
