@@ -1,3 +1,3 @@
-# tcc
+# Site Cantina Federal
 
-tcc do diogo e do bernardo
+Site para o restaurante Cantina Federal de Sombrio - SC desenvolvido por Diogo Borges Corso.
