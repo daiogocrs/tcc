@@ -229,7 +229,7 @@ mysqli_close($conexao);
                         <select class="input" id="forma_pagamento" name="forma_pagamento" required>
                             <option value="" disabled selected>Selecione a forma de pagamento</option>
                             <option value="dinheiro">Dinheiro</option>
-                            <option value="cartao">Cartão de Crédito</option>
+                            <option value="cartao">Cartão</option>
                             <option value="pix">PIX</option>
                         </select>
                         <button id="btn-voltar-comidas" class="button">Voltar</button>
@@ -241,62 +241,62 @@ mysqli_close($conexao);
     </div>
     <script type="text/javascript" src="../js/header.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
-        const comidasOptions = document.querySelector('.comidas-options');
-        const localizacaoForm = document.querySelector('.localizacao-form');
-        const btnVoltarComidas = document.getElementById('btn-voltar-comidas');
-        const btnProximoComidas = document.getElementById('btn-proximo-comidas');
-        const btnVoltarLocalizacao = document.getElementById('btn-voltar-localizacao');
-        const btnFinalizar = document.getElementById('btn-finalizar');
+        document.addEventListener('DOMContentLoaded', function () {
+            const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
+            const comidasOptions = document.querySelector('.comidas-options');
+            const localizacaoForm = document.querySelector('.localizacao-form');
+            const btnVoltarComidas = document.getElementById('btn-voltar-comidas');
+            const btnProximoComidas = document.getElementById('btn-proximo-comidas');
+            const btnVoltarLocalizacao = document.getElementById('btn-voltar-localizacao');
+            const btnFinalizar = document.getElementById('btn-finalizar');
 
-        let tamanhoSelecionado = null;
-
-        tamanhoOptions.forEach((option) => {
-            option.addEventListener("change", () => {
-                if (option.checked) {
-                    tamanhoSelecionado = option.value;
-                    document.querySelector('.marmitas-options').style.display = 'none';
-                    comidasOptions.style.display = 'block';
-                    btnVoltarComidas.style.display = 'block';
-                }
-            });
-        });
-
-        btnProximoComidas.addEventListener('click', (event) => {
-            event.preventDefault();
-            comidasOptions.style.display = 'none';
-            localizacaoForm.style.display = 'block';
-            btnVoltarComidas.style.display = 'none';
-            btnVoltarLocalizacao.style.display = 'block';
-        });
-
-        btnVoltarComidas.addEventListener('click', (event) => {
-            event.preventDefault();
-            comidasOptions.style.display = 'none';
-            document.querySelector('.marmitas-options').style.display = 'block';
-            btnVoltarComidas.style.display = 'none';
+            let tamanhoSelecionado = null;
 
             tamanhoOptions.forEach((option) => {
-                option.checked = false;
+                option.addEventListener("change", () => {
+                    if (option.checked) {
+                        tamanhoSelecionado = option.value;
+                        document.querySelector('.marmitas-options').style.display = 'none';
+                        comidasOptions.style.display = 'block';
+                        btnVoltarComidas.style.display = 'block';
+                    }
+                });
             });
 
-            tamanhoSelecionado = null;
-        });
+            btnProximoComidas.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                localizacaoForm.style.display = 'block';
+                btnVoltarComidas.style.display = 'none';
+                btnVoltarLocalizacao.style.display = 'block';
+            });
 
-        btnVoltarLocalizacao.addEventListener('click', (event) => {
-            event.preventDefault();
-            localizacaoForm.style.display = 'none';
-            comidasOptions.style.display = 'block';
-            btnVoltarLocalizacao.style.display = 'none';
-            btnVoltarComidas.style.display = 'block';
-        });
+            btnVoltarComidas.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                document.querySelector('.marmitas-options').style.display = 'block';
+                btnVoltarComidas.style.display = 'none';
 
-        btnFinalizar.addEventListener('click', (event) => {
-            event.preventDefault();
-            alert('Pedido finalizado!');
+                tamanhoOptions.forEach((option) => {
+                    option.checked = false;
+                });
+
+                tamanhoSelecionado = null;
+            });
+
+            btnVoltarLocalizacao.addEventListener('click', (event) => {
+                event.preventDefault();
+                localizacaoForm.style.display = 'none';
+                comidasOptions.style.display = 'block';
+                btnVoltarLocalizacao.style.display = 'none';
+                btnVoltarComidas.style.display = 'block';
+            });
+
+            btnFinalizar.addEventListener('click', (event) => {
+                event.preventDefault();
+                alert('Pedido finalizado!');
+            });
         });
-    });
     </script>
 
 </body>
