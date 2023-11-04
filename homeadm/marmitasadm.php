@@ -1,9 +1,8 @@
 <?php
 session_start();
-
 include('../config.php');
 
-if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true) and (!isset($_SESSION['nivel_acesso']) == 'adm')) {
+if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true) and ($_SESSION['nivel_acesso'] != 'adm')) {
     unset($_SESSION['email']);
     unset($_SESSION['senha']);
     header('Location: ../home/login.php');
@@ -15,6 +14,7 @@ if (!empty($_GET['search'])) {
 } else {
     $sql = "SELECT id_pedidos, tamanho, bebidas, retirar_algo, preco, DATE_FORMAT(data_hora_pedido, '%d/%m/%Y %H:%i:%s') as data_hora_pedido, forma_pagamento, cidade, bairro, rua, numero, complemento FROM pedidos ORDER BY id_pedidos DESC";
 }
+
 $result = $conexao->query($sql);
 ?>
 

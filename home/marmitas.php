@@ -4,6 +4,7 @@ $mensagemPedido = '';
 $diaSemana = '';
 $comidas = '';
 $sobremesa = '';
+$precoTotal = 0;
 
 if (isset($_POST['submit_pedido'])) {
     include('../config.php');
@@ -32,19 +33,31 @@ if (isset($_POST['submit_pedido'])) {
     mysqli_stmt_bind_result($stmtPrecoMarmita, $precoMarmita);
 
     if (mysqli_stmt_fetch($stmtPrecoMarmita)) {
+        $precoTotal += $precoMarmita;
     } else {
         $mensagemPedido = 'Tamanho de marmita não encontrado na tabela de preços';
     }
-
+    
     mysqli_stmt_close($stmtPrecoMarmita);
-
+    
     $bebidasSelecionadas = isset($_POST['bebidas']) ? $_POST['bebidas'] : [];
-    $bebidasTexto = implode(', ', $bebidasSelecionadas);
+    
+    if (!empty($bebidasSelecionadas)) {
+        $queryPrecoBebidas = "SELECT SUM(preco) AS preco_total FROM produtos WHERE id_produtos IN (" . implode(",", $bebidasSelecionadas) . ")";
+        $resultPrecoBebidas = mysqli_query($conexao, $queryPrecoBebidas);
+    
+        if ($resultPrecoBebidas) {
+            $rowPrecoBebida = mysqli_fetch_assoc($resultPrecoBebidas);
+            $precoTotal += (float) $rowPrecoBebida['preco_total'];
+        }
+    }
+    
+    mysqli_free_result($resultPrecoBebidas);
 
     $queryInserirPedido = "INSERT INTO pedidos (tamanho, retirar_algo, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, bebidas, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmtInserirPedido = mysqli_prepare($conexao, $queryInserirPedido);
-    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdsssssss', $tamanho, $retirar_algo, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento, $bebidasTexto);
+    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdsssssss', $tamanho, $retirar_algo, $precoTotal, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento, $bebidasTexto);
 
     if (mysqli_stmt_execute($stmtInserirPedido)) {
         $mensagemPedido = 'Seu pedido foi feito!';
@@ -88,6 +101,24 @@ if (mysqli_stmt_fetch($stmt)) {
 }
 
 mysqli_stmt_close($stmt);
+
+$queryBebidas = "SELECT id_produtos, nome, preco FROM produtos WHERE categoria = 'bebidas'";
+$resultBebidas = mysqli_query($conexao, $queryBebidas);
+$bebidasArray = [];
+
+while ($rowBebida = mysqli_fetch_assoc($resultBebidas)) {
+    $idBebida = $rowBebida['id_produtos'];
+    $nomeBebida = $rowBebida['nome'];
+    $precoBebida = $rowBebida['preco'];
+
+    $bebidasArray[] = array(
+        'id' => $idBebida,
+        'nome' => $nomeBebida,
+        'preco' => $precoBebida
+    );
+}
+
+mysqli_free_result($resultBebidas);
 mysqli_close($conexao);
 ?>
 
@@ -179,41 +210,13 @@ mysqli_close($conexao);
                         </div>
                         <label>Bebidas:</label>
                         <div class="bebidas-content">
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="pepsi-250"> Pepsi 250ml
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="pepsi-600"> Pepsi 600ml
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="pepsi-2L"> Pepsi 2L
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="cocacola-250"> Coca-cola
-                                250ml
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="cocacola-600"> Coca-cola
-                                600ml
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="cocacola-2L"> Coca-cola 2L
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="guarana-250"> Guaraná 250ml
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class "input" name="bebidas[]" value="guarana-600"> Guaraná 600ml
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="guarana-2L"> Guaraná 2L
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="cerveja-350"> Cerveja 350ml
-                            </label><br>
-                            <label>
-                                <input type="checkbox" class="input" name="bebidas[]" value="cerveja-600"> Cerveja 600ml
-                            </label>
+                            <?php
+                            foreach ($bebidasArray as $bebida) {
+                                echo '<label>';
+                                echo '<input type="checkbox" class="input" name="bebidas[]" value="' . $bebida['id'] . '"> ' . $bebida['nome'] . ' - R$ ' . $bebida['preco'];
+                                echo '</label><br>';
+                            }
+                            ?>
                         </div>
                         <button id="btn-voltar-comidas" class="button">Voltar</button>
                         <button id="btn-proximo-comidas" class="button">Próximo</button>
@@ -232,6 +235,9 @@ mysqli_close($conexao);
                             <option value="cartao">Cartão</option>
                             <option value="pix">PIX</option>
                         </select>
+                        <label>Preço Total do Pedido: R$
+                            <?php echo number_format($precoTotal, 2, ',', '.'); ?>
+                        </label>
                         <button id="btn-voltar-comidas" class="button">Voltar</button>
                         <input type="submit" class="button" name="submit_pedido" value="Enviar Pedido">
                     </div>
@@ -241,62 +247,62 @@ mysqli_close($conexao);
     </div>
     <script type="text/javascript" src="../js/header.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
-            const comidasOptions = document.querySelector('.comidas-options');
-            const localizacaoForm = document.querySelector('.localizacao-form');
-            const btnVoltarComidas = document.getElementById('btn-voltar-comidas');
-            const btnProximoComidas = document.getElementById('btn-proximo-comidas');
-            const btnVoltarLocalizacao = document.getElementById('btn-voltar-localizacao');
-            const btnFinalizar = document.getElementById('btn-finalizar');
+    document.addEventListener('DOMContentLoaded', function() {
+        const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
+        const comidasOptions = document.querySelector('.comidas-options');
+        const localizacaoForm = document.querySelector('.localizacao-form');
+        const btnVoltarComidas = document.getElementById('btn-voltar-comidas');
+        const btnProximoComidas = document.getElementById('btn-proximo-comidas');
+        const btnVoltarLocalizacao = document.getElementById('btn-voltar-localizacao');
+        const btnFinalizar = document.getElementById('btn-finalizar');
 
-            let tamanhoSelecionado = null;
+        let tamanhoSelecionado = null;
 
-            tamanhoOptions.forEach((option) => {
-                option.addEventListener("change", () => {
-                    if (option.checked) {
-                        tamanhoSelecionado = option.value;
-                        document.querySelector('.marmitas-options').style.display = 'none';
-                        comidasOptions.style.display = 'block';
-                        btnVoltarComidas.style.display = 'block';
-                    }
-                });
-            });
-
-            btnProximoComidas.addEventListener('click', (event) => {
-                event.preventDefault();
-                comidasOptions.style.display = 'none';
-                localizacaoForm.style.display = 'block';
-                btnVoltarComidas.style.display = 'none';
-                btnVoltarLocalizacao.style.display = 'block';
-            });
-
-            btnVoltarComidas.addEventListener('click', (event) => {
-                event.preventDefault();
-                comidasOptions.style.display = 'none';
-                document.querySelector('.marmitas-options').style.display = 'block';
-                btnVoltarComidas.style.display = 'none';
-
-                tamanhoOptions.forEach((option) => {
-                    option.checked = false;
-                });
-
-                tamanhoSelecionado = null;
-            });
-
-            btnVoltarLocalizacao.addEventListener('click', (event) => {
-                event.preventDefault();
-                localizacaoForm.style.display = 'none';
-                comidasOptions.style.display = 'block';
-                btnVoltarLocalizacao.style.display = 'none';
-                btnVoltarComidas.style.display = 'block';
-            });
-
-            btnFinalizar.addEventListener('click', (event) => {
-                event.preventDefault();
-                alert('Pedido finalizado!');
+        tamanhoOptions.forEach((option) => {
+            option.addEventListener("change", () => {
+                if (option.checked) {
+                    tamanhoSelecionado = option.value;
+                    document.querySelector('.marmitas-options').style.display = 'none';
+                    comidasOptions.style.display = 'block';
+                    btnVoltarComidas.style.display = 'block';
+                }
             });
         });
+
+        btnProximoComidas.addEventListener('click', (event) => {
+            event.preventDefault();
+            comidasOptions.style.display = 'none';
+            localizacaoForm.style.display = 'block';
+            btnVoltarComidas.style.display = 'none';
+            btnVoltarLocalizacao.style.display = 'block';
+        });
+
+        btnVoltarComidas.addEventListener('click', (event) => {
+            event.preventDefault();
+            comidasOptions.style.display = 'none';
+            document.querySelector('.marmitas-options').style.display = 'block';
+            btnVoltarComidas.style.display = 'none';
+
+            tamanhoOptions.forEach((option) => {
+                option.checked = false;
+            });
+
+            tamanhoSelecionado = null;
+        });
+
+        btnVoltarLocalizacao.addEventListener('click', (event) => {
+            event.preventDefault();
+            localizacaoForm.style.display = 'none';
+            comidasOptions.style.display = 'block';
+            btnVoltarLocalizacao.style.display = 'none';
+            btnVoltarComidas.style.display = 'block';
+        });
+
+        btnFinalizar.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('Pedido finalizado!');
+        });
+    });
     </script>
 
 </body>
