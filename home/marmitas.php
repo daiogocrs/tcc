@@ -4,7 +4,6 @@ $mensagemPedido = '';
 $diaSemana = '';
 $comidas = '';
 $sobremesa = '';
-$precoTotal = 0;
 
 if (isset($_POST['submit_pedido'])) {
     include('../config.php');
@@ -33,31 +32,19 @@ if (isset($_POST['submit_pedido'])) {
     mysqli_stmt_bind_result($stmtPrecoMarmita, $precoMarmita);
 
     if (mysqli_stmt_fetch($stmtPrecoMarmita)) {
-        $precoTotal += $precoMarmita;
     } else {
         $mensagemPedido = 'Tamanho de marmita não encontrado na tabela de preços';
     }
-    
+
     mysqli_stmt_close($stmtPrecoMarmita);
-    
+
     $bebidasSelecionadas = isset($_POST['bebidas']) ? $_POST['bebidas'] : [];
-    
-    if (!empty($bebidasSelecionadas)) {
-        $queryPrecoBebidas = "SELECT SUM(preco) AS preco_total FROM produtos WHERE id_produtos IN (" . implode(",", $bebidasSelecionadas) . ")";
-        $resultPrecoBebidas = mysqli_query($conexao, $queryPrecoBebidas);
-    
-        if ($resultPrecoBebidas) {
-            $rowPrecoBebida = mysqli_fetch_assoc($resultPrecoBebidas);
-            $precoTotal += (float) $rowPrecoBebida['preco_total'];
-        }
-    }
-    
-    mysqli_free_result($resultPrecoBebidas);
+    $bebidasTexto = implode(', ', $bebidasSelecionadas);
 
     $queryInserirPedido = "INSERT INTO pedidos (tamanho, retirar_algo, preco, forma_pagamento, cidade, bairro, rua, numero, complemento, bebidas, data_hora_pedido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmtInserirPedido = mysqli_prepare($conexao, $queryInserirPedido);
-    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdsssssss', $tamanho, $retirar_algo, $precoTotal, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento, $bebidasTexto);
+    mysqli_stmt_bind_param($stmtInserirPedido, 'ssdsssssss', $tamanho, $retirar_algo, $precoMarmita, $forma_pagamento, $cidade, $bairro, $rua, $numero, $complemento, $bebidasTexto);
 
     if (mysqli_stmt_execute($stmtInserirPedido)) {
         $mensagemPedido = 'Seu pedido foi feito!';
@@ -235,9 +222,6 @@ mysqli_close($conexao);
                             <option value="cartao">Cartão</option>
                             <option value="pix">PIX</option>
                         </select>
-                        <label>Preço Total do Pedido: R$
-                            <?php echo number_format($precoTotal, 2, ',', '.'); ?>
-                        </label>
                         <button id="btn-voltar-comidas" class="button">Voltar</button>
                         <input type="submit" class="button" name="submit_pedido" value="Enviar Pedido">
                     </div>
@@ -247,62 +231,62 @@ mysqli_close($conexao);
     </div>
     <script type="text/javascript" src="../js/header.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
-        const comidasOptions = document.querySelector('.comidas-options');
-        const localizacaoForm = document.querySelector('.localizacao-form');
-        const btnVoltarComidas = document.getElementById('btn-voltar-comidas');
-        const btnProximoComidas = document.getElementById('btn-proximo-comidas');
-        const btnVoltarLocalizacao = document.getElementById('btn-voltar-localizacao');
-        const btnFinalizar = document.getElementById('btn-finalizar');
+        document.addEventListener('DOMContentLoaded', function () {
+            const tamanhoOptions = document.querySelectorAll('input[name="tamanho"]');
+            const comidasOptions = document.querySelector('.comidas-options');
+            const localizacaoForm = document.querySelector('.localizacao-form');
+            const btnVoltarComidas = document.getElementById('btn-voltar-comidas');
+            const btnProximoComidas = document.getElementById('btn-proximo-comidas');
+            const btnVoltarLocalizacao = document.getElementById('btn-voltar-localizacao');
+            const btnFinalizar = document.getElementById('btn-finalizar');
 
-        let tamanhoSelecionado = null;
-
-        tamanhoOptions.forEach((option) => {
-            option.addEventListener("change", () => {
-                if (option.checked) {
-                    tamanhoSelecionado = option.value;
-                    document.querySelector('.marmitas-options').style.display = 'none';
-                    comidasOptions.style.display = 'block';
-                    btnVoltarComidas.style.display = 'block';
-                }
-            });
-        });
-
-        btnProximoComidas.addEventListener('click', (event) => {
-            event.preventDefault();
-            comidasOptions.style.display = 'none';
-            localizacaoForm.style.display = 'block';
-            btnVoltarComidas.style.display = 'none';
-            btnVoltarLocalizacao.style.display = 'block';
-        });
-
-        btnVoltarComidas.addEventListener('click', (event) => {
-            event.preventDefault();
-            comidasOptions.style.display = 'none';
-            document.querySelector('.marmitas-options').style.display = 'block';
-            btnVoltarComidas.style.display = 'none';
+            let tamanhoSelecionado = null;
 
             tamanhoOptions.forEach((option) => {
-                option.checked = false;
+                option.addEventListener("change", () => {
+                    if (option.checked) {
+                        tamanhoSelecionado = option.value;
+                        document.querySelector('.marmitas-options').style.display = 'none';
+                        comidasOptions.style.display = 'block';
+                        btnVoltarComidas.style.display = 'block';
+                    }
+                });
             });
 
-            tamanhoSelecionado = null;
-        });
+            btnProximoComidas.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                localizacaoForm.style.display = 'block';
+                btnVoltarComidas.style.display = 'none';
+                btnVoltarLocalizacao.style.display = 'block';
+            });
 
-        btnVoltarLocalizacao.addEventListener('click', (event) => {
-            event.preventDefault();
-            localizacaoForm.style.display = 'none';
-            comidasOptions.style.display = 'block';
-            btnVoltarLocalizacao.style.display = 'none';
-            btnVoltarComidas.style.display = 'block';
-        });
+            btnVoltarComidas.addEventListener('click', (event) => {
+                event.preventDefault();
+                comidasOptions.style.display = 'none';
+                document.querySelector('.marmitas-options').style.display = 'block';
+                btnVoltarComidas.style.display = 'none';
 
-        btnFinalizar.addEventListener('click', (event) => {
-            event.preventDefault();
-            alert('Pedido finalizado!');
+                tamanhoOptions.forEach((option) => {
+                    option.checked = false;
+                });
+
+                tamanhoSelecionado = null;
+            });
+
+            btnVoltarLocalizacao.addEventListener('click', (event) => {
+                event.preventDefault();
+                localizacaoForm.style.display = 'none';
+                comidasOptions.style.display = 'block';
+                btnVoltarLocalizacao.style.display = 'none';
+                btnVoltarComidas.style.display = 'block';
+            });
+
+            btnFinalizar.addEventListener('click', (event) => {
+                event.preventDefault();
+                alert('Pedido finalizado!');
+            });
         });
-    });
     </script>
 
 </body>
