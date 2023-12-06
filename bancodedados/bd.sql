@@ -36,6 +36,7 @@ CREATE TABLE pedidos (
     id_pedidos INT AUTO_INCREMENT PRIMARY KEY,
     tamanho VARCHAR(255) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL,
+    bebidas TEXT, 
     retirar_algo VARCHAR(255) NOT NULL,
     cidade VARCHAR(255) NOT NULL,
     bairro VARCHAR(255) NOT NULL,

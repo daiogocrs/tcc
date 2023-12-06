@@ -88,24 +88,6 @@ if (mysqli_stmt_fetch($stmt)) {
 }
 
 mysqli_stmt_close($stmt);
-
-$queryBebidas = "SELECT id_produtos, nome, preco FROM produtos WHERE categoria = 'bebidas'";
-$resultBebidas = mysqli_query($conexao, $queryBebidas);
-$bebidasArray = [];
-
-while ($rowBebida = mysqli_fetch_assoc($resultBebidas)) {
-    $idBebida = $rowBebida['id_produtos'];
-    $nomeBebida = $rowBebida['nome'];
-    $precoBebida = $rowBebida['preco'];
-
-    $bebidasArray[] = array(
-        'id' => $idBebida,
-        'nome' => $nomeBebida,
-        'preco' => $precoBebida
-    );
-}
-
-mysqli_free_result($resultBebidas);
 mysqli_close($conexao);
 ?>
 
@@ -197,13 +179,41 @@ mysqli_close($conexao);
                         </div>
                         <label>Bebidas:</label>
                         <div class="bebidas-content">
-                            <?php
-                            foreach ($bebidasArray as $bebida) {
-                                echo '<label>';
-                                echo '<input type="checkbox" class="input" name="bebidas[]" value="' . $bebida['id'] . '"> ' . $bebida['nome'] . ' - R$ ' . $bebida['preco'];
-                                echo '</label><br>';
-                            }
-                            ?>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="pepsi-250"> Pepsi 250ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="pepsi-600"> Pepsi 600ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="pepsi-2L"> Pepsi 2L
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cocacola-250"> Coca-cola
+                                250ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cocacola-600"> Coca-cola
+                                600ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cocacola-2L"> Coca-cola 2L
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="guarana-250"> Guaraná 250ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class "input" name="bebidas[]" value="guarana-600"> Guaraná 600ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="guarana-2L"> Guaraná 2L
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cerveja-350"> Cerveja 350ml
+                            </label><br>
+                            <label>
+                                <input type="checkbox" class="input" name="bebidas[]" value="cerveja-600"> Cerveja 600ml
+                            </label>
                         </div>
                         <button id="btn-voltar-comidas" class="button">Voltar</button>
                         <button id="btn-proximo-comidas" class="button">Próximo</button>
